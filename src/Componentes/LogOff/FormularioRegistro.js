@@ -1,10 +1,11 @@
-
+import './style.css';
+import 'bootstrap/dist/css/bootstrap.min.css';
 function FR (){
 
     return (
-        <article>
-            <h1>
-                area del FR
+        <article id="123">
+            <h1 class="hola" id="mary" >
+                areaddd del FR
             </h1>
         </article>
     );
