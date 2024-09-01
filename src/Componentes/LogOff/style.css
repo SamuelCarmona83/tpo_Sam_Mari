@@ -22,9 +22,29 @@
 .divNav {
   display: flex;
   flex-direction: row;
-  
+  justify-content: space-between;
+  height: 5em;
+}
+
+.divNav ul {
+  list-style: none;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding-right: 10px;
+}
+
+.divNav ul li {
+  margin: 0 10px;
+}
+
+.buttonNav{
+  background-color: #e1bcaa;
+  border-radius: 10px;
+  border: #271d24;
+  border-width: 2px;
 }
 
 .logoNav{
-  width: 100px;
+  height: 100%;
 }

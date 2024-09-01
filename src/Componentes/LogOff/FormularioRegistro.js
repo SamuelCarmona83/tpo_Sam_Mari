@@ -5,7 +5,7 @@ function FR (){
     return (
         <article id="123">
             <h1 class="hola" id="mary" >
-                areaddd del FR
+                area del FR
             </h1>
         </article>
     );
