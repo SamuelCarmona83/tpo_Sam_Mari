@@ -8,7 +8,19 @@
   #mary {
     color: green;
   }
-/**       Navbar        **/
+  
+  .wid_5{/* Repensar... */
+    width: 50%;
+  }
+
+/**       Generales       **/
+.row_spaceBetween {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+
+/**         Navbar        **/
 .logOfNavBar{
   position: absolute;
   top: 0;
@@ -20,9 +32,6 @@
 }
 
 .divNav {
-  display: flex;
-  flex-direction: row;
-  justify-content: space-between;
   height: 5em;
 }
 
@@ -47,4 +56,40 @@
 
 .logoNav{
   height: 100%;
+}
+
+/**       Carrucel       **/
+
+.carrucel {
+  height: 50%;
+}
+
+.carrucel div{
+  height: 720px;
+}
+
+.carrucel div img{
+  object-fit: cover;
+}
+
+/**       Nosotros       **/
+
+
+
+/**       Area del Formulario       **/
+
+.registro {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+
+  background-color: #e1bcaa;
+  margin: 10%;
+  border-radius: 30px;
+  border: #271d24;
+  border-width: 2px;
+}
+.item_Registro{
+  margin: 10px;
 }

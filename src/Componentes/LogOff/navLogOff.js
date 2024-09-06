@@ -4,7 +4,7 @@ import logo from '../../imagenes/CatLogoSF.png';
 function Navbar (){
     return (
         <nav className="logOfNavBar">
-            <div className="divNav">
+            <div className="divNav row_spaceBetween">
                 <figure >
                 <img className='logoNav' src={logo} alt='Logo de la pagina, es un gato'/>
                 </figure>

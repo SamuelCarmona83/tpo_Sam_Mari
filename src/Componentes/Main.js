@@ -1,12 +1,12 @@
-import Carrucel from './LogOff/Carrucel';
-import FR from './LogOff/FormularioRegistro.js';
+import Carrucel from './LogOff/Carrusel.js';
+import FormularioRegistro from './LogOff/FormularioRegistro.js';
 import Navbar from './LogOff/navLogOff.js';
 import Nosotros from './LogOff/Nosotros.js';
 import './LogOff/style.css';
 
 
 
-function Body(){
+function Main(){
 
     return (
        
@@ -15,8 +15,11 @@ function Body(){
                 <Navbar />  
                 <Carrucel />
             </div>
-            <FR />
-            <Nosotros/>
+            <div className='row_spaceBetween'>
+                <Nosotros/>
+                <FormularioRegistro />
+            </div>
+            
         </div>
         
     );
@@ -24,4 +27,4 @@ function Body(){
 
 }
 
-export default Body;
+export default Main;
