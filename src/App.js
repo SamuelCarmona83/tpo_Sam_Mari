@@ -1,6 +1,8 @@
 import './App.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import Main from './Componentes/Main'
+import Footer from './Componentes/LogOff/Footer';
+
 
 
 
@@ -11,6 +13,9 @@ function App() {
        </header>
 
        <Main />
+       
+       <Footer></Footer>
+       
       
     </div>
   );

@@ -16,7 +16,6 @@
 /**       Generales       **/
 .row_spaceBetween {
   display: flex;
-  flex-direction: row;
   justify-content: space-between;
 }
 
@@ -92,4 +91,25 @@
 }
 .item_Registro{
   margin: 10px;
+}
+
+.footer{
+  width: 100%;
+  height: 200px;
+  margin-bottom: 0;
+  background-color: rgb(44, 51, 58);
+  position: relative;
+  
+  
+}
+
+.letraFooter{
+  color: white;
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  
+
+  
+
 }

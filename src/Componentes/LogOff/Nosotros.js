@@ -1,15 +1,15 @@
 function Nosotros(){
     return (
         <article className="wid_5">
-             <h1>Hola samu este es el nosotros</h1>
-            <p>
-                Lorem ipsum dolor sit amet consectetur adipiscing elit ad, faucibus maecenas non euismod scelerisque 
-                lacinia convallis placerat porta, leo egestas nostra sapien lacus sed per. Nunc suspendisse augue 
-                etiam sollicitudin hendrerit egestas aliquam ultricies facilisis sodales, posuere euismod accumsan 
-                urna semper cubilia ac erat primis varius sagittis, eget ornare fames class habitant vel vitae 
-                ultrices habitasse. Proin libero natoque sociis turpis nascetur platea fermentum quis tortor, 
-                vivamus mattis maecenas nisi quam molestie laoreet rhoncus lobortis cubilia, gravida cursus mus diam 
-                id velit nunc habitasse.
+             <h1>Simplifica tus Finanzas Grupales con Samuel</h1>
+            <p>¡Deja de preocuparte por las complejidades de dividir gastos con amigos, familiares o compañeros de trabajo! 
+                Con SamuelMari, gestionar los gastos compartidos nunca ha sido tan fácil y eficiente.</p>
+
+            <h2>¿Qué es SamuelMari?</h2>
+
+           <p> Es la solución definitiva para llevar un control preciso de los gastos en grupo. Ya sea que estés planeando un viaje, 
+            organizando un evento, o simplemente compartiendo gastos cotidianos, SamuelMari te proporciona todas las herramientas 
+            que necesitas para una gestión financiera sin complicaciones.
             </p>
             <p>
                 Aenean neque bibendum sapien tempus nunc quam mauris urna congue, mi montes senectus suspendisse 
