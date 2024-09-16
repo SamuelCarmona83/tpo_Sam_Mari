@@ -1,0 +1,29 @@
+.registro {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    background-color: #e1bcaa;
+    margin: 10%;
+    border-radius: 30px;
+    border: #271d24;
+    border-width: 2px;
+}
+
+
+
+.item_Registro{
+    margin: 10px;
+}
+
+.acceso {
+    width: 100vw;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    background-image: url(../../imagenes/fondoDesierto.jpg);
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+}
+  

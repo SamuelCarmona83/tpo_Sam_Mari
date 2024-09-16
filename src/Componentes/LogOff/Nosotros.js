@@ -1,6 +1,8 @@
+import React from 'react';
+
 function Nosotros(){
     return (
-        <article className="wid_5">
+        <article className="w-50">
              <h1>Simplifica tus Finanzas Grupales con Samuel</h1>
             <p>¡Deja de preocuparte por las complejidades de dividir gastos con amigos, familiares o compañeros de trabajo! 
                 Con SamuelMari, gestionar los gastos compartidos nunca ha sido tan fácil y eficiente.</p>

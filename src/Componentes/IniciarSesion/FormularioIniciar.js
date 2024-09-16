@@ -1,13 +1,14 @@
+import React from 'react';
 import './style.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { Button, TextField } from '@mui/material';
 
-function FormularioRegistro (){
+function FormularioIniciarSesion () {
 
     return (
-        <article className='wid_5 registro'>
+        <article className='w-50 registro'>
             <h3>
-                Registrate
+                Iniciar sesión
             </h3>
             <div className='item_Registro'>
                 <TextField
@@ -25,20 +26,13 @@ function FormularioRegistro (){
                 autoComplete="current-password"
                 />
             </div>
-            <div className='item_Registro'>
-                <TextField
-                id="outlined-password-input"
-                label="Repita Contraseña"
-                type="password"
-                autoComplete="current-password"
-                />  
+            
+            <div className='mt-4'>
+                <Button variant="contained">Registrate</Button>
             </div>
-            
-            
-           
-            <Button variant="contained">Registrate</Button>
         </article>
     );
+
 }
 
-export default FormularioRegistro;
+export default FormularioIniciarSesion;
