@@ -1,3 +1,5 @@
+
+
 .hola{
     color: blue;
     background-color: black;
@@ -21,7 +23,6 @@
   top: 0;
   left: 0;
   width: 100%;
-  background-color: transparent;
   color:white;
   z-index: 1000;
 }
@@ -51,6 +52,17 @@
 
 .logoNav{
   height: 100%;
+}
+
+.f0 {
+  background-image: url(../../imagenes/fondoDesierto.jpg);
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+}
+
+.f1 {
+  background-color: transparent;
 }
 
 /**       Carrucel       **/

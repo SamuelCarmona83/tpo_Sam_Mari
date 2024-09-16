@@ -1,0 +1,30 @@
+
+
+.navProj {
+    border: 3px solid #000;
+    border-radius: 5px;
+
+    display: flex;
+    flex-direction: column;
+
+    width: 27%;
+}
+
+.projecto {
+    border: 3px solid #000;
+    border-radius: 5px;
+
+    display: flex;
+    justify-content: center;
+
+    flex-grow: 1;
+}
+
+.artUsuario {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+
+    margin-top: 5em;
+
+}

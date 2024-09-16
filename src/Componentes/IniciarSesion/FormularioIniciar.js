@@ -2,8 +2,9 @@ import React from 'react';
 import './style.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { Button, TextField } from '@mui/material';
+import { Link } from 'react-router-dom';
 
-function FormularioIniciarSesion () {
+function FormularioIniciarSesion ({cambiarFondo}) {
 
     return (
         <article className='w-50 registro'>
@@ -28,7 +29,9 @@ function FormularioIniciarSesion () {
             </div>
             
             <div className='mt-4'>
-                <Button variant="contained">Registrate</Button>
+                <Link to="/usuario">
+                    <Button variant="contained" >Iniciar sesión</Button>
+                </Link>
             </div>
         </article>
     );

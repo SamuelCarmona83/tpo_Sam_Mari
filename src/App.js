@@ -5,6 +5,7 @@ import Navbar from './Componentes/Layout/Layout.js';
 import Inicio from './Pages/Inicio.js';
 import IniciarSesion from './Pages/Acceso.js';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import Usuario from './Pages/Usuario.js';
 
 function App() {
   return (
@@ -14,6 +15,7 @@ function App() {
           <Route path="/" index element={<Inicio />} />
           <Route path="iniciar-sesion" element={<IniciarSesion pag="iniciar"/>} />
           <Route path="registrate" element={<IniciarSesion pag="registrate"/>} />
+          <Route path="usuario" element={<Usuario />} />
         </Route>
       </Routes>
     </Router>
