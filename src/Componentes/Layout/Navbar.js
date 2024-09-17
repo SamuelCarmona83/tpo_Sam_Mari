@@ -1,15 +1,8 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { Link } from 'react-router-dom';
 
-function Navbar () {
+function Navbar ({estado, actualizarNavbar}) {
     let Contenido;
-
-    const [estado, setEstado] = useState("/");
-
-    const actualizarNavbar = (path) => {
-        console.log(path);
-        setEstado(path);
-    }
 
     const ButtonIniciar = () => {
         return (
@@ -44,6 +37,14 @@ function Navbar () {
     }
 
     switch (estado){
+        case "/":
+            Contenido = (
+                <ul>
+                    <ButtonRegistrar />
+                    <ButtonIniciar />
+                </ul>
+            );
+            break;
         case "/iniciar-sesion":
             Contenido = (
                 <ul>
@@ -52,7 +53,7 @@ function Navbar () {
                 </ul>
             );
             break;
-        case "/":
+            case "/usuario":
             Contenido = (
                 <ul>
                     <ButtonRegistrar />

@@ -2,9 +2,10 @@ import React from 'react';
 import './style.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { Button, TextField } from '@mui/material';
-import { Link } from 'react-router-dom';
+import { Link, useOutletContext } from 'react-router-dom';
 
-function FormularioIniciarSesion ({cambiarFondo}) {
+function FormularioIniciarSesion () {
+    const actualizarNavbar = useOutletContext();
 
     return (
         <article className='w-50 registro'>
@@ -30,7 +31,9 @@ function FormularioIniciarSesion ({cambiarFondo}) {
             
             <div className='mt-4'>
                 <Link to="/usuario">
-                    <Button variant="contained" >Iniciar sesión</Button>
+                    <Button variant="contained" onClick={() => actualizarNavbar("/usuario")}>
+                        Iniciar sesión
+                    </Button>
                 </Link>
             </div>
         </article>

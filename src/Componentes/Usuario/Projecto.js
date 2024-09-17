@@ -1,7 +1,12 @@
-import React from 'react';
+import React, { useState } from 'react';
 import 'bootstrap/dist/css/bootstrap.min.css';
 
-function Projecto () {
+function Projecto (props) {
+    const [estadoProj, setEstado] = useState(false);
+
+    const actualizarProjecto = (props) => {
+        setEstado(!estadoProj);
+    }
 
     return (
         <article className='projecto'>

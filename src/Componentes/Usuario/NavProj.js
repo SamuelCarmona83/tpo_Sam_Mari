@@ -1,14 +1,15 @@
 import React from 'react';
 import 'bootstrap/dist/css/bootstrap.min.css';
+import ItemNavProj from './ItemNavProj';
 
 function NavProj () {
 
     return(
-        <div className='navProj'>
-            <h5>projecto1</h5>
-            <h5>projecto2</h5>
-            <h5>projecto3</h5>
-        </div>
+        <ul className='navProj container'>
+            <ItemNavProj text="Projecto 1"/>
+            <ItemNavProj text="Projecto 2"/>
+            <ItemNavProj text="Projecto 3"/>
+        </ul>
     );
 }
 
