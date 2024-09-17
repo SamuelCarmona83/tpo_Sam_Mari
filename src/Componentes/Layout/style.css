@@ -16,7 +16,7 @@
     background-repeat: no-repeat;
 }
   
-  .divNav {
+.divNav {
     height: 5em;
 }
   
@@ -42,4 +42,8 @@
 .logoNav{
     height: 100%;
     margin-left: 1em;
+}
+
+.liNavBar {
+    color: black;
 }

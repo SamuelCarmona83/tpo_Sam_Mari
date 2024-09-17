@@ -1,4 +1,6 @@
-
+.vh-n {
+    height: 88vh;
+}
 
 .navProj {
     border: 3px solid #000;
@@ -8,7 +10,6 @@
     flex-direction: column;
 
     width: 27%;
-
 }
 
 .itemNavProj {
@@ -28,7 +29,6 @@
     justify-content: center;
 
     flex-grow: 1;
-    height: 88vh;
 }
 
 .artUsuario {
