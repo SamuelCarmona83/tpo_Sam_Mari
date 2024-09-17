@@ -1,0 +1,45 @@
+/**         Navbar        **/
+.logOfNavBar{
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    color:white;
+    z-index: 1000;
+    background-color: transparent;
+}
+  
+.fondo {
+    background-image: url(../../imagenes/fondoDesierto.jpg);
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+}
+  
+  .divNav {
+    height: 5em;
+}
+  
+.divNav ul {
+    list-style: none;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding-right: 10px;
+}
+  
+.divNav ul li {
+    margin: 0 10px;
+}
+  
+.buttonNav{
+    background-color: #e1bcaa;
+    border-radius: 10px;
+    border: #271d24;
+    border-width: 2px;
+}
+  
+.logoNav{
+    height: 100%;
+    margin-left: 1em;
+}

@@ -8,6 +8,10 @@ function Projecto (props) {
         setEstado(!estadoProj);
     }
 
+    const generarContenido = () => {
+        
+    }
+
     return (
         <article className='projecto'>
             <h2>Bienvenidos, aqui va el projecto</h2>

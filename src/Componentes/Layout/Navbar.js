@@ -1,5 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
+import UsuarioNB from './UsuarioNB';
 
 function Navbar ({estado, actualizarNavbar}) {
     let Contenido;
@@ -55,10 +56,7 @@ function Navbar ({estado, actualizarNavbar}) {
             break;
             case "/usuario":
             Contenido = (
-                <ul>
-                    <ButtonRegistrar />
-                    <ButtonIniciar />
-                </ul>
+                <UsuarioNB ></UsuarioNB>
             );
             break;
         default:

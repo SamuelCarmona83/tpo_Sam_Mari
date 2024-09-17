@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import {Outlet, useLocation} from 'react-router-dom';
-import '../LogOff/style.css';
+import './style.css';
 import logo from '../../imagenes/CatLogoSF.png';
 import Navbar from './Navbar';
 
