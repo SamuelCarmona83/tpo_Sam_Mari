@@ -2,10 +2,10 @@ import React from 'react';
 import './style.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { Button, TextField } from '@mui/material';
-import { useOutletContext } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 
 function FormularioIniciarSesion() {
-    const actualizarNavbar = useOutletContext();
+    const actualizarNavbar = useNavigate();
     const [correo, setCorreo] = React.useState("");
     const [contraseña, setContraseña] = React.useState(""); 
     const [error, setError] = React.useState("");
@@ -23,7 +23,7 @@ function FormularioIniciarSesion() {
         const existe = usuarios.some(usu => usu.email === correo && usu.contraseña === contraseña);
         
         if (existe) {
-            actualizarNavbar("/usuario");
+         actualizarNavbar("/usuario");
         } else {
             alert("Verifique sus datos e intente de nuevo");
         }
