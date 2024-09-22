@@ -25,7 +25,7 @@ function FormularioIniciarSesion() {
         if (existe) {
             actualizarNavbar("/usuario");
         } else {
-            alert("Verifique los datos e intente de nuevo");
+            alert("Verifique sus datos e intente de nuevo");
         }
     };
 
