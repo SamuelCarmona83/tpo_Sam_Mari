@@ -1,25 +1,23 @@
 import React, {useState} from 'react';
 import "../Componentes/Usuario/style.css";
-import NavProj from '../Componentes/Usuario/NavProj';
-import Projecto from '../Componentes/Usuario/Projecto';
-
-let projecto = 'n';
+import NavProy from '../Componentes/Usuario/NavProy';
+import Proyecto from '../Componentes/Usuario/Proyecto';
 
 function Usuario (){
 
-    const [estado, setEstado] = useState(true);
+    let [proyectoID, setProyectoID] = useState('n');
 
-    const actualizarApp = (text) => {
-        setEstado(!estado);
-        projecto = text;
+    const actualizarApp = (ID) => {
+        proyectoID = ID;
+        setProyectoID(proyectoID);
     }
 
     return (
         <article className='container-fluid artUsuario'>
-            <NavProj 
+            <NavProy 
                 actualizar={actualizarApp}
             />
-            <Projecto projecto ={projecto}/>
+            <Proyecto proyectoID ={proyectoID}/>
         </article>
     );
     

@@ -1,8 +1,4 @@
-.vh-n {
-    height: 88vh;
-}
-
-.navProj {
+#proyectos {
     border: 3px solid #000;
     border-radius: 5px;
 
@@ -12,16 +8,31 @@
     width: 27%;
 }
 
-.itemNavProj {
+#navProyecto {
+    width: 100%;
+    height: 10%;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    padding: 0.5em;
+    
+}
+
+.vh-n {
+    height: 88vh;
+}
+
+.itemNavProy {
     background-color: beige;
     list-style: none;
     width: 100%;
 
     justify-content: space-between;
     padding: 0.5em;
+    margin-top: 0.5em;
 }
 
-.projecto {
+.proyecto {
     border: 3px solid #000;
     border-radius: 5px;
 

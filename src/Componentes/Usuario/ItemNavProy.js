@@ -4,13 +4,14 @@ import logo from '../../imagenes/cuadrado.svg';
 
 function ItemNavProj (props){
     const actualizar = props.actualizar;
-    let proj = props.text;
+    let id = props.id;
+    let nombre = props.nombre;
     return (
-        <li className='itemNavProj d-flex f-row'>
+        <li className='itemNavProy d-flex f-row'>
             <h3>
-                {proj}
+                {nombre}
             </h3>
-            <button onClick={() => {actualizar(proj)}}>
+            <button onClick={() => {actualizar(id)}}>
                 <img src={logo} />
             </button>
         </li>

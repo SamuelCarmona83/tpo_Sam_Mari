@@ -3,6 +3,7 @@ import {Outlet, useLocation, Link} from 'react-router-dom';
 import './style.css';
 import logo from '../../imagenes/CatLogoSF.png';
 import Navbar from './Navbar';
+import Footer from '../LogOff/Footer';
 
 
 function Layout (){
@@ -32,6 +33,7 @@ function Layout (){
             </header>
             <main>
                 <Outlet context={actualizarNavbar}/>
+                <Footer />
             </main>
         </div>
     );

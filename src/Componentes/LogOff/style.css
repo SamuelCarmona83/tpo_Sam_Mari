@@ -1,16 +1,4 @@
 
-
-.hola{
-    color: blue;
-    background-color: black;
-    padding: 20px;
-    border: 1px solid black;
-  }
-  
-  #mary {
-    color: green;
-  }
-  
 /**       Generales       **/
 .row_spaceBetween {
   display: flex;
