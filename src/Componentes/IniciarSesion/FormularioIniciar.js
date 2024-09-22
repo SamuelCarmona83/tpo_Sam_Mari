@@ -76,7 +76,7 @@ function FormularioIniciarSesion() {
             </div>
             
             <div className='mt-4'>
-                <Button variant="contained" onClick={actualizarNavbar("/usuario")}>
+                <Button variant="contained" onClick={mensaje}>
                     Iniciar sesión
                 </Button>
             </div>
