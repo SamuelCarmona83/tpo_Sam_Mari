@@ -12,18 +12,6 @@ const proyectos = [{
 },{
     nombre:"proyecto 3",
     ID: 2
-},{
-    nombre:"proyecto 4",
-    ID: 3
-},{
-    nombre:"proyecto 5",
-    ID: 4
-},{
-    nombre:"proyecto 6",
-    ID: 5
-},{
-    nombre:"proyecto 7",
-    ID: 6
 }];
 
 
@@ -63,7 +51,11 @@ function Proyecto ({proyectoID}) {
 
     let main;
     switch (alignment){
+        case 'dato':
+        
+        case 'participantes':
 
+        case 'configuración':
     }
 
 

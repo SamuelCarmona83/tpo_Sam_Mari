@@ -9,13 +9,13 @@ function FormularioIniciarSesion() {
     const [correo, setCorreo] = React.useState("");
     const [contraseña, setContraseña] = React.useState(""); 
     const [error, setError] = React.useState("");
-    
+
 
     const usuarios = [{
         email: "mariangel@gmail.com",
         contraseña: "ABCDE"},
         {email:"samuel@gmail.com",
-        contraseña: "AEIOU"
+        contraseña: "admin"
         }
     ];
 
