@@ -2,17 +2,43 @@ import React, { useState } from 'react';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import ToggleButton from '@mui/material/ToggleButton';
 import ToggleButtonGroup from '@mui/material/ToggleButtonGroup';
-import foto1 from './../../imagenes/rueda-dentada.svg'
+import Participantes from './Participantes';
+import imagen1 from '../../imagenes/mari.jpeg';
+import imagen2 from '../../imagenes/samu.jpeg';
+
+
+
+
 const proyectos = [{
     nombre:"proyecto pepito",
-    ID: 0
+    ID: 0,
+    partici: [0,1,3]
 },{
     nombre:"proyecto 2",
-    ID: 1
+    ID: 1,
+    partici: [0,1,3]
+
 },{
     nombre:"proyecto 3",
-    ID: 2
+    ID: 2,
+    partici: [0,1]
 }];
+
+const participantes = [
+    {
+      participante: <Participantes imagen= {imagen1} nombre="Mariangel" ID="001" collap="#collapseOne" monto="300" />
+    },
+    {
+      participante: <Participantes imagen= {imagen2} nombre="Samuel" ID="002" collap="#collapseTwo" monto="500"/>
+    },
+    {
+      participante: <Participantes nombre="Jose Alejandro" ID="003" collap= "#collapseThree" />
+    },
+    {
+      participante: <Participantes nombre="Eddymar Orellana" ID="004"></Participantes>
+    }
+  ];
+  
 
 
 
@@ -60,9 +86,11 @@ function Proyecto ({proyectoID}) {
                 )
                 break
             case 'participantes':
-                main = (
-                    <h1>participantes</h1>
-                )
+                const participantesDelProyecto = proyectos[proyectoID].partici || [];
+                main = participantesDelProyecto.map(index => (
+                    <div key={index}>{participantes[index].participante}</div>
+                ));
+                break;
                 break
             case 'configuración':
                 main = (
