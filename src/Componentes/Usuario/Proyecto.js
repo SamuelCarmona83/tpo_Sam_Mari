@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import ToggleButton from '@mui/material/ToggleButton';
 import ToggleButtonGroup from '@mui/material/ToggleButtonGroup';
-
+import foto1 from './../../imagenes/rueda-dentada.svg'
 const proyectos = [{
     nombre:"proyecto 1",
     ID: 0
@@ -26,6 +26,8 @@ const proyectos = [{
     ID: 6
 }];
 
+
+
 function Proyecto ({proyectoID}) {
     const [alignment, setAlignment] = React.useState('datos');
 
@@ -47,7 +49,7 @@ function Proyecto ({proyectoID}) {
                         aria-label="Platform"
                         >
                         <ToggleButton value="datos">Datos</ToggleButton>
-                        <ToggleButton value="participantes">Participantes</ToggleButton>
+                        <ToggleButton value="participantes" >Participantes</ToggleButton>
                         <ToggleButton value="configuración">Configuración</ToggleButton>
                     </ToggleButtonGroup>
                 </div>
@@ -57,6 +59,7 @@ function Proyecto ({proyectoID}) {
             <h2>Bienvenidos, elija un proyecto!</h2>
         );
     }
+
 
     let main;
     switch (alignment){
