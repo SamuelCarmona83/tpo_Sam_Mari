@@ -15,7 +15,7 @@ function FormularioIniciarSesion() {
         email: "mariangel@gmail.com",
         contraseña: "ABCDE"},
         {email:"samuel@gmail.com",
-        contraseña: "AEIOU"
+        contraseña: "admin"
         }
     ];
 
