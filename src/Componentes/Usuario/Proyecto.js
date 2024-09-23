@@ -4,7 +4,7 @@ import ToggleButton from '@mui/material/ToggleButton';
 import ToggleButtonGroup from '@mui/material/ToggleButtonGroup';
 
 const proyectos = [{
-    nombre:"proyecto 1",
+    nombre:"proyecto pepito",
     ID: 0
 },{
     nombre:"proyecto 2",
@@ -47,18 +47,34 @@ function Proyecto ({proyectoID}) {
     }
 
     let main;
-    switch (alignment){
-        case 'dato':
-        
-        case 'participantes':
 
-        case 'configuración':
+    console.log(alignment);
+    if(proyectoID != 'n'){
+        switch (alignment){
+            case 'datos':
+                main = (
+                    <h1>datos</h1>
+                )
+                break
+            case 'participantes':
+                main = (
+                    <h1>participantes</h1>
+                )
+                break
+            case 'configuración':
+                main = (
+                    <h1>configuración</h1>
+                )
+                break
+            }
     }
-
 
     return (
         <article className='proyecto vh-n'>
             {headerProyecto}
+            <div id='mainProyecto'>
+                {main}
+            </div>
         </article>
     );
 }
