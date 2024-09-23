@@ -3,12 +3,16 @@ import './style.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { Button, TextField } from '@mui/material';
 import { useNavigate } from 'react-router-dom';
+import { useOutletContext } from 'react-router-dom'
 
 function FormularioIniciarSesion() {
-    const actualizarNavbar = useNavigate();
+    const navegate = useNavigate();
+    const actualizarNavbar = useOutletContext();
+    console.log(actualizarNavbar)
     const [correo, setCorreo] = React.useState("");
     const [contraseña, setContraseña] = React.useState(""); 
     const [error, setError] = React.useState("");
+    
 
 
     const usuarios = [{
@@ -24,6 +28,9 @@ function FormularioIniciarSesion() {
         
         if (existe) {
          actualizarNavbar("/usuario");
+         navegate("/usuario");
+         
+
         } else {
             alert("Verifique sus datos e intente de nuevo");
         }
