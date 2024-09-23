@@ -54,7 +54,7 @@ function Navbar ({estado, actualizarNavbar}) {
                 </ul>
             );
             break;
-            case "/usuario":
+        case "/usuario":
             Contenido = (
                 <UsuarioNB ></UsuarioNB>
             );

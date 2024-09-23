@@ -16,8 +16,9 @@ function Usuario (){
         <article className='container-fluid artUsuario'>
             <NavProy 
                 actualizar={actualizarApp}
+                proyectoIDSeleccionado = {proyectoID}
             />
-            <Proyecto proyectoID ={proyectoID}/>
+            <Proyecto proyectoID ={proyectoID} />
         </article>
     );
     
