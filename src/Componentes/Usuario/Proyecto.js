@@ -6,6 +6,7 @@ import Participantes from './Participantes';
 import imagen1 from '../../imagenes/mari.jpeg';
 import imagen2 from '../../imagenes/samu.jpeg';
 import imagen3 from '../../imagenes/corazon.png';
+import imagen4 from '../../imagenes/agregarUsuario.png';
 
 
 
@@ -13,7 +14,7 @@ import imagen3 from '../../imagenes/corazon.png';
 const proyectos = [{
     nombre: "proyecto pepito",
     ID: 0,
-    partici: [0, 1, 3]
+    partici: [0, 1, 3,0]
 }, {
     nombre: "proyecto 2",
     ID: 1,
@@ -106,6 +107,9 @@ function Proyecto({ proyectoID }) {
             {headerProyecto}
             <div id='mainProyecto'>
                 {main}
+                <button className="boton-agregar"><img src={imagen4} className="imagen-agregar" alt="Descripción de la imagen" />
+</button>
+
             </div>
         </article>
     );
