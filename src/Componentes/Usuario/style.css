@@ -22,10 +22,12 @@
     height: 90%;
     border: 3px solid #000;
     border-radius: 5px;
+    
 }
 
 .vh-n {
     height: 88vh;
+    position: relative;
 }
 
 .itemNavProy {
@@ -59,5 +61,16 @@
     width: 70px;
     height: 70px;
     border-radius: 50%;
+    margin-right: 20px;
 
+}
+
+#datosParticipante{
+    display: flex; /* Activar flexbox */
+    justify-content: center; /* Centra verticalmente */
+    align-items: center; /* Centra horizontalmente */
+}
+#nombre-participante{
+    font-family: 'Great Vibes', cursive;
+    font-size: 30px;
 }
