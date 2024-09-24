@@ -2,11 +2,10 @@ import React from 'react';
 import './style.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { Button, TextField } from '@mui/material';
-import { useNavigate } from 'react-router-dom';
-import { useOutletContext } from 'react-router-dom'
+import { useNavigate ,useOutletContext} from 'react-router-dom';
 
 function FormularioIniciarSesion() {
-    const navegate = useNavigate();
+    const navigate = useNavigate();
     const actualizarNavbar = useOutletContext();
     console.log(actualizarNavbar)
     const [correo, setCorreo] = React.useState("");
@@ -17,20 +16,21 @@ function FormularioIniciarSesion() {
 
     const usuarios = [{
         email: "mariangel@gmail.com",
-        contraseña: "ABCDE"},
+        contraseña: "ABCDE",
+        nombre: "Mariangel"},
         {email:"samuel@gmail.com",
-        contraseña: "admin"
+        contraseña: "admin",
+        nombre:"Samuel"
         }
     ];
 
     const validarUsuario = (correo, contraseña) => {
         const existe = usuarios.some(usu => usu.email === correo && usu.contraseña === contraseña);
-        
-        if (existe) {
-         actualizarNavbar("/usuario");
-         navegate("/usuario");
-         
 
+        if (existe) {
+            let usuarioLogeado = usuarios.find(usu => usu.email === correo);
+            actualizarNavbar("/usuario");
+            navigate("/"+ usuarioLogeado.nombre);
         } else {
             alert("Verifique sus datos e intente de nuevo");
         }
@@ -61,7 +61,6 @@ function FormularioIniciarSesion() {
                     required
                     id="outlined-required"
                     label="Correo Electrónico"
-                    defaultValue=""
                     value={correo}
                     onChange={(e) => {
                         setCorreo(e.target.value);

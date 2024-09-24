@@ -1,20 +1,34 @@
 import React from 'react';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import 'bootstrap-icons/font/bootstrap-icons.css';
-import logoConf from '../../imagenes/rueda-dentada.svg';
+import PersonIcon from '@mui/icons-material/Person';
+import Button from '@mui/material/Button';
+import {useNavigate} from 'react-router-dom';
 
 
-function UsuarioNB () {
+
+function UsuarioNB ({actualizar}) {
+    const navigate = useNavigate();
+
+    const cerrarSesion = () => {
+        actualizar('/');
+        navigate('/');
+    }
 
     return (
         <ul>
+            
             <li className='liNavBar'>
-                Usuario
+                <Button style={{ color: 'black' }} variant='outlined'>Mi Perfil</Button>
+            </li> 
+            <li className='liNavBar'>
+                <Button style={{ color: 'black' }} variant='outlined' >Proyectos</Button>
             </li> 
             <li>
-                <button className='buttonNav'>
-                    <img src={logoConf} alt='boton de configuracion'/>
-                </button>
+                <Button style={{ color: 'black' }} variant='outlined' onClick={cerrarSesion}>Cerrar Sesión</Button>
+            </li>
+            <li>
+                <PersonIcon style={{ color: 'black' }} />
             </li>
         </ul>
     );

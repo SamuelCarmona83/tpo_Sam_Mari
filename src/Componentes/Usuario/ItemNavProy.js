@@ -1,6 +1,8 @@
 import React from 'react';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import Checkbox from '@mui/material/Checkbox';
+import DeleteIcon from '@mui/icons-material/Delete';
+import Button from '@mui/material/Button';
 
 const label = { inputProps: { 'aria-label': 'Checkbox demo' } };
 
@@ -21,6 +23,13 @@ function ItemNavProj (props){
             onChange={()=> actualizar(id)}
             checked = {elegido === id}
             />
+            <Button variant='text' 
+                sx={{
+                    color: 'green',
+                    width:'42px'
+                }}>
+                <DeleteIcon />
+            </Button>
         </li>
     );
 }

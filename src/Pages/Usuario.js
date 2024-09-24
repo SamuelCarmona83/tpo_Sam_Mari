@@ -13,7 +13,7 @@ function Usuario (){
     }
 
     return (
-        <article className='container-fluid artUsuario'>
+        <article className='artUsuario'>
             <NavProy 
                 actualizar={actualizarApp}
                 proyectoIDSeleccionado = {proyectoID}

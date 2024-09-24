@@ -2,6 +2,7 @@ import React from 'react';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import ItemNavProj from './ItemNavProy';
 
+
 const proyectos = [{
     nombre:"proyecto 1",
     ID: 0
@@ -19,18 +20,21 @@ function NavProy (props) {
     const ProyIDSeleccionado = props.proyectoIDSeleccionado;
     
     return(
-        <ul id='proyectos' className='navProy container vh-n'>
-            {proyectos.map((i, index) => {
-                return <ItemNavProj 
-                    key={index} 
-                    actualizar={actualizar} 
-                    id={i.ID}
-                    nombre={i.nombre}
-                    ProyIDSeleccionado = {ProyIDSeleccionado}
-                    />
-                })
-            }
-        </ul>
+        <div id='proyectos'>
+            <ul  className='navProy container-fluid vh-n'>
+                {proyectos.map((i, index) => {
+                    return <ItemNavProj 
+                        key={index} 
+                        actualizar={actualizar} 
+                        id={i.ID}
+                        nombre={i.nombre}
+                        ProyIDSeleccionado = {ProyIDSeleccionado}
+                        />
+                    })
+                }
+            </ul>
+        </div>
+        
     );
 }
 

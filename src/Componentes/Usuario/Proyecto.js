@@ -1,13 +1,10 @@
-import React, { useState } from 'react';
+import React from 'react';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import ToggleButton from '@mui/material/ToggleButton';
 import ToggleButtonGroup from '@mui/material/ToggleButtonGroup';
 import Participantes from './Participantes';
 import imagen1 from '../../imagenes/mari.jpeg';
 import imagen2 from '../../imagenes/samu.jpeg';
-
-
-
 
 const proyectos = [{
     nombre:"proyecto pepito",
@@ -50,7 +47,7 @@ function Proyecto ({proyectoID}) {
     };
 
     let headerProyecto;
-    if (proyectoID != 'n'){
+    if (proyectoID !== 'n'){
         let titulo = proyectos[proyectoID].nombre;
         headerProyecto = (
                 <div id='navProyecto'>
@@ -70,15 +67,16 @@ function Proyecto ({proyectoID}) {
         );
     }else {
         headerProyecto = (
-            <h2>Bienvenidos, elija un proyecto!</h2>
+            <div id='navProyecto'>
+                <h2>Bienvenidos, elija un proyecto!</h2>
+            </div>
         );
     }
 
 
     let main;
 
-    console.log(alignment);
-    if(proyectoID != 'n'){
+    if(proyectoID !== 'n'){
         switch (alignment){
             case 'datos':
                 main = (
@@ -91,12 +89,10 @@ function Proyecto ({proyectoID}) {
                     <div key={index}>{participantes[index].participante}</div>
                 ));
                 break;
-                break
-            case 'configuración':
+            default:
                 main = (
                     <h1>configuración</h1>
                 )
-                break
             }
     }
 
