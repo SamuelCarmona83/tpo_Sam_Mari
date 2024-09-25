@@ -65,3 +65,7 @@ export function agregarParticipante (proyectoID, participanteID) {
         }
     }
 }
+
+export function agregarUsuario (UsuarioJason) {
+    usuarios.push(UsuarioJason);
+}
