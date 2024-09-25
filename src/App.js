@@ -15,7 +15,7 @@ function App() {
           <Route path="/" index element={<Inicio />} />
           <Route path="iniciar-sesion" element={<IniciarSesion pag="iniciar"/>} />
           <Route path="registrate" element={<IniciarSesion pag="registrate"/>} />
-          <Route path="usuario" element={<Usuario />} />
+          <Route path=":usuario" element={<Usuario />} />
         </Route>
       </Routes>
     </Router>

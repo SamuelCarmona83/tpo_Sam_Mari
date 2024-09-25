@@ -1,50 +1,19 @@
-import React, { useState } from 'react';
+import React from 'react';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import ToggleButton from '@mui/material/ToggleButton';
 import ToggleButtonGroup from '@mui/material/ToggleButtonGroup';
 import Participantes from './Participantes';
-import imagen1 from '../../imagenes/mari.jpeg';
-import imagen2 from '../../imagenes/samu.jpeg';
-import imagen3 from '../../imagenes/corazon.png';
 import imagen4 from '../../imagenes/agregarUsuario.png';
+import {getParticipantes, getProyectos, getUsuarios} from '../../Backend/BD';
 
-
-
-
-const proyectos = [{
-    nombre: "proyecto pepito",
-    ID: 0,
-    partici: [0, 1, 3,0]
-}, {
-    nombre: "proyecto 2",
-    ID: 1,
-    partici: [0, 1, 3]
-
-}, {
-    nombre: "proyecto 3",
-    ID: 2,
-    partici: [0, 1]
-}];
-
-const participantes = [
-    {
-        participante: <Participantes imagen={imagen1} nombre="Mariangel" ID="001" collap="#collapseOne" monto="300" />
-    },
-    {
-        participante: <Participantes imagen={imagen2} nombre="Samuel" ID="002" collap="#collapseTwo" monto="500" />
-    },
-    {
-        participante: <Participantes nombre="Jose Alejandro" ID="003" collap="#collapseThree" />
-    },
-    {
-        participante: <Participantes imagen={imagen3} nombre="Eddymar Orellana" ID="004"></Participantes>
-    }
-];
 
 
 
 
 function Proyecto({ proyectoID }) {
+    let proyectos = getProyectos();
+    let participantes = getParticipantes(proyectos[proyectoID].partici);
+
     const [alignment, setAlignment] = React.useState('datos');
 
     const handleChange = (event, newAlignment) => {
@@ -52,7 +21,7 @@ function Proyecto({ proyectoID }) {
     };
 
     let headerProyecto;
-    if (proyectoID != 'n') {
+    if (proyectoID !== 'n'){
         let titulo = proyectos[proyectoID].nombre;
         headerProyecto = (
             <div id='navProyecto'>
@@ -72,34 +41,45 @@ function Proyecto({ proyectoID }) {
         );
     } else {
         headerProyecto = (
-            <h2>Bienvenidos, elija un proyecto!</h2>
+            <div id='navProyecto'>
+                <h2>Bienvenidos, elija un proyecto!</h2>
+            </div>
         );
     }
 
 
     let main;
 
-    console.log(alignment);
-    if (proyectoID != 'n') {
-        switch (alignment) {
+    if(proyectoID !== 'n'){
+        switch (alignment){
             case 'datos':
                 main = (
                     <h1>datos</h1>
                 )
                 break
             case 'participantes':
-                const participantesDelProyecto = proyectos[proyectoID].partici || [];
-                main = participantesDelProyecto.map(index => (
-                    <div key={index}>{participantes[index].participante}</div>
-                ));
+                const participantesDelProyecto = proyectos[proyectoID].partici || [];   
+                main = (
+                    <article>
+                        {participantesDelProyecto.map(index => (
+                            <Participantes 
+                            imagen={participantes[index].imagen} 
+                            nombre={participantes[index].nombre} 
+                            ID={participantes[index].ID} 
+                            collap="#collapseOne" 
+                            monto={participantes[index].monto} />
+                        ))}
+                    <button className="boton-agregar">
+                        <img src={imagen4} className="imagen-agregar" alt="Descripción de la imagen" />
+                    </button>
+                    </article>
+                );
                 break;
-                break
-            case 'configuración':
+            default:
                 main = (
                     <h1>configuración</h1>
                 )
-                break
-        }
+            }
     }
 
     return (
@@ -107,9 +87,6 @@ function Proyecto({ proyectoID }) {
             {headerProyecto}
             <div id='mainProyecto'>
                 {main}
-                <button className="boton-agregar"><img src={imagen4} className="imagen-agregar" alt="Descripción de la imagen" />
-</button>
-
             </div>
         </article>
     );

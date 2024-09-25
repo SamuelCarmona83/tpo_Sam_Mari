@@ -10,7 +10,7 @@
 }
   
 .fondo {
-    background-image: url(../../imagenes/fondoDesierto.jpg);
+    background-color: #BDC3C7 ;
     background-size: cover;
     background-position: center;
     background-repeat: no-repeat;

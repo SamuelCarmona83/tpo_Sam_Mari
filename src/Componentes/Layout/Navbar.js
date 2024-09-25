@@ -54,17 +54,17 @@ function Navbar ({estado, actualizarNavbar}) {
                 </ul>
             );
             break;
-        case "/usuario":
-            Contenido = (
-                <UsuarioNB ></UsuarioNB>
-            );
-            break;
-        default:
+        case "/registrate":
             Contenido = (
                 <ul>
                     <ButtonIniciar />
                     <ButtonInicio />
                 </ul>
+            );
+            break;
+        default:
+            Contenido = (
+                <UsuarioNB actualizar={actualizarNavbar}></UsuarioNB>
             );
     }
 
