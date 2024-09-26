@@ -2,18 +2,16 @@ import React from 'react';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import ToggleButton from '@mui/material/ToggleButton';
 import ToggleButtonGroup from '@mui/material/ToggleButtonGroup';
-import Participantes from './Participantes';
-import imagen4 from '../../imagenes/agregarUsuario.png';
-import {getParticipantes, getProyectos, getUsuarios} from '../../Backend/BD';
+import {getProyectobyID} from '../../Backend/BD';
 import ParticipantesList from './ParticipantesList';
-
-
-
+import InfoProyecto from './InformacionProyecto';
 
 
 function Proyecto({ proyectoID }) {
-    let proyectos = getProyectos();
-    let participantes = getUsuarios();
+    let ProySeleccionado;
+    if(proyectoID != 'n'){
+        ProySeleccionado = getProyectobyID(proyectoID);
+    }
 
     const [alignment, setAlignment] = React.useState('datos');
 
@@ -25,7 +23,7 @@ function Proyecto({ proyectoID }) {
     if (proyectoID !== 'n'){
         headerProyecto = (
             <div id='navProyecto'>
-                <h2>{ProSeleccionado.nombre}</h2>
+                <h2>{ProySeleccionado.nombre}</h2>
                 <ToggleButtonGroup
                     color="primary"
                     value={alignment}
@@ -57,13 +55,10 @@ function Proyecto({ proyectoID }) {
                     <InfoProyecto />
                 )
                 break
-            case 'participantes':
-                const participantesDelProyecto = proyectos[proyectoID].participantes || [];   
+            case 'participantes': 
                 main = (
                     <ParticipantesList 
                         proyectoID={proyectoID} 
-                        participantes={participantes} 
-                        proyectos={proyectos} 
                     />
                 );
                 break;

@@ -2,9 +2,12 @@
 import React from 'react';
 import Participantes from './Participantes';
 import imagen4 from '../../imagenes/agregarUsuario.png';
+import { getProyectobyID, getUsuarios } from '../../Backend/BD';
 
-const ParticipantesList = ({ proyectoID, participantes, proyectos }) => {
-    const participantesDelProyecto = proyectos[proyectoID].participantes || [];
+const ParticipantesList = ({proyectoID}) => {
+    let proyecto = getProyectobyID(proyectoID);
+    let participantes = getUsuarios();
+    const participantesDelProyecto = proyecto.participantes || [];
 
     return (
         <article>
