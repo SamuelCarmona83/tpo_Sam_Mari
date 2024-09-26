@@ -1,3 +1,5 @@
+
+
 let proyectos = [{
     nombre: "proyecto pepito",
     ID: 0,
@@ -16,13 +18,13 @@ let usuarios = [
     {
         ID:"001",
         nombre:"mariangel",
-        imagen:'../../imagenes/mari.jpeg',
+        imagen: '../../imagenes/mari.jpeg',
         monto:"300",
     },
     {
         ID:"002",
         nombre:"Samuel",
-        imagen:'../../imagenes/samu.jpeg',
+        imagen: ('../../imagenes/samu.jpeg'),
         monto:"500"
     },
     {

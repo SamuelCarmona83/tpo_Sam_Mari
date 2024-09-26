@@ -23,8 +23,7 @@ export default function Participantes(props) {
               <li><p>Aporte</p><img className="icono-peso" src={peso}></img></li>
               <li><p>Saldo a cobrar</p><img className="icono-peso" src={peso}></img></li>
               <li><p>Saldo a pagar</p><img className="icono-peso" src={peso}></img>h</li>
-              <li><p>Saldo a cobrar</p><img className="icono-peso" alt='icono de peso' src={peso}></img></li>
-              <li><p>Saldo a pagar</p><img className="icono-peso" alt='icono de peso' src={peso}></img></li>
+             
               
             </ul>
           </div>
