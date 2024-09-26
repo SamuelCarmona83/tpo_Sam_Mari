@@ -5,6 +5,8 @@ import ToggleButtonGroup from '@mui/material/ToggleButtonGroup';
 import {getProyectobyID} from '../../Backend/BD';
 import ParticipantesList from './ParticipantesList';
 import InfoProyecto from './InformacionProyecto';
+import {Button} from '@mui/material';
+import EditIcon from '@mui/icons-material/Edit';
 
 
 function Proyecto({ proyectoID }) {
@@ -23,7 +25,19 @@ function Proyecto({ proyectoID }) {
     if (proyectoID !== 'n'){
         headerProyecto = (
             <div id='navProyecto'>
-                <h2>{ProySeleccionado.nombre}</h2>
+                <div className='d-flex f-row justify-content-between align-items-center'>
+                    <h2>{ProySeleccionado.nombre}</h2>
+                    <Button 
+                        variant='text'
+                        sx={{
+                            height: "25px",
+                            color: 'grey',
+                        }}
+                    > 
+                        <EditIcon />
+                    </Button>
+                </div>
+                
                 <ToggleButtonGroup
                     color="primary"
                     value={alignment}
@@ -33,7 +47,7 @@ function Proyecto({ proyectoID }) {
                 >
                     <ToggleButton value="datos">Datos</ToggleButton>
                     <ToggleButton value="participantes" >Participantes</ToggleButton>
-                    <ToggleButton value="configuración">Configuración</ToggleButton>
+                    <ToggleButton value="Gastos">Gastos</ToggleButton>
                 </ToggleButtonGroup>
             </div>
         );

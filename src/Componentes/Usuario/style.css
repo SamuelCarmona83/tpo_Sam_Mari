@@ -78,9 +78,9 @@
 }
 
 #datosParticipante{
-    display: flex; /* Activar flexbox */
-    justify-content: center; /* Centra verticalmente */
-    align-items: center; /* Centra horizontalmente */
+    display: flex; 
+    justify-content: center; 
+    align-items: center;
 }
 
 .imagen-agregar{
@@ -92,7 +92,7 @@
 }
 
 .boton-agregar{
-    bottom: 2%; /* Ajusta según lo necesites */
+    bottom: 2%;
     right: 2%;
     border-radius: 40%;
     border: none;
@@ -123,4 +123,14 @@
     height: 20px;
 }
 
+.descripcion{
+    width: 100%;
+}
 
+.gastoTotal {
+    width: 15%;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: center;
+}
