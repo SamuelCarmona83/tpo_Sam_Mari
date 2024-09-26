@@ -1,11 +1,12 @@
 import React from 'react';
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import './App.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import Layout from './Componentes/Layout/Layout.js';
 import Inicio from './Pages/Inicio.js';
 import IniciarSesion from './Pages/Acceso.js';
-import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import Usuario from './Pages/Usuario.js';
+import Perfil from './Pages/PerfilUsuario.js';
 
 function App() {
   return (
@@ -16,6 +17,7 @@ function App() {
           <Route path="iniciar-sesion" element={<IniciarSesion pag="iniciar"/>} />
           <Route path="registrate" element={<IniciarSesion pag="registrate"/>} />
           <Route path=":usuario" element={<Usuario />} />
+          <Route path="Perfil" element={<Perfil />}/>
         </Route>
       </Routes>
     </Router>

@@ -8,15 +8,13 @@ function Usuario (){
     let [proyectoID, setProyectoID] = useState('n');
 
     const actualizarApp = (ID) => {
-        proyectoID = ID;
-        setProyectoID(proyectoID);
+        setProyectoID(ID);
     }
 
     return (
-        <article className='artUsuario'>
+        <article id='articuloUsuario'>
             <NavProy 
                 actualizar={actualizarApp}
-                proyectoIDSeleccionado = {proyectoID}
             />
             <Proyecto proyectoID ={proyectoID} />
         </article>

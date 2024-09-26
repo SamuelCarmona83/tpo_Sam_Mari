@@ -64,7 +64,7 @@ function Navbar ({estado, actualizarNavbar}) {
             break;
         default:
             Contenido = (
-                <UsuarioNB actualizar={actualizarNavbar}></UsuarioNB>
+                <UsuarioNB estado={estado} actualizar={actualizarNavbar}></UsuarioNB>
             );
     }
 

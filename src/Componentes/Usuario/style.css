@@ -1,4 +1,22 @@
-#proyectos {
+#articuloUsuario {
+    display: flex;
+    flex-direction: row;
+    justify-content:space-between;
+    min-height: 88vh;
+    margin-top: 5em;
+
+}
+
+#proyecto {
+    background-color: #ECF0F1;
+    flex-basis: 75%;
+    flex-grow: 1;
+    display: flex;
+    flex-direction: column;
+    flex-grow: 1;
+}
+
+#listaDeProyectos {
     background-color: #ECF0F1;
     border: 2px solid #3498DB;
     border-radius: 5px;
@@ -6,7 +24,8 @@
     display: flex;
     flex-direction: column;
 
-    width: 25%;
+    flex-basis: 25%;
+    flex-grow: 0;
 }
 
 #navProyecto {
@@ -31,9 +50,9 @@
     
 }
 
-.vh-n {
-    height: 88vh;
-    position: relative;
+.box {
+    flex-grow: 1; 
+    box-sizing: border-box; 
 }
 
 .itemNavProy {
@@ -43,30 +62,13 @@
 
     justify-content: space-between;
     padding: 0.5em;
-    margin-top: 0.5em;
+    margin-bottom: 0.5em;
 }
 
-.proyecto {
-    background-color: #ECF0F1;
-    max-width: 75%;
-
-    display: flex;
-    flex-direction: column;
-    flex-grow: 1;
+.ulProyectos{
+    background-color: gray;
 }
 
-.navProy{
-    color:burlywood;
-}
-
-.artUsuario {
-    display: flex;
-    flex-direction: row;
-    justify-content:space-between;
-
-    margin-top: 5em;
-
-}
 .participante-imagen{
     width: 70px;
     height: 70px;

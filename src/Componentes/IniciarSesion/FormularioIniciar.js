@@ -3,11 +3,11 @@ import './style.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { Button, TextField } from '@mui/material';
 import { useNavigate ,useOutletContext} from 'react-router-dom';
+import { setUsuarioLogeado } from '../../Backend/BD';
 
 function FormularioIniciarSesion() {
     const navigate = useNavigate();
     const actualizarNavbar = useOutletContext();
-    console.log(actualizarNavbar)
     const [correo, setCorreo] = React.useState("");
     const [contraseña, setContraseña] = React.useState(""); 
     const [error, setError] = React.useState("");
@@ -29,6 +29,7 @@ function FormularioIniciarSesion() {
 
         if (existe) {
             let usuarioLogeado = usuarios.find(usu => usu.email === correo);
+            setUsuarioLogeado(usuarioLogeado.nombre);
             actualizarNavbar("/usuario");
             navigate("/"+ usuarioLogeado.nombre);
         } else {

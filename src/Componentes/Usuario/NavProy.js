@@ -1,29 +1,90 @@
 import React from 'react';
 import 'bootstrap/dist/css/bootstrap.min.css';
-import ItemNavProj from './ItemNavProy';
-import {getProyectos} from '../../Backend/BD';
+import ItemNavProy from './ItemNavProy';
+import { agregarProyecto, getProyectos } from '../../Backend/BD';
+import { Button, TextField, Dialog, DialogActions, DialogContent, DialogTitle } from '@mui/material';
+import AddIcon from '@mui/icons-material/Add';
 
-function NavProy (props) {
+function NavProy(props) {
     const actualizar = props.actualizar;
-    const ProyIDSeleccionado = props.proyectoIDSeleccionado;
     let proyectos = getProyectos();
-    
-    return(
-        <div id='proyectos'>
-            <ul  className='navProy container-fluid vh-n'>
-                {proyectos.map((i, index) => {
-                    return <ItemNavProj 
-                        key={index} 
-                        actualizar={actualizar} 
-                        id={i.ID}
-                        nombre={i.nombre}
-                        ProyIDSeleccionado = {ProyIDSeleccionado}
+
+    const [cantidad, setCantidad] = React.useState(proyectos.length || 0);
+    const [open, setOpen] = React.useState(false); // Estado para manejar la visibilidad del diálogo
+    const [nombre, setNombreProyecto] = React.useState(''); // Estado para el nombre del proyecto
+
+    const eliminarProyecto = () => {
+        setCantidad(cantidad - 1);
+    };
+
+    const abrirFormulario = () => {
+        setOpen(true);
+    };
+
+    const botonCerrar = () => {
+        setOpen(false);
+    };
+
+    const crearNuevoProyecto = () => {
+        agregarProyecto(nombre);
+        botonCerrar();
+        setNombreProyecto('');
+        setCantidad(cantidad + 1);
+    };
+
+    return (
+        <div id='listaDeProyectos'>
+            <div className='d-flex justify-content-end'>
+                <Button 
+                    sx={{ color: 'Blue', alignItems: "center" }} 
+                    onClick={abrirFormulario}
+                >
+                    <div className='d-flex align-items-center'>
+                        <p className='mb-0'>Nuevo</p>
+                        <AddIcon fontSize="medium" />
+                    </div>
+                </Button>
+            </div>
+
+            {/* Diálogo para crear el proyecto */}
+            <Dialog open={open} onClose={botonCerrar}>
+                <DialogTitle>Crear Proyecto</DialogTitle>
+                <DialogContent>
+                    <TextField
+                        autoFocus
+                        margin="dense"
+                        id="project-name"
+                        label="Nombre del Proyecto"
+                        type="text"
+                        fullWidth
+                        variant="outlined"
+                        value={nombre}
+                        onChange={(e) => setNombreProyecto(e.target.value)}
+                    />
+                </DialogContent>
+                <DialogActions>
+                    <Button onClick={botonCerrar} color="primary">
+                        Cancelar
+                    </Button>
+                    <Button onClick={crearNuevoProyecto} color="primary">
+                        Crear
+                    </Button>
+                </DialogActions>
+            </Dialog>
+
+            <ul className='container-fluid box'>
+                {proyectos.map((proyecto) => {
+                    return (
+                        <ItemNavProy 
+                            key={proyecto.ID} 
+                            proyecto={proyecto}
+                            actualizar={actualizar}
+                            eliminarProyecto={eliminarProyecto}
                         />
-                    })
-                }
+                    )
+                })}
             </ul>
         </div>
-        
     );
 }
 

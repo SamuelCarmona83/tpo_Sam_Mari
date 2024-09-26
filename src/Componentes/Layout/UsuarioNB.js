@@ -4,10 +4,10 @@ import 'bootstrap-icons/font/bootstrap-icons.css';
 import PersonIcon from '@mui/icons-material/Person';
 import Button from '@mui/material/Button';
 import {useNavigate} from 'react-router-dom';
+import { getUsuarioLogeado } from '../../Backend/BD';
 
 
-
-function UsuarioNB ({actualizar}) {
+function UsuarioNB ({actualizar, estado}) {
     const navigate = useNavigate();
 
     const cerrarSesion = () => {
@@ -15,14 +15,22 @@ function UsuarioNB ({actualizar}) {
         navigate('/');
     }
 
+    const toPerfil = () => {
+        navigate(`/Perfil`);
+    }
+
+    const toProyectos = () => {
+        let nombreUsuario = getUsuarioLogeado();
+        navigate(`/${nombreUsuario}`);
+    }
+
     return (
         <ul>
-            
             <li className='liNavBar'>
-                <Button style={{ color: 'black' }} variant='outlined'>Mi Perfil</Button>
+                <Button style={{ color: 'black' }} variant='outlined' onClick={toPerfil}>Mi Perfil</Button>
             </li> 
             <li className='liNavBar'>
-                <Button style={{ color: 'black' }} variant='outlined' >Proyectos</Button>
+                <Button style={{ color: 'black' }} variant='outlined' onClick={toProyectos}>Proyectos</Button>
             </li> 
             <li>
                 <Button style={{ color: 'black' }} variant='outlined' onClick={cerrarSesion}>Cerrar Sesión</Button>

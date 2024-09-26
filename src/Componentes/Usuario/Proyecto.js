@@ -4,15 +4,15 @@ import ToggleButton from '@mui/material/ToggleButton';
 import ToggleButtonGroup from '@mui/material/ToggleButtonGroup';
 import Participantes from './Participantes';
 import imagen4 from '../../imagenes/agregarUsuario.png';
-import {getParticipantes, getProyectos, getUsuarios} from '../../Backend/BD';
-
-
-
-
+import {getProyectobyID, getUsuarios} from '../../Backend/BD';
+import InfoProyecto from './InformacionProyecto';
 
 function Proyecto({ proyectoID }) {
-    let proyectos = getProyectos();
-    let participantes = getParticipantes(proyectos[proyectoID].partici);
+    let ProSeleccionado;
+    if (proyectoID !== 'n'){
+        ProSeleccionado = getProyectobyID(proyectoID);
+    }
+    let participantes = getUsuarios();
 
     const [alignment, setAlignment] = React.useState('datos');
 
@@ -22,10 +22,9 @@ function Proyecto({ proyectoID }) {
 
     let headerProyecto;
     if (proyectoID !== 'n'){
-        let titulo = proyectos[proyectoID].nombre;
         headerProyecto = (
             <div id='navProyecto'>
-                <h2>{titulo}</h2>
+                <h2>{ProSeleccionado.nombre}</h2>
                 <ToggleButtonGroup
                     color="primary"
                     value={alignment}
@@ -54,11 +53,11 @@ function Proyecto({ proyectoID }) {
         switch (alignment){
             case 'datos':
                 main = (
-                    <h1>datos</h1>
+                    <InfoProyecto />
                 )
                 break
             case 'participantes':
-                const participantesDelProyecto = proyectos[proyectoID].partici || [];   
+                const participantesDelProyecto = ProSeleccionado.participantes || [];   
                 main = (
                     <article>
                         {participantesDelProyecto.map(index => (
@@ -69,9 +68,9 @@ function Proyecto({ proyectoID }) {
                             collap="#collapseOne" 
                             monto={participantes[index].monto} />
                         ))}
-                    <button className="boton-agregar">
-                        <img src={imagen4} className="imagen-agregar" alt="Descripción de la imagen" />
-                    </button>
+                        <button className="boton-agregar">
+                            <img src={imagen4} className="imagen-agregar" alt="Descripción de la imagen" />
+                        </button>
                     </article>
                 );
                 break;
@@ -83,7 +82,7 @@ function Proyecto({ proyectoID }) {
     }
 
     return (
-        <article className='proyecto vh-n'>
+        <article id='proyecto' className='proyecto box'>
             {headerProyecto}
             <div id='mainProyecto'>
                 {main}
