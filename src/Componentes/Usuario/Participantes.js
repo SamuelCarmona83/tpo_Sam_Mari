@@ -21,8 +21,9 @@ export default function Participantes(props) {
             <ul className="detalle-totales" >
               <li><p>Total de los Gastos</p><img className="icono-peso" src={peso}></img></li>
               <li><p>Aporte</p><img className="icono-peso" src={peso}></img></li>
-              <li><p>Saldo a cobrar</p><img className="icono-peso" alt='icono de peso' src={peso}></img></li>
-              <li><p>Saldo a pagar</p><img className="icono-peso" alt='icono de peso' src={peso}></img></li>
+              <li><p>Saldo a cobrar</p><img className="icono-peso" src={peso}></img></li>
+              <li><p>Saldo a pagar</p><img className="icono-peso" src={peso}></img>h</li>
+             
               
             </ul>
           </div>

@@ -4,14 +4,15 @@ import ToggleButton from '@mui/material/ToggleButton';
 import ToggleButtonGroup from '@mui/material/ToggleButtonGroup';
 import Participantes from './Participantes';
 import imagen4 from '../../imagenes/agregarUsuario.png';
-import {getProyectobyID, getUsuarios} from '../../Backend/BD';
-import InfoProyecto from './InformacionProyecto';
+import {getParticipantes, getProyectos, getUsuarios} from '../../Backend/BD';
+import ParticipantesList from './ParticipantesList';
+
+
+
+
 
 function Proyecto({ proyectoID }) {
-    let ProSeleccionado;
-    if (proyectoID !== 'n'){
-        ProSeleccionado = getProyectobyID(proyectoID);
-    }
+    let proyectos = getProyectos();
     let participantes = getUsuarios();
 
     const [alignment, setAlignment] = React.useState('datos');
@@ -57,21 +58,13 @@ function Proyecto({ proyectoID }) {
                 )
                 break
             case 'participantes':
-                const participantesDelProyecto = ProSeleccionado.participantes || [];   
+                const participantesDelProyecto = proyectos[proyectoID].participantes || [];   
                 main = (
-                    <article>
-                        {participantesDelProyecto.map(index => (
-                            <Participantes 
-                            imagen={participantes[index].imagen} 
-                            nombre={participantes[index].nombre} 
-                            ID={participantes[index].ID} 
-                            collap="#collapseOne" 
-                            monto={participantes[index].monto} />
-                        ))}
-                        <button className="boton-agregar">
-                            <img src={imagen4} className="imagen-agregar" alt="Descripción de la imagen" />
-                        </button>
-                    </article>
+                    <ParticipantesList 
+                        proyectoID={proyectoID} 
+                        participantes={participantes} 
+                        proyectos={proyectos} 
+                    />
                 );
                 break;
             default:
