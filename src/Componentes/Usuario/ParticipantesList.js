@@ -1,10 +1,13 @@
 // ParticipantesList.js
 import React from 'react';
 import Participantes from './Participantes';
-import imagen4 from '../../imagenes/agregarUsuario.png';
 import { getProyectobyID, getUsuarios } from '../../Backend/BD';
+import { PropaneSharp } from '@mui/icons-material';
+import imagen4 from '../../imagenes/agregarUsuario.png';
 
-const ParticipantesList = ({proyectoID}) => {
+
+
+const ParticipantesList = ({proyectoID,abrir}) => {
     let proyecto = getProyectobyID(proyectoID);
     let participantes = getUsuarios();
     const participantesDelProyecto = proyecto.participantes || [];
@@ -13,7 +16,7 @@ const ParticipantesList = ({proyectoID}) => {
         <article>
             {participantesDelProyecto.map(index => (
                 <Participantes 
-                    key={participantes[index].ID} // Asegúrate de añadir una clave única
+                  
                     imagen={participantes[index].imagen} 
                     nombre={participantes[index].nombre} 
                     ID={participantes[index].ID} 
@@ -21,9 +24,9 @@ const ParticipantesList = ({proyectoID}) => {
                     monto={participantes[index].monto} 
                 />
             ))}
-            <button className="boton-agregar">
-                <img src={imagen4} className="imagen-agregar" alt="Descripción de la imagen" />
-            </button>
+            <button className="boton-agregar" onClick={abrir}>
+                <img src={imagen4} className="imagen-agregar" alt="Descripción de la imagen"  />
+                 </button>
         </article>
     );
 };
