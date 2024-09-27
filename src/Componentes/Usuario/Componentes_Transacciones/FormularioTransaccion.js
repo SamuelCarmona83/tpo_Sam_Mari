@@ -13,19 +13,29 @@ export default function FormularioTransaccion ({visibilidad, cerrar, crearT}) {
     };
 
     const botonGuardar = () => {
-        const formData = {
+        let nuevoMonto = parseFloat(monto)
+        const nuevaT = {
             imagen,
             descripcion,
-            monto,
+            monto: nuevoMonto,
             usuarioID:0,
             fecha,
         };
-        crearT(formData);
-        cerrar();
+        crearT(nuevaT);
+
+        cerrarFormulario();
     };
 
+    const cerrarFormulario = () => {
+        setDescripcion('');
+        setMonto('');
+        setFecha('');
+        setImagen(null);
+        cerrar();
+    }
+
     return (
-        <Dialog open={visibilidad} onClose={cerrar}>
+        <Dialog open={visibilidad} onClose={cerrarFormulario}>
             <DialogTitle>Agregar Información del Proyecto</DialogTitle>
             <DialogContent>
                 <TextField
@@ -70,7 +80,7 @@ export default function FormularioTransaccion ({visibilidad, cerrar, crearT}) {
                 </Button>
             </DialogContent>
             <DialogActions>
-                <Button onClick={cerrar} color="primary">
+                <Button onClick={cerrarFormulario} color="primary">
                     Cancelar
                 </Button>
                 <Button onClick={botonGuardar} color="primary">
