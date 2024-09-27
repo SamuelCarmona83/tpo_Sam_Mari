@@ -6,7 +6,7 @@ import imagen4 from '../../imagenes/agregarUsuario.png';
 
 
 
-const ParticipantesList = ({proyectoID,abrir}) => {
+const ParticipantesList = ({proyectoID, abrir, calcularAbonado}) => {
     let proyecto = getProyectobyID(proyectoID);
     let participantes = getUsuarios();
     const participantesDelProyecto = proyecto.participantes || [];
@@ -15,12 +15,13 @@ const ParticipantesList = ({proyectoID,abrir}) => {
         <article>
             {participantesDelProyecto.map(index => (
                 <Participantes 
-                  
+                    proyectoID = {proyectoID}
                     imagen={participantes[index].imagen} 
                     nombre={participantes[index].nombre} 
                     ID={participantes[index].ID} 
                     collap="#collapseOne" 
-                    monto={participantes[index].monto} 
+                    monto={participantes[index].monto}
+                    calcularAbonado={calcularAbonado}
                 />
             ))}
             <button className="boton-agregar" onClick={abrir}>

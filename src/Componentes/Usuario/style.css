@@ -30,7 +30,7 @@
 
 #navProyecto {
     width: 100%;
-    height: 10%;
+    min-height: 10%;
     display: flex;
     flex-direction: row;
     justify-content: space-between;

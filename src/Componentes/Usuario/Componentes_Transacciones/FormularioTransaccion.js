@@ -9,7 +9,14 @@ export default function FormularioTransaccion ({visibilidad, cerrar, crearT}) {
     const [imagen, setImagen] = useState(null);
 
     const cargarImagen = (event) => {
-        setImagen(event.target.files[0]);
+        const file = event.target.files[0];
+        if (file) {
+            const reader = new FileReader();
+            reader.onloadend = () => {
+                setImagen(reader.result);
+            };
+            reader.readAsDataURL(file); // Lee la imagen como Data URL
+        }
     };
 
     const botonGuardar = () => {

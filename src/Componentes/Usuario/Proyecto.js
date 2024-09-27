@@ -14,7 +14,6 @@ function Proyecto({ proyectoID }) {
         proyecto = getProyectobyID(proyectoID);
     }
     
-    
     const [usuarios, setUsuarios] = React.useState(getUsuarios());
     const [cantidad, setCantidad] = React.useState(usuarios.length || 0);
     const [open, setOpen] = React.useState(false);
@@ -49,11 +48,6 @@ function Proyecto({ proyectoID }) {
         setCantidad(cantidad - 1);
     };
     
-    let ProySeleccionado;
-    if (proyectoID !== 'n') {
-        ProySeleccionado = getProyectobyID(proyectoID);
-    }
-
     //      Metodos para calcular datos     //
     const calcularAbonadoPorUsuario = (usuarioID) =>  {
         let abonado = 0;
@@ -81,6 +75,25 @@ function Proyecto({ proyectoID }) {
         setAlignment(newAlignment);
     };
 
+    //      Formulario para editar el nombre del proyecto   //
+    let ProySeleccionado = getProyectobyID(proyectoID);
+    let nombreProyectoSeleccionado = ProySeleccionado? ProySeleccionado.nombre: '';
+    let [nombreProyecto, setNombre] = React.useState(nombreProyectoSeleccionado);
+    let [estadoFormulario, setEstado] = React.useState(false);
+
+    const cerrarFormularioDelNombre = () => {
+        setNombre(ProySeleccionado.nombre);
+        setEstado(false);
+    }
+    const botonEditar = () =>  {
+        nombreProyectoSeleccionado = nombreProyecto;
+        setEstado(false);
+    }
+
+    const desplegarFormulario = () => {
+        setEstado(true);
+    }
+
     //      Generando el contenido del proyecto     //
     //      Barra de nagegacion y contenido //
     let headerProyecto;
@@ -88,13 +101,14 @@ function Proyecto({ proyectoID }) {
         headerProyecto = (
             <nav id='navProyecto'>
                 <div className='d-flex f-row justify-content-between align-items-center'>
-                    <h2>{ProySeleccionado.nombre}</h2>
+                    <h2>{nombreProyectoSeleccionado}</h2>
                     <Button 
                         variant='text'
                         sx={{
                             height: "25px",
                             color: 'grey',
                         }}
+                        onClick={desplegarFormulario}
                     > 
                         <EditIcon />
                     </Button>
@@ -111,6 +125,31 @@ function Proyecto({ proyectoID }) {
                     <ToggleButton value="participantes" >Participantes</ToggleButton>
                     <ToggleButton value="transacciones">Transacciones</ToggleButton>
                 </ToggleButtonGroup>
+
+                <Dialog open={estadoFormulario} onClose={cerrarFormularioDelNombre}>
+                    <DialogTitle>Agregar Participante</DialogTitle>
+                    <DialogContent>
+                        <TextField
+                            autoFocus
+                            margin="dense"
+                            id="Nombre del Proyecto"
+                            label="Nombre del Proyecto"
+                            type="text"
+                            fullWidth
+                            variant="outlined"
+                            value={nombreProyecto}
+                            onChange={(e) => setNombre(e.target.value)}
+                        />
+                    </DialogContent>
+                    <DialogActions>
+                        <Button onClick={cerrarFormularioDelNombre} color="primary">
+                            Cancelar
+                        </Button>
+                        <Button onClick={botonEditar} color="primary">
+                            Editar
+                        </Button>
+                    </DialogActions>
+                </Dialog>
             </nav>
         );
     } else {
@@ -129,7 +168,7 @@ function Proyecto({ proyectoID }) {
                 main = <InfoProyecto proyectoID={proyectoID} calcularAbonado={calcularAbonadoPorUsuario} />;
                 break;
             case 'participantes':
-                main = <ParticipantesList proyectoID={proyectoID} abrir= {abrirFormulario} />;
+                main = <ParticipantesList proyectoID={proyectoID} abrir= {abrirFormulario} calcularAbonado={calcularAbonadoPorUsuario}/>;
 
                 break;
             case 'transacciones':

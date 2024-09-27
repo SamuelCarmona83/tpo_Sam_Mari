@@ -3,7 +3,7 @@ import imagenSamu from "../imagenes/samu.jpeg";
 import imagenCorazon from "../imagenes/corazon.png";
 
 let proyectos = [{
-    nombre: "fiesta de cumpleaños",
+    nombre: "Fiesta de cumpleaños",
     descripcion: "Todos los gastos para la fiesta del fin de semana",
     ID: 0,
     participantes: [0, 1, 3],
@@ -38,16 +38,16 @@ let proyectos = [{
     
 }, {
     nombre: "Viaje a la costa",
-    descripcion: "Vamos subiendo los consumos del viaje",
+    descripcion: "Llevamos la cuenta de todos los gastos del viaje a la costa",
     ID: 1,
     participantes: [0, 1],
     gastos:[
         {
             ID: 0,
             imagen: 'https://img.freepik.com/vector-gratis/muestra-ticket-realista_23-2147938550.jpg',
-            descripcion: 'Pasaje',
-            monto: 25300,
-            usuarioID: 0,
+            descripcion: 'hotel',
+            monto: 30000,
+            usuarioID: 1,
             fecha: "16/08/24"
         }
     ],

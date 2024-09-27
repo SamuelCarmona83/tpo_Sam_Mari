@@ -1,14 +1,14 @@
 import React from 'react';
-import {Typography, Divider, Button, Box} from '@mui/material';
+import {Typography, Divider, Button, Box, Dialog, DialogTitle, DialogContent, TextField, DialogActions} from '@mui/material';
 import EditIcon from '@mui/icons-material/Edit';
 import { getProyectobyID } from '../../Backend/BD';
 
 export default function InfoProyecto ({proyectoID, calcularAbonado}){
     let proyecto = getProyectobyID(proyectoID);
     let gastos = proyecto.gastos;
-    let totalGastos = 0;
     let abonadoPorUsuario = calcularAbonado(0); 
 
+    let totalGastos = 0;
     for (let i=0; i<gastos.length; i++) {
         totalGastos += gastos[i].monto;
     }
@@ -20,6 +20,21 @@ export default function InfoProyecto ({proyectoID, calcularAbonado}){
 
     let balance = abonadoPorUsuario - parteAPagar;
     
+    const [estadoFormulario, setEstado] = React.useState(false);
+    const [nuevaDescripcion, setDescripcion] = React.useState(proyecto.descripcion);
+
+    const abrirFormulario = () => {
+        setEstado(true);
+    }
+    const botonCancelar = () => {
+        setDescripcion(proyecto.descripcion);
+        setEstado(false);
+    }
+    const botonEditar = () => {
+        proyecto.descripcion = nuevaDescripcion;
+        setEstado(false);
+    }
+
     return (
             <article id='infoProyecto'>
                 <div className='descripcion d-flex f-row justify-content-between'>
@@ -33,6 +48,7 @@ export default function InfoProyecto ({proyectoID, calcularAbonado}){
                             color: 'grey',
                             marginTop: '15px'
                         }}
+                        onClick={abrirFormulario}
                     > 
                         <EditIcon />
                     </Button>
@@ -85,6 +101,31 @@ export default function InfoProyecto ({proyectoID, calcularAbonado}){
                     </Box>
                 </Box>
                 <Divider />
+                
+                <Dialog open={estadoFormulario} onClose={botonCancelar}>
+                <DialogTitle>Agregar Participante</DialogTitle>
+                <DialogContent>
+                    <TextField
+                        autoFocus
+                        margin="dense"
+                        id="Descripcion del Proyecto"
+                        label="Descripcion del Proyecto"
+                        type="text"
+                        fullWidth
+                        variant="outlined"
+                        value={nuevaDescripcion}
+                        onChange={(e) => setDescripcion(e.target.value)}
+                    />
+                </DialogContent>
+                <DialogActions>
+                    <Button onClick={botonCancelar} color="primary">
+                        Cancelar
+                    </Button>
+                    <Button onClick={botonEditar} color="primary">
+                        Editar
+                    </Button>
+                </DialogActions>
+            </Dialog>
             </article>
         );
 }

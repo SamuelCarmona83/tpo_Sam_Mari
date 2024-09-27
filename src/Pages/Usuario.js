@@ -16,7 +16,7 @@ function Usuario (){
             <NavProy 
                 actualizar={actualizarApp}
             />
-            <Proyecto proyectoID ={proyectoID} />
+            <Proyecto proyectoID ={proyectoID} actualizar={actualizarApp}/>
         </article>
     );
     
