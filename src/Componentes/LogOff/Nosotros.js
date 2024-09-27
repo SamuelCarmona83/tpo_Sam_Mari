@@ -16,7 +16,7 @@ function Nosotros() {
                 <strong>
                     ¡Deja de preocuparte por las complejidades <br /> de dividir gastos con amigos,
                     familiares o compañeros de trabajo! <br />
-                    Con SamuelMari, gestionar los gastos compartidos nunca ha sido tan fácil y eficiente.
+                    Con FinSnap, gestionar los gastos compartidos nunca ha sido tan fácil y eficiente.
                 </strong>
             </p><br /><br /><br />
             
