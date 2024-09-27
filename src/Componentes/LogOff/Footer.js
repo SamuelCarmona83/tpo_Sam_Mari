@@ -16,7 +16,7 @@ function Footer(){
 
             <ul className="footer-links">
                 <li>Simplifica tus finanzas</li>
-                <li>SamuelMari</li>
+                <li>FinSnap</li>
                 <li>Comentarios</li>
                 <li>Información</li>
                 <li>Colaboraciones</li>

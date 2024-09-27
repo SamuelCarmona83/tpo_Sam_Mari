@@ -1,44 +1,60 @@
 import React from 'react';
 import './style.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
-import { Button, TextField } from '@mui/material';
+import { Button, TextField, Box, Typography } from '@mui/material';
 
-function FormularioRegistro (){
-
+function FormularioRegistro() {
     return (
-        <article className='w-50 registro fondoRegistro'>
-            <h3>
-                Registrate
-            </h3>
+        <Box
+            className='w-50 registro fondoRegistro'
+            sx={{
+                padding: '20px',
+                borderRadius: '12px',
+                boxShadow: 2, // Sombra suave
+                backgroundColor: '#f5f5f5', // Color suave
+                margin: '0 auto', // Centrar en el contenedor
+                mt: 5 // Margen superior
+            }}
+        >
+            <Typography variant="h4" gutterBottom align="center">
+                Regístrate
+            </Typography>
             <div className='item_Registro'>
                 <TextField
                     required
-                    id="outlined-required"
+                    fullWidth
+                    variant="outlined"
                     label="Correo Electrónico"
-                    defaultValue=""
+                    margin="normal"
                 />
             </div>
             <div className='item_Registro'>
                 <TextField
-                id="outlined-password-input"
-                label="Contraseña"
-                type="password"
-                autoComplete="current-password"
+                    fullWidth
+                    variant="outlined"
+                    label="Contraseña"
+                    type="password"
+                    autoComplete="current-password"
+                    margin="normal"
                 />
             </div>
             <div className='item_Registro'>
                 <TextField
-                id="outlined-password-input"
-                label="Repita Contraseña"
-                type="password"
-                autoComplete="current-password"
-                />  
+                    fullWidth
+                    variant="outlined"
+                    label="Repita Contraseña"
+                    type="password"
+                    autoComplete="current-password"
+                    margin="normal"
+                />
             </div>
-           
+
             <div className='mt-4'>
-                <Button variant="contained">Registrate</Button>
+                <Button variant="contained" sx={{ backgroundColor: 'black', color: 'white' }} fullWidth>
+                    Regístrate
+                </Button>
             </div>
-        </article>
+        </Box>
     );
 }
 

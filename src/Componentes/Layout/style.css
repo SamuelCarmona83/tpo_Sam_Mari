@@ -33,10 +33,11 @@
 }
   
 .buttonNav{
-    background-color: #e1bcaa;
+    background-color:black;
     border-radius: 10px;
-    border: #271d24;
+    border:  #e1bcaa;
     border-width: 2px;
+    color:  #e1bcaa;
 }
   
 .logoNav{

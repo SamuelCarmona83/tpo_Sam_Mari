@@ -9,7 +9,7 @@ function Navbar ({estado, actualizarNavbar}) {
         return (
             <li>
                 <Link to="/iniciar-sesion">
-                <button className='buttonNav' onClick={() => actualizarNavbar("/iniciar-sesion")}>
+                <button className='buttonNav'  onClick={() => actualizarNavbar("/iniciar-sesion")}>
                     Iniciar sesión
                 </button>
                 </Link>
