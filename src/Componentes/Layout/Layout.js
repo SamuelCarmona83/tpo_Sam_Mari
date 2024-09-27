@@ -32,6 +32,7 @@ function Layout (){
             </header>
             <main>
                 <Outlet context={actualizarNavbar}/>
+                <hr className="divider" />
                 <Footer />
             </main>
         </div>

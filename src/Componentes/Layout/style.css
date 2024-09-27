@@ -47,3 +47,7 @@
 .liNavBar {
     color: black;
 }
+.divider {
+    width: 90%;
+    margin-left: 55px;
+}

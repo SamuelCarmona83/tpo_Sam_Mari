@@ -13,8 +13,6 @@ import ParticipantesList from './ParticipantesList';
 import InfoProyecto from './InformacionProyecto';
 import imagen4 from '../../imagenes/agregarUsuario.png';
 import imagen5 from '../../imagenes/mari.jpeg';
-
-import {Button} from '@mui/material';
 import EditIcon from '@mui/icons-material/Edit';
 
 

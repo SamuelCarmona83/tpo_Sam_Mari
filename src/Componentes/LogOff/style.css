@@ -3,6 +3,7 @@
 .row_spaceBetween {
   display: flex;
   justify-content: space-between;
+  
 }
 
 /**       Carrucel       **/
@@ -12,18 +13,32 @@
 }
 
 .carrucel div{
-  height: 720px;
+  height: 500px;
 }
 
 .carrucel div img{
   object-fit: cover;
 }
+
+  .headerP {
+  width: 100%;
+  height: 500px;
+  background-size: cover; /* Asegura que la imagen cubra todo el contenedor */
+  background-position: center; /* Centra la imagen */
+  background-repeat: no-repeat; /* Evita que la imagen se repita */
+}
+
+
+
+
+
 /**  Footer  **/
 .footer{
   box-sizing: content-box;
     max-width: 1200px;
     margin: 0 auto;
     padding: 0 24px
+    
   
   
 }
@@ -113,6 +128,36 @@
 .footer-logo-r{
   width: 30px;
   height: 30px;
+}
+
+
+#descrip{
+  width: 100%;
+  margin: 0 auto; /* Centra el contenedor horizontalmente */
+  padding: 20px; /* Espaciado interno */
+  background-color: white; /* Fondo blanco para simular una tarjeta */
+  border-radius: 10px; /* Bordes redondeados */
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2); /* Sombra suave */
+  text-align: center; /* Centra el texto dentro del contenedor */
+}
+
+.descrip {
+  font-family: 'Poppins', sans-serif; /* Cambia la fuente */
+  font-size: 2.5em; /* Tamaño grande */
+  margin-bottom: 10px; /* Espacio inferior */
+}
+
+.descrip2 {
+  font-family: 'Poppins', sans-serif; /* Cambia la fuente */
+  font-size: 2em; /* Tamaño mediano */
+  margin-bottom: 10px; /* Espacio inferior */
+}
+
+.descrip3 {
+  font-family: 'Arial', sans-serif; /* Cambia la fuente */
+  font-size: 1.2em; /* Tamaño de fuente para el párrafo */
+  line-height: 1.6; /* Espaciado entre líneas */
+  margin-bottom: 15px; /* Espacio inferior */
 }
 
 
