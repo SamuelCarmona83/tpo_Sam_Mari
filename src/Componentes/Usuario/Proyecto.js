@@ -47,7 +47,7 @@ function Proyecto({ proyectoID }) {
                 >
                     <ToggleButton value="datos">Datos</ToggleButton>
                     <ToggleButton value="participantes" >Participantes</ToggleButton>
-                    <ToggleButton value="Gastos">Gastos</ToggleButton>
+                    <ToggleButton value="transacciones">Transacciones</ToggleButton>
                 </ToggleButtonGroup>
             </div>
         );
@@ -76,6 +76,9 @@ function Proyecto({ proyectoID }) {
                     />
                 );
                 break;
+            case 'transacciones':
+
+                break
             default:
                 main = (
                     <h1>configuración</h1>
