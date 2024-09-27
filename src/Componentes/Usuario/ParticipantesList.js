@@ -2,7 +2,6 @@
 import React from 'react';
 import Participantes from './Participantes';
 import { getProyectobyID, getUsuarios } from '../../Backend/BD';
-import { PropaneSharp } from '@mui/icons-material';
 import imagen4 from '../../imagenes/agregarUsuario.png';
 
 
@@ -26,7 +25,7 @@ const ParticipantesList = ({proyectoID,abrir}) => {
             ))}
             <button className="boton-agregar" onClick={abrir}>
                 <img src={imagen4} className="imagen-agregar" alt="Descripción de la imagen"  />
-                 </button>
+            </button>
         </article>
     );
 };

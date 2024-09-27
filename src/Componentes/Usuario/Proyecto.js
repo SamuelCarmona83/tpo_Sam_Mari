@@ -1,27 +1,15 @@
 import React from 'react';
 import 'bootstrap/dist/css/bootstrap.min.css';
-import ToggleButton from '@mui/material/ToggleButton';
-import ToggleButtonGroup from '@mui/material/ToggleButtonGroup';
-import Dialog from '@mui/material/Dialog';
-import DialogTitle from '@mui/material/DialogTitle';
-import DialogContent from '@mui/material/DialogContent';
-import DialogActions from '@mui/material/DialogActions';
-import TextField from '@mui/material/TextField';
-import Button from '@mui/material/Button';
+import {Button, DialogActions, DialogContent, TextField, DialogTitle, Dialog, ToggleButtonGroup, ToggleButton} from '@mui/material';
 import { getProyectobyID, getUsuarios, agregarUsuario, agregarParticipante, getProyectos } from '../../Backend/BD';
 import ParticipantesList from './ParticipantesList';
 import InfoProyecto from './InformacionProyecto';
-import imagen4 from '../../imagenes/agregarUsuario.png';
-import imagen5 from '../../imagenes/mari.jpeg';
-
-import {Button} from '@mui/material';
 import EditIcon from '@mui/icons-material/Edit';
+import Transacciones from './Transacciones';
 
 
 function Proyecto({ proyectoID }) {
     let proyectos = getProyectos();
-    console.log(proyectos);
-    
     
     const [usuarios, setUsuarios] = React.useState(getUsuarios());
     const [cantidad, setCantidad] = React.useState(usuarios.length || 0);
@@ -42,7 +30,7 @@ function Proyecto({ proyectoID }) {
 
     const crearNuevoUsuario = () => {
         const nuevoUsuario = {
-            ID: String(cantidad + 1).padStart(3, '0'),
+            ID: cantidad,
             nombre: nombre,
             imagen: '../../imagenes/mari.jpeg',
             monto: '300'
@@ -61,7 +49,6 @@ function Proyecto({ proyectoID }) {
 
     };
     
-
     let ProySeleccionado;
     if (proyectoID !== 'n') {
         ProySeleccionado = getProyectobyID(proyectoID);
@@ -123,10 +110,10 @@ function Proyecto({ proyectoID }) {
 
                 break;
             case 'transacciones':
-
+                main = <Transacciones proyectoID={proyectoID} />
                 break
             default:
-                main = <h1>Configuración</h1>;
+                main = <InfoProyecto />;
         }
     }
 
@@ -135,8 +122,8 @@ function Proyecto({ proyectoID }) {
             {headerProyecto}
             <div id='mainProyecto'>
                 {main}
-
             </div>
+
             <Dialog open={open} onClose={botonCerrar}>
                 <DialogTitle>Agregar Participante</DialogTitle>
                 <DialogContent>

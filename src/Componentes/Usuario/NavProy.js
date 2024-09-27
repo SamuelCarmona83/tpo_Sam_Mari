@@ -3,7 +3,7 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import ItemNavProy from './ItemNavProy';
 import { agregarProyecto, getProyectos } from '../../Backend/BD';
 import { Button, TextField, Dialog, DialogActions, DialogContent, DialogTitle } from '@mui/material';
-import AddIcon from '@mui/icons-material/Add';
+import { Typography } from '@mui/material';
 
 function NavProy(props) {
     const actualizar = props.actualizar;
@@ -34,14 +34,18 @@ function NavProy(props) {
 
     return (
         <div id='listaDeProyectos'>
-            <div className='d-flex justify-content-end'>
-                <Button 
-                    sx={{ color: 'Blue', alignItems: "center" }} 
+            <div id='misProyectos'className='d-flex justify-content-between'>
+                <Typography variant='h5' sx={{marginLeft: "0.5em"}}>
+                    Mis Proyectos
+                </Typography>
+                <Button variant='outlined'
+                    sx={{ color: 'green', alignItems: "center", marginRight : "1em"}} 
                     onClick={abrirFormulario}
                 >
                     <div className='d-flex align-items-center'>
-                        <p className='mb-0'>Nuevo</p>
-                        <AddIcon fontSize="medium" />
+                        <Typography variant='subtitle' >
+                            Nuevo
+                        </Typography>
                     </div>
                 </Button>
             </div>

@@ -1,6 +1,6 @@
 import React from 'react';
 import 'bootstrap/dist/css/bootstrap.min.css';
-import { Button } from '@mui/material';
+import { Button, Typography } from '@mui/material';
 import DeleteIcon from '@mui/icons-material/Delete';
 import { sacarProyecto } from '../../Backend/BD';
 
@@ -9,7 +9,8 @@ function ItemNavProj ({actualizar, proyecto, eliminarProyecto}){
     const botonBorrar = () => {
         const confirmDelete = window.confirm(`¿Quieres borrar el proyecto "${proyecto.nombre}"?`);
         if (confirmDelete) {
-            sacarProyecto(proyecto.ID)
+            sacarProyecto(proyecto.ID);
+            actualizar('n');
             eliminarProyecto();
         }
     }
@@ -18,18 +19,18 @@ function ItemNavProj ({actualizar, proyecto, eliminarProyecto}){
 
         <li className='itemNavProy d-flex f-row'>
                 <Button 
-                    sx={{color:'black'}}
+                    sx={{color:'white', width:'100%'}}
                     variant='text'
                     onClick={() => {actualizar(proyecto.ID)}}
                 >
-                    <h5>
+                    <Typography variant='subtitle'>
                         {proyecto.nombre}
-                    </h5>
+                    </Typography>
                 </Button>
                 <Button 
                     variant='text'
                     sx={{
-                    color: 'blue',
+                    color: 'white',
                     width:'42px'}}
                     onClick={botonBorrar}
                 >
