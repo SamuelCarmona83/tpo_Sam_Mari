@@ -27,11 +27,11 @@ function Inicio(){
                  style={{ margin: '30px',backgroundColor: 'black', color: 'white', '&:hover': { backgroundColor: 'darkgray' } }} >  Registrarse </Button>
                 </div>
                 <Carrucel></Carrucel> </div>
-            <div className='row_spaceBetween'>
+            <div >
                 <Nosotros/>
                 <FormularioRegistro />
             </div>
-            <VideoComponent></VideoComponent>
+            
             
         </div>
         

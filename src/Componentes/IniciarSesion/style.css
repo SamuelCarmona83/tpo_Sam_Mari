@@ -28,12 +28,12 @@
 }
 
 .carrucel {
-    width: 60%; /* Ajusta este valor según tus necesidades */
-    max-width: 500px; /* Tamaño máximo */
-    height: 300px; /* Ajusta a la altura que necesites */
-    border-radius: 16px; /* Redondea los bordes */
-    border: 4px solid white; /* Borde blanco más grueso */
-    overflow: hidden; /* Asegura que las imágenes no sobresalgan */
+    width: 60%; 
+    max-width: 500px; 
+    height: 300px; 
+    border-radius: 16px; 
+    border: 4px solid white; 
+    overflow: hidden; 
     margin-right: 10%;
     
 }
@@ -43,25 +43,25 @@
     background-size: cover;
     background-position: center;
     background-repeat: no-repeat;
-    display: flex; /* Para usar flexbox */
-    justify-content: end; /* Centra horizontalmente */
-    align-items: center; /* Centra verticalmente */
+    display: flex; 
+    justify-content: end; 
+    align-items: center; 
 
   }
   
   .header-title {
-    color: black; /* Cambia a un color que contraste bien con el fondo */ /* Centra el texto */
-    font-size: 2.5em; /* Tamaño de fuente grande */
-    font-family: 'Arial', sans-serif; /* Cambia la fuente si deseas */
-    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.7); /* Sombra para dar profundidad */
-    margin: 20px 0; /* Espacio alrededor del texto */
+    color: black; 
+    font-size: 2.5em;
+    font-family: 'Arial', sans-serif; 
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.7); 
+    margin: 20px 0; 
     margin-left: 10%;
 }
 .header-title6{
-    color: black; /* Cambia a un color que contraste bien con el fondo */ /* Centra el texto */
-    font-family: 'Poppins', sans-serif;; /* Cambia la fuente si deseas */
-    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.7); /* Sombra para dar profundidad */
-    margin: 20px 0; /* Espacio alrededor del texto */
+    color: black; 
+    font-family: 'Poppins', sans-serif;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.7); 
+    margin: 20px 0; 
     margin-left: 10%;
     
 }
