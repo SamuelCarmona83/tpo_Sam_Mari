@@ -14,6 +14,8 @@ import InfoProyecto from './InformacionProyecto';
 import imagen4 from '../../imagenes/agregarUsuario.png';
 import imagen5 from '../../imagenes/mari.jpeg';
 
+import {Button} from '@mui/material';
+import EditIcon from '@mui/icons-material/Edit';
 
 
 function Proyecto({ proyectoID }) {
@@ -75,7 +77,19 @@ function Proyecto({ proyectoID }) {
     if (proyectoID !== 'n') {
         headerProyecto = (
             <div id='navProyecto'>
-                <h2>{ProySeleccionado.nombre}</h2>
+                <div className='d-flex f-row justify-content-between align-items-center'>
+                    <h2>{ProySeleccionado.nombre}</h2>
+                    <Button 
+                        variant='text'
+                        sx={{
+                            height: "25px",
+                            color: 'grey',
+                        }}
+                    > 
+                        <EditIcon />
+                    </Button>
+                </div>
+                
                 <ToggleButtonGroup
                     color="primary"
                     value={alignment}
@@ -84,8 +98,8 @@ function Proyecto({ proyectoID }) {
                     aria-label="Plataforma"
                 >
                     <ToggleButton value="datos">Datos</ToggleButton>
-                    <ToggleButton value="participantes">Participantes</ToggleButton>
-                    <ToggleButton value="configuración">Configuración</ToggleButton>
+                    <ToggleButton value="participantes" >Participantes</ToggleButton>
+                    <ToggleButton value="Gastos">Gastos</ToggleButton>
                 </ToggleButtonGroup>
             </div>
         );

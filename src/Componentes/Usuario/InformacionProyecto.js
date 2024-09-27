@@ -1,38 +1,73 @@
 import React from 'react';
-import { Card, CardContent, Typography, Divider } from '@mui/material';
+import {Typography, Divider, Button, Box} from '@mui/material';
+import EditIcon from '@mui/icons-material/Edit';
 
 export default function InfoProyecto (){
-    return (<Card sx={{ maxWidth: 500, margin: '20px auto', padding: '20px' }}>
-                <CardContent>
-                    {/* Descripción del Proyecto */}
-                    <Typography variant="h5" gutterBottom>
-                        Descripción del proyecto
+    return (
+            <article id='infoProyecto'>
+                <div className='descripcion d-flex f-row justify-content-between'>
+                    <Typography variant="subtitle1" gutterBottom sx={{maxWidth:'75%' , padding:'15px'}}>
+                        Lorem ipsum dolor sit amet consectetur adipiscing elit netus mauris 
+                        fermentum volutpat urna, lectus non nunc nostra mi fusce maecenas donec 
+                        facilisis congue sed, malesuada fringilla lobortis parturient egestas cubilia 
+                        vestibulum sapien in felis sociis.
                     </Typography>
+                    <Button 
+                        variant='text'
+                        sx={{
+                            height: "25px",
+                            color: 'grey',
+                            marginTop: '15px'
+                        }}
+                    > 
+                        <EditIcon />
+                    </Button>
+                    <div className='gastoTotal'>
+                        <Typography variant="h6" gutterBottom sx={{ marginTop: '10px' }}>
+                            Gasto Total
+                        </Typography>
+                        <Divider />
+                        <Typography variant="subtitle1" gutterBottom 
+                            sx={{ marginTop: '10px' ,
+                                color: 'red' 
+                            }}
+                        >
+                            1000
+                        </Typography>
+                    </div>
+                </div>
+                <Divider />
+                <Typography variant='h5' 
+                    sx={{ margin: '15px' }}
+                >
+                    Balance Personal
+                </Typography>
+                <Box sx={{ display: 'flex', marginBottom: '15px'}}>
+                    <Box sx={{ flex: 1, display: 'flex', flexDirection: 'column', justifyContent: 'center', alignItems: 'center' }}>
+                        <Typography variant="h6">Abonado</Typography>
+                        <Typography variant="body1"
+                            sx={{color:"green"}}
+                        >
+                            100
+                        </Typography>
+                    </Box>
 
-                    <Divider />
+                    <Box sx={{ flex: 1, display: 'flex', flexDirection: 'column', justifyContent: 'center', alignItems: 'center' }}>
+                        <Typography variant="h6">Total a Pagar</Typography>
+                        <Typography variant="body1"
+                            sx={{color:"red"}}
+                        >
+                            500
+                        </Typography>
+                    </Box>
 
-                    {/* Monto total abonado */}
-                    <Typography variant="subtitle1" gutterBottom sx={{ marginTop: '10px' }}>
-                        Monto Total Abonado: "1000"
-                    </Typography>
-
-                    <Divider />
-
-                    {/* Datos del Usuario Logueado */}
-                    <Typography variant="h6" gutterBottom sx={{ marginTop: '10px' }}>
-                        Detalles de tu cuenta:
-                    </Typography>
-                    <Typography variant="body1">
-                        Balance: 100
-                    </Typography>
-                    <Typography variant="body1">
-                        Ingresos: 50
-                    </Typography>
-                    <Typography variant="body1" color={'primary'}>
-                        Monto a Pagar: 150
-                    </Typography>
-                </CardContent>
-            </Card>
+                    <Box sx={{ flex: 1, display: 'flex', flexDirection: 'column', justifyContent: 'center', alignItems: 'center' }}>
+                        <Typography variant="h6">balance</Typography>
+                        <Typography variant="body1">400</Typography>
+                    </Box>
+                </Box>
+                <Divider />
+            </article>
         );
 }
     

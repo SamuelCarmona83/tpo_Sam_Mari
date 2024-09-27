@@ -32,7 +32,7 @@ function ItemNavProj ({actualizar, proyecto, eliminarProyecto}){
                     color: 'blue',
                     width:'42px'}}
                     onClick={botonBorrar}
-                 >
+                >
                     <DeleteIcon />
                 </Button>
             </li>
