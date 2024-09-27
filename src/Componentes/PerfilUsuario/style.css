@@ -1,3 +1,30 @@
-#perfilArticle {
-    margin-top: 5em;
+.perfil-container {
+    display: flex; /* Cambia a flex para alinear horizontalmente */
+    justify-content: center; /* Centra los elementos en el contenedor */
+    align-items: flex-start; /* Alinea en la parte superior */
+    padding-top: 100px; /* Espacio desde arriba */
+}
+
+.circular-image {
+    width: 350px; /* Ajusta el tamaño según sea necesario */
+    height: 350px;
+    border-radius: 50%; /* Hace la imagen circular */
+    object-fit: cover; /* Asegura que la imagen cubra el área sin distorsionarse */
+    border: 6px solid transparent; /* Borde transparente inicial */
+    background-image: radial-gradient(circle at center, rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.1)); /* Sombra */
+    background-clip: padding-box, border-box; /* Asegura que el borde de fondo se muestre */
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.4); /* Sombra para mayor efecto */
+    transition: transform 0.3s; /* Transiciones suaves para efectos */
+}
+
+.circular-image:hover {
+    transform: scale(1.05); /* Aumenta ligeramente al pasar el ratón */
+}
+
+.perfil-card {
+    width: 400px; /* Ancho fijo para la tarjeta */
+    margin: 20px; /* Margen alrededor de la tarjeta */
+    border-radius: 16px; /* Bordes redondeados */
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2); /* Sombra de la tarjeta */
+    padding: 20px; /* Espacio interno */
 }

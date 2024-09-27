@@ -18,7 +18,7 @@ function Footer(){
                 <li>Simplifica tus finanzas</li>
                 <li>SamuelMari</li>
                 <li>Comentarios</li>
-                <li>Irformación</li>
+                <li>Información</li>
                 <li>Colaboraciones</li>
             </ul>
             <div className="footer-links-1">

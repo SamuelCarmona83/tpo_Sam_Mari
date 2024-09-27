@@ -1,6 +1,8 @@
 import React from 'react';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import foto1 from './../../imagenes/carrusel_foto1.png'
+import foto2 from './../../imagenes/imagen.png'
+import foto3 from './../../imagenes/amigos.jpg'
 
 function Carrucel (){
 
@@ -12,10 +14,10 @@ function Carrucel (){
       <img src={foto1} className="d-block w-100" alt="..."/>
     </div>
     <div className="carousel-item">
-      <img src="https://content.nationalgeographic.com.es/medio/2022/12/12/perro-1_514aad3b_221212161023_1280x720.jpg" class="d-block w-100" alt="..."/>
+      <img src={foto2} class="d-block w-100" alt="..."/>
     </div>
     <div className="carousel-item">
-      <img src="https://content.nationalgeographic.com.es/medio/2022/12/12/perro-1_514aad3b_221212161023_1280x720.jpg" class="d-block w-100" alt="..."/>
+      <img src={foto3} class="d-block w-100" alt="..."/>
     </div>
   </div>
   <button className="carousel-control-prev" type="button" data-bs-target="#carouselExampleAutoplaying" data-bs-slide="prev">
