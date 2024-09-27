@@ -175,7 +175,7 @@ function Proyecto({ proyectoID }) {
                 main = <Transacciones proyectoID={proyectoID} />
                 break
             default:
-                main = <InfoProyecto />;
+                main = <InfoProyecto proyectoID={proyectoID} calcularAbonado={calcularAbonadoPorUsuario} />;
         }
     }
 
