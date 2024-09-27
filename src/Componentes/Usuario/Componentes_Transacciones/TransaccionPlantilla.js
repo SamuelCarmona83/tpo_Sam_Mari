@@ -1,9 +1,17 @@
-import { Typography , Divider, Button} from '@mui/material';
+import { Typography , Button} from '@mui/material';
 import React from 'react';
+import DeleteIcon from '@mui/icons-material/Delete';
 import { getUsuaruiByID } from '../../../Backend/BD';
 
-export default function TransaccionPlantilla ({transaccion}) {
+export default function TransaccionPlantilla ({transaccion, borrar}) {
     let usuario = getUsuaruiByID(transaccion.usuarioID);
+
+    const botonBorrar = () => {
+        const confirmDelete = window.confirm(`¿Quieres borrar "${transaccion.descripcion}"?`);
+        if (confirmDelete) {
+            borrar(transaccion.ID);
+        }
+    }
 
     return (
         <li>
@@ -20,25 +28,34 @@ export default function TransaccionPlantilla ({transaccion}) {
                 </figure>
             </Button>
             <Typography variant='subtitle1' 
-                sx={{ marginLeft: '1em', flex: 1 }}
+                sx={{flex: 2 }}
             >
                 {transaccion.descripcion}
             </Typography>
             <Typography variant='subtitle1' 
-                sx={{ marginLeft: '1em', flex: 1 }}
+                sx={{flex: 1 }}
             >
                 {usuario.nombre}
             </Typography>
             <Typography variant='subtitle2' 
-                sx={{ marginLeft: '1em', flex: 1 }}
+                sx={{flex: 1 }}
             >
                 {transaccion.fecha}
             </Typography>
             <Typography variant='h5' 
-                sx={{ marginLeft: '1em', flex: 1,}}
+                sx={{ flex: 1,}}
             >
                 {transaccion.monto}
             </Typography>
+            <Button 
+                variant='text'
+                sx={{
+                color: 'grey',
+                width:'42px'}}
+                onClick={botonBorrar}
+            >
+                <DeleteIcon />
+            </Button>
         </li>
     )
 }

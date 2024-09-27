@@ -1,7 +1,7 @@
 import { Typography, Divider, ToggleButtonGroup, ToggleButton, Button} from '@mui/material';
 import React from 'react';
 import ListaDeTransacciones from './Componentes_Transacciones/ListaDeTransacciones';
-import { agregarGasto, agregarPago, getProyectobyID } from '../../Backend/BD';
+import { agregarGasto, agregarPago, borrarGasto, borrarPago, getProyectobyID } from '../../Backend/BD';
 import FormularioTransaccion from './Componentes_Transacciones/FormularioTransaccion';
 
 export default function Transacciones({proyectoID}){
@@ -16,13 +16,14 @@ export default function Transacciones({proyectoID}){
         setTipoTransaccion(newTipo);
     }
 
-    let listaAMostrar, tipo;
+    let listaAMostrar = [];
+    let tipo = '';
     if (tipoTransaccion === 'Gastos') {
-        listaAMostrar = proyecto.gastos;
-        tipo = "gasto";
-    }else {
-        listaAMostrar = proyecto.pagos;
-        tipo = "pago";
+        listaAMostrar = proyecto.gastos || [];  
+        tipo = 'gasto';
+    } else {
+        listaAMostrar = proyecto.pagos || [];
+        tipo = 'pago';
     }
 
     //      Variable de estado y funciones para el formulario       //
@@ -36,18 +37,25 @@ export default function Transacciones({proyectoID}){
     const crearTransaccion = (data) => {
         if(tipoTransaccion === 'Gastos'){
             agregarGasto(data, proyectoID);
-            actualizarLista(cantidad + 1);
         }else {
             agregarPago(data, proyectoID);
-            actualizarLista(cantidad + 1);
         }
+        setCantidad(cantidad + 1);
+    }
+
+    const borrarTransaccion = (transaccionID) => {
+        console.log(listaAMostrar);
+        console.log(transaccionID);
+        if(tipoTransaccion === 'Gastos'){
+            borrarGasto(transaccionID, proyectoID);
+        }else {
+            borrarPago(transaccionID, proyectoID);
+        }
+        setCantidad(cantidad - 1);
+        console.log(listaAMostrar);
     }
 
     const [cantidad, setCantidad] = React.useState(listaAMostrar.length);
-
-    const actualizarLista = (nuevaCantidad) => {
-        setCantidad(nuevaCantidad);
-    }
 
     const sumarMontos = () => {
         let total = 0;
@@ -60,8 +68,12 @@ export default function Transacciones({proyectoID}){
     return (
         <article>
             <nav id='tituloTransacciones' className='d-flex f-row justify-content-between'>
-                <Typography variant='h4' >
-                    {tipoTransaccion} = {sumarMontos()}
+                <Typography variant='h4' 
+                    sx={{
+                        color: tipoTransaccion ==='Gastos'? 'red' : 'green'
+                    }}
+                >
+                    {tipoTransaccion}  ${sumarMontos()}
                 </Typography>
 
                 <ToggleButtonGroup
@@ -81,7 +93,7 @@ export default function Transacciones({proyectoID}){
                 </Button>
             </nav>
             <Divider />
-            <ListaDeTransacciones listaAMostrar={listaAMostrar} />
+            <ListaDeTransacciones listaAMostrar={listaAMostrar} borrar={borrarTransaccion} />
             <FormularioTransaccion visibilidad={visibilidad} cerrar={cerrarFormulario} crearT={crearTransaccion}/>
         </article>
     );

@@ -1,16 +1,30 @@
 import React from 'react';
 import {Typography, Divider, Button, Box} from '@mui/material';
 import EditIcon from '@mui/icons-material/Edit';
+import { getProyectobyID } from '../../Backend/BD';
 
-export default function InfoProyecto (){
+export default function InfoProyecto ({proyectoID, calcularAbonado}){
+    let proyecto = getProyectobyID(proyectoID);
+    let gastos = proyecto.gastos;
+    let totalGastos = 0;
+    let abonadoPorUsuario = calcularAbonado(0); 
+
+    for (let i=0; i<gastos.length; i++) {
+        totalGastos += gastos[i].monto;
+    }
+
+    let parteAPagar = totalGastos;
+    if (proyecto.participantes.length > 0) {
+        parteAPagar = totalGastos / proyecto.participantes.length;
+    }
+
+    let balance = abonadoPorUsuario - parteAPagar;
+    
     return (
             <article id='infoProyecto'>
                 <div className='descripcion d-flex f-row justify-content-between'>
                     <Typography variant="subtitle1" gutterBottom sx={{maxWidth:'75%' , padding:'15px'}}>
-                        Lorem ipsum dolor sit amet consectetur adipiscing elit netus mauris 
-                        fermentum volutpat urna, lectus non nunc nostra mi fusce maecenas donec 
-                        facilisis congue sed, malesuada fringilla lobortis parturient egestas cubilia 
-                        vestibulum sapien in felis sociis.
+                        {proyecto.descripcion}
                     </Typography>
                     <Button 
                         variant='text'
@@ -32,7 +46,7 @@ export default function InfoProyecto (){
                                 color: 'red' 
                             }}
                         >
-                            1000
+                            {totalGastos}
                         </Typography>
                     </div>
                 </div>
@@ -48,22 +62,26 @@ export default function InfoProyecto (){
                         <Typography variant="body1"
                             sx={{color:"green"}}
                         >
-                            100
+                            {abonadoPorUsuario.toFixed(2)}
                         </Typography>
                     </Box>
 
                     <Box sx={{ flex: 1, display: 'flex', flexDirection: 'column', justifyContent: 'center', alignItems: 'center' }}>
-                        <Typography variant="h6">Total a Pagar</Typography>
+                        <Typography variant="h6">Tu parte a pagar</Typography>
                         <Typography variant="body1"
                             sx={{color:"red"}}
                         >
-                            500
+                            {parteAPagar.toFixed(2)}
                         </Typography>
                     </Box>
 
                     <Box sx={{ flex: 1, display: 'flex', flexDirection: 'column', justifyContent: 'center', alignItems: 'center' }}>
                         <Typography variant="h6">balance</Typography>
-                        <Typography variant="body1">400</Typography>
+                        <Typography variant="body1"
+                            sx={{
+                                color: balance >= 0 ? 'green' : 'red'
+                            }}
+                        >{balance.toFixed(2)}</Typography>
                     </Box>
                 </Box>
                 <Divider />

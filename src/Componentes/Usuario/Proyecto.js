@@ -1,7 +1,7 @@
 import React from 'react';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import {Button, DialogActions, DialogContent, TextField, DialogTitle, Dialog, ToggleButtonGroup, ToggleButton} from '@mui/material';
-import { getProyectobyID, getUsuarios, agregarUsuario, agregarParticipante, getProyectos } from '../../Backend/BD';
+import { getProyectobyID, getUsuarios, agregarUsuario, agregarParticipante} from '../../Backend/BD';
 import ParticipantesList from './ParticipantesList';
 import InfoProyecto from './InformacionProyecto';
 import EditIcon from '@mui/icons-material/Edit';
@@ -9,16 +9,16 @@ import Transacciones from './Transacciones';
 
 
 function Proyecto({ proyectoID }) {
-    let proyectos = getProyectos();
+    let proyecto = [];
+    if (proyectoID !== 'n') {
+        proyecto = getProyectobyID(proyectoID);
+    }
+    
     
     const [usuarios, setUsuarios] = React.useState(getUsuarios());
     const [cantidad, setCantidad] = React.useState(usuarios.length || 0);
     const [open, setOpen] = React.useState(false);
     const [nombre, setNombreUsuario] = React.useState('');
-
-    const eliminarParticipante = () => {
-        setCantidad(cantidad - 1);
-    };
 
     const abrirFormulario = () => {
         setOpen(true);
@@ -36,7 +36,6 @@ function Proyecto({ proyectoID }) {
             monto: '300'
         };
 
-
         agregarUsuario(nuevoUsuario);
         setUsuarios(prevUsuarios => [...prevUsuarios, nuevoUsuario]);
         agregarParticipante(proyectoID, usuarios.length-1);
@@ -44,14 +43,36 @@ function Proyecto({ proyectoID }) {
         botonCerrar();
         setNombreUsuario('');
         setCantidad(cantidad + 1);
-        
-        
+    };
 
+    const eliminarParticipante = () => {
+        setCantidad(cantidad - 1);
     };
     
     let ProySeleccionado;
     if (proyectoID !== 'n') {
         ProySeleccionado = getProyectobyID(proyectoID);
+    }
+
+    //      Metodos para calcular datos     //
+    const calcularAbonadoPorUsuario = (usuarioID) =>  {
+        let abonado = 0;
+        let gastos = proyecto.gastos;
+        let pagos = proyecto.pagos;
+
+        for (let i=0; i<gastos.length; i++){
+            if (gastos[i].usuarioID === usuarioID) {
+                abonado += gastos[i].monto;
+            }
+        }
+
+        for (let i=0; i<pagos.length; i++) {
+            if (pagos[i].usuarioID === usuarioID) {
+                abonado += pagos[i].monto;
+            }
+        }
+
+        return abonado;
     }
 
     const [alignment, setAlignment] = React.useState('datos');
@@ -60,10 +81,12 @@ function Proyecto({ proyectoID }) {
         setAlignment(newAlignment);
     };
 
+    //      Generando el contenido del proyecto     //
+    //      Barra de nagegacion y contenido //
     let headerProyecto;
     if (proyectoID !== 'n') {
         headerProyecto = (
-            <div id='navProyecto'>
+            <nav id='navProyecto'>
                 <div className='d-flex f-row justify-content-between align-items-center'>
                     <h2>{ProySeleccionado.nombre}</h2>
                     <Button 
@@ -88,7 +111,7 @@ function Proyecto({ proyectoID }) {
                     <ToggleButton value="participantes" >Participantes</ToggleButton>
                     <ToggleButton value="transacciones">Transacciones</ToggleButton>
                 </ToggleButtonGroup>
-            </div>
+            </nav>
         );
     } else {
         headerProyecto = (
@@ -103,7 +126,7 @@ function Proyecto({ proyectoID }) {
     if (proyectoID !== 'n') {
         switch (alignment) {
             case 'datos':
-                main = <InfoProyecto />;
+                main = <InfoProyecto proyectoID={proyectoID} calcularAbonado={calcularAbonadoPorUsuario} />;
                 break;
             case 'participantes':
                 main = <ParticipantesList proyectoID={proyectoID} abrir= {abrirFormulario} />;

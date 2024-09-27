@@ -3,17 +3,20 @@ import imagenSamu from "../imagenes/samu.jpeg";
 import imagenCorazon from "../imagenes/corazon.png";
 
 let proyectos = [{
-    nombre: "Gastos de la fiesta",
+    nombre: "fiesta de cumpleaños",
+    descripcion: "Todos los gastos para la fiesta del fin de semana",
     ID: 0,
     participantes: [0, 1, 3],
     gastos:[
         {
+            ID: 0,
             imagen: 'https://img.freepik.com/vector-gratis/muestra-ticket-realista_23-2147938550.jpg',
             descripcion: 'Torta de chocolate',
             monto: 3000,
             usuarioID: 0,
             fecha: "20/09/24"
         },{
+            ID: 1,
             imagen: 'https://img.freepik.com/vector-gratis/muestra-ticket-realista_23-2147938550.jpg',
             descripcion: 'Bebidas',
             monto: 5000,
@@ -23,6 +26,7 @@ let proyectos = [{
     ],
     pagos: [
         {
+            ID: 0,
             imagen: 'https://img.freepik.com/vector-gratis/muestra-ticket-realista_23-2147938550.jpg',
             descripcion: 'Pago a Samuel',
             monto: 500,
@@ -34,10 +38,12 @@ let proyectos = [{
     
 }, {
     nombre: "Viaje a la costa",
+    descripcion: "Vamos subiendo los consumos del viaje",
     ID: 1,
-    participantes: [0, 1, 3],
+    participantes: [0, 1],
     gastos:[
         {
+            ID: 0,
             imagen: 'https://img.freepik.com/vector-gratis/muestra-ticket-realista_23-2147938550.jpg',
             descripcion: 'Pasaje',
             monto: 25300,
@@ -100,7 +106,9 @@ export function agregarProyecto(nombreNuevoProyecto){
     proyectos.push({
         nombre: nombreNuevoProyecto,
         ID: IDNuevo,
-        participantes: []
+        participantes: [],
+        gastos: [], 
+        pagos: []
     });
 }
 
@@ -108,8 +116,8 @@ export function agregarProyecto(nombreNuevoProyecto){
 export function agregarGasto(datos, proyectoID) {
     for (let i = 0; i < proyectos.length ; i++){
         if(proyectos[i].ID === proyectoID){
+            datos.ID = proyectos[i].gastos.length;
             proyectos[i].gastos.push(datos)
-            console.log(proyectos[i].gastos);
         }
     }
 }
@@ -117,7 +125,36 @@ export function agregarGasto(datos, proyectoID) {
 export function agregarPago(datos, proyectoID) {
     for (let i = 0; i < proyectos.length ; i++){
         if(proyectos[i].ID === proyectoID){
+            datos.ID = proyectos[i].pagos.length;
             proyectos[i].pagos.push(datos)
+        }
+    }
+}
+
+export function borrarGasto(gastoID, proyectoID ){
+    for (let i = 0; i < proyectos.length ; i++){
+        if(proyectos[i].ID === proyectoID){
+            let gastos = proyectos[i].gastos
+            for (let j = 0; j < gastos.length ; j++) {
+                if (gastos[j].ID === gastoID) {
+                    console.log(gastos);
+                    gastos.splice(j , 1);
+                    console.log(gastos);
+                }
+            }
+        }
+    }
+}
+
+export function borrarPago(pagoID, proyectoID ){
+    for (let i = 0; i < proyectos.length ; i++){
+        if(proyectos[i].ID === proyectoID){
+            let pagos = proyectos[i].pagos;
+            for (let j = 0; j < pagos.length ; j++) {
+                if (pagos[j].ID === pagoID) {
+                    pagos.splice(j , 1);
+                }
+            }
         }
     }
 }
@@ -152,7 +189,6 @@ export function agregarUsuario (UsuarioJason) {
 let UsuarioLogeado = "";
 
 export function setUsuarioLogeado(newUsuario) {
-    console.log("Seteando" + newUsuario)
     UsuarioLogeado = newUsuario;
 }
 

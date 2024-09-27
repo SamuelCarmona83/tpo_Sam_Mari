@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Dialog, DialogActions, DialogContent, DialogTitle, Button, TextField, IconButton } from '@mui/material';
+import { Dialog, DialogActions, DialogContent, DialogTitle, Button, TextField} from '@mui/material';
 import PhotoCamera from '@mui/icons-material/PhotoCamera';
 
 export default function FormularioTransaccion ({visibilidad, cerrar, crearT}) {
@@ -15,6 +15,7 @@ export default function FormularioTransaccion ({visibilidad, cerrar, crearT}) {
     const botonGuardar = () => {
         let nuevoMonto = parseFloat(monto)
         const nuevaT = {
+            ID: 0,
             imagen,
             descripcion,
             monto: nuevoMonto,
