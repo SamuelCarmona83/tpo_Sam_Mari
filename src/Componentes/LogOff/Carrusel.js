@@ -9,15 +9,15 @@ function Carrucel (){
     return (
     <article className='carrucel'>
       <div id="carouselExampleAutoplaying" className="carousel slide" data-bs-ride="carousel">
-  <div class="carousel-inner">
-    <div class="carousel-item active">
+  <div className="carousel-inner">
+    <div className="carousel-item active">
       <img src={foto1} className="d-block w-100" alt="..."/>
     </div>
     <div className="carousel-item">
-      <img src={foto2} class="d-block w-100" alt="..."/>
+      <img src={foto2} className="d-block w-100" alt="..."/>
     </div>
     <div className="carousel-item">
-      <img src={foto3} class="d-block w-100" alt="..."/>
+      <img src={foto3} className="d-block w-100" alt="..."/>
     </div>
   </div>
   <button className="carousel-control-prev" type="button" data-bs-target="#carouselExampleAutoplaying" data-bs-slide="prev">
