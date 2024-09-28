@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import './style.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { Button, TextField } from '@mui/material';
@@ -8,15 +8,15 @@ import { setUsuarioLogeado } from '../../Backend/BD';
 function FormularioIniciarSesion() {
     const navigate = useNavigate();
     const actualizarNavbar = useOutletContext();
-    const [correo, setCorreo] = React.useState("");
-    const [contraseña, setContraseña] = React.useState(""); 
-    const [error, setError] = React.useState("");
+    const [correo, setCorreo] = useState("");
+    const [contraseña, setContraseña] = useState(""); 
+    const [error, setError] = useState("");
     
 
 
     const usuarios = [{
         email: "mariangel@gmail.com",
-        contraseña: "ABCDE",
+        contraseña: "admin",
         nombre: "Mariangel"},
         {email:"samuel@gmail.com",
         contraseña: "admin",

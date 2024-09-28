@@ -6,7 +6,7 @@ let proyectos = [{
     nombre: "Fiesta de cumpleaños",
     descripcion: "Todos los gastos para la fiesta del fin de semana",
     ID: 0,
-    participantes: [0, 1, 3],
+    participantes: [0, 1],
     gastos:[
         {
             ID: 0,
@@ -58,7 +58,7 @@ let usuarios = [
     {
         ID:0,
         nombre:"mariangel",
-        imagen: ImagenMari,
+        imagen: "https://static.vecteezy.com/system/resources/thumbnails/046/850/555/small/portrait-of-a-smiling-businesswoman-with-glasses-working-on-a-laptop-in-a-modern-office-environment-professional-and-confident-office-worker-photo.jpg",
         monto:"300",
     },
     {
@@ -106,7 +106,7 @@ export function agregarProyecto(nombreNuevoProyecto){
     proyectos.push({
         nombre: nombreNuevoProyecto,
         ID: IDNuevo,
-        participantes: [],
+        participantes: [0],
         gastos: [], 
         pagos: []
     });

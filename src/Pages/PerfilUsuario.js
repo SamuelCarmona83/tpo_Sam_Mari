@@ -10,7 +10,7 @@ import DialogContent from '@mui/material/DialogContent';
 import DialogActions from '@mui/material/DialogActions';
 import TextField from '@mui/material/TextField';
 import PhotoCamera from '@mui/icons-material/PhotoCamera'; // Cambiado a ícono de cámara
-import imagen from '../imagenes/mari.jpeg';
+
 
 export default function CircularProfileImage() {
     const [open, setOpen] = React.useState(false);
@@ -25,7 +25,7 @@ export default function CircularProfileImage() {
     const [nuevaEdad, setNuevaEdad] = React.useState(usuario.edad);
     const [nuevoEmail, setNuevoEmail] = React.useState(usuario.email);
     const [nuevaFechaNacimiento, setNuevaFechaNacimiento] = React.useState(usuario.fechaNacimiento);
-    const [fotoPerfil, setFotoPerfil] = React.useState(imagen);
+    const [fotoPerfil, setFotoPerfil] = React.useState('https://static.vecteezy.com/system/resources/thumbnails/046/850/555/small/portrait-of-a-smiling-businesswoman-with-glasses-working-on-a-laptop-in-a-modern-office-environment-professional-and-confident-office-worker-photo.jpg');
 
     const abrirFormulario = () => {
         setOpen(true);
@@ -55,6 +55,7 @@ export default function CircularProfileImage() {
             reader.readAsDataURL(file);
         }
     };
+    //      formulario para cambiar la contraseña       //
 
     return (
         <div className="perfil-container">

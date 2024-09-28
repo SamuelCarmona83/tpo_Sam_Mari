@@ -6,7 +6,9 @@ import ParticipantesList from './ParticipantesList';
 import InfoProyecto from './InformacionProyecto';
 import EditIcon from '@mui/icons-material/Edit';
 import Transacciones from './Transacciones';
-
+import GroupIcon from '@mui/icons-material/Group';
+import FeedIcon from '@mui/icons-material/Feed';
+import ReceiptLongIcon from '@mui/icons-material/ReceiptLong';
 
 function Proyecto({ proyectoID }) {
     let proyecto = [];
@@ -77,7 +79,7 @@ function Proyecto({ proyectoID }) {
 
     //      Formulario para editar el nombre del proyecto   //
     let ProySeleccionado = getProyectobyID(proyectoID);
-    let nombreProyectoSeleccionado = ProySeleccionado? ProySeleccionado.nombre: '';
+    let nombreProyectoSeleccionado = ProySeleccionado ? ProySeleccionado.nombre : '';
     let [nombreProyecto, setNombre] = React.useState(nombreProyectoSeleccionado);
     let [estadoFormulario, setEstado] = React.useState(false);
 
@@ -108,7 +110,7 @@ function Proyecto({ proyectoID }) {
                             height: "25px",
                             color: 'grey',
                         }}
-                        onClick={desplegarFormulario}
+                        onClick={() => setEstado(true)}
                     > 
                         <EditIcon />
                     </Button>
@@ -121,9 +123,9 @@ function Proyecto({ proyectoID }) {
                     onChange={handleChange}
                     aria-label="Plataforma"
                 >
-                    <ToggleButton value="datos">Datos</ToggleButton>
-                    <ToggleButton value="participantes" >Participantes</ToggleButton>
-                    <ToggleButton value="transacciones">Transacciones</ToggleButton>
+                    <ToggleButton value="datos"><FeedIcon/></ToggleButton>
+                    <ToggleButton value="participantes" ><GroupIcon /></ToggleButton>
+                    <ToggleButton value="transacciones"><ReceiptLongIcon /></ToggleButton>
                 </ToggleButtonGroup>
 
                 <Dialog open={estadoFormulario} onClose={cerrarFormularioDelNombre}>
@@ -155,7 +157,7 @@ function Proyecto({ proyectoID }) {
     } else {
         headerProyecto = (
             <div id='navProyecto'>
-                <h2>Bienvenidos, elija un proyecto!</h2>
+                <h2>Bienvenidos, elija un proyecto para comenzar!</h2>
             </div>
         );
     }
