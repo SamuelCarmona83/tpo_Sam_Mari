@@ -1,19 +1,21 @@
-import React from 'react';
+import React, {useState} from 'react';
 import './style.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { Button, TextField, Box, Typography } from '@mui/material';
+import {useLocation} from 'react-router-dom';
 
 function FormularioRegistro() {
+    let location = useLocation();
+    let path = location.pathname;
+    console.log(path)
     return (
         <Box
             className='w-50 registro fondoRegistro'
             sx={{
                 padding: '20px',
                 borderRadius: '12px',
-                boxShadow: 2, // Sombra suave
-                backgroundColor: '#f5f5f5', // Color suave
-                margin: '0 auto', // Centrar en el contenedor
-                mt: 5 // Margen superior
+                boxShadow: 2,
+                backgroundColor: path === '/' ? 'white' : ''
             }}
         >
             <Typography variant="h4" gutterBottom align="center">

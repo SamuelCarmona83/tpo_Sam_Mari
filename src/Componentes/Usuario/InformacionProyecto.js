@@ -5,7 +5,7 @@ import { getProyectobyID } from '../../Backend/BD';
 
 export default function InfoProyecto ({proyectoID, calcularAbonado}){
     let proyecto = getProyectobyID(proyectoID);
-    let gastos = proyecto.gastos;
+    let gastos = proyecto && proyecto.gastos;
     let abonadoPorUsuario = calcularAbonado(0); 
 
     let totalGastos = 0;

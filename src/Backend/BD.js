@@ -59,25 +59,25 @@ let usuarios = [
         ID:0,
         nombre:"mariangel",
         imagen: "https://static.vecteezy.com/system/resources/thumbnails/046/850/555/small/portrait-of-a-smiling-businesswoman-with-glasses-working-on-a-laptop-in-a-modern-office-environment-professional-and-confident-office-worker-photo.jpg",
-        monto:"300",
+        deudas:[]
     },
     {
         ID: 1,
         nombre:"Samuel",
         imagen: imagenSamu,
-        monto:"500"
+        deudas:[]
     },
     {
         ID: 2,
         nombre:"Jose Alejandro",
         imagen:"",
-        monto:"200"
+        deudas:[]
     },
     {
         ID: 3,
         nombre:"Eddymar Orellana",
         imagen: imagenCorazon,
-        monto:"100"
+        deudas:[]
     }
 ];
 //      Metodos de Proyecto     //
