@@ -25,9 +25,11 @@ function Inicio(){
                 <Button className='boton-registrase' variant="contained"  color="black" 
                  style={{ margin: '30px',backgroundColor: 'black', color: 'white', '&:hover': { backgroundColor: 'darkgray' } }} >  Registrarse </Button>
                 </div>
-                <Carrucel></Carrucel> </div>
-            <div >
-                <Nosotros/>
+                <Carrucel></Carrucel> 
+            </div>
+            <Nosotros/>
+            <div className='d-flex justify-content-center align-items-center'>
+                
                 <FormularioRegistro />
             </div>
             

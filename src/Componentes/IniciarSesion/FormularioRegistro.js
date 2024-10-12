@@ -10,13 +10,7 @@ function FormularioRegistro() {
     console.log(path)
     return (
         <Box
-            className='w-50 registro fondoRegistro'
-            sx={{
-                padding: '20px',
-                borderRadius: '12px',
-                boxShadow: 2,
-                backgroundColor: path === '/' ? 'white' : ''
-            }}
+            className={path === '/' ? 'registro registro_Inicio w-50' : 'registro w-50'}
         >
             <Typography variant="h4" gutterBottom align="center">
                 Regístrate

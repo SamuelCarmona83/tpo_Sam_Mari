@@ -6,8 +6,12 @@
     background-color: #e1bcaa;
     margin: 10%;
     border-radius: 30px;
-    border: #271d24;
-    border-width: 2px;
+}
+
+.registro_Inicio {
+    background-Color: white;
+    border: 0.5px solid black;
+    padding: 5%;
 }
 
 
