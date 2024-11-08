@@ -8,14 +8,12 @@ import { Typography } from '@mui/material';
 function NavProy(props) {
     const actualizar = props.actualizar;
     const [proyectos, setProyectos] = useState([]);
-    console.log(proyectos);
 
     useEffect( () => {
         const llamadaProyectos = async () => {
             try {
                 let data = await getProyectos();
                 setProyectos(data || []);
-                console.log(proyectos);
             } catch (error) {
                 console.log("Error fetching data:", error);
             }

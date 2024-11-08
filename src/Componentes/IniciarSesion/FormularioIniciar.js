@@ -1,9 +1,10 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import './style.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { Button, TextField } from '@mui/material';
 import { useNavigate ,useOutletContext} from 'react-router-dom';
 import { setUsuarioLogeado } from '../../Backend/BD';
+import { validarLogin } from '../../Controladores/usuarioControlador';
 
 function FormularioIniciarSesion() {
     const navigate = useNavigate();
@@ -24,11 +25,19 @@ function FormularioIniciarSesion() {
         }
     ];
 
-    const validarUsuario = (correo, contraseña) => {
+    const  validarUsuario = async (correo, contraseña) => {
         const existe = usuarios.some(usu => usu.email === correo && usu.contraseña === contraseña);
+        let respuesta;
+        //peticion a la api//
+        try {
+            respuesta = await validarLogin(correo, contraseña);
+        } catch (error) {
+            console.log("Error fetching data:", error);
+        }
 
-        if (existe) {
-            let usuarioLogeado = usuarios.find(usu => usu.email === correo);
+        if (respuesta.ok) {
+            const data = await respuesta.json(); //convertir en json
+            let usuarioLogeado = data.usuario; //sacar del json los datos del usuario especificamente
             setUsuarioLogeado(usuarioLogeado.nombre);
             actualizarNavbar("/usuario");
             navigate("/"+ usuarioLogeado.nombre);

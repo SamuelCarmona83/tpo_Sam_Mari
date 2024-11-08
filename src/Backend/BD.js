@@ -2,8 +2,6 @@ import ImagenMari from "../imagenes/mari.jpeg";
 import imagenSamu from "../imagenes/samu.jpeg";
 import imagenCorazon from "../imagenes/corazon.png";
 
-
-
 let proyectos = [{
     nombre: "Fiesta de cumpleaños",
     descripcion: "Todos los gastos para la fiesta del fin de semana",
