@@ -26,7 +26,6 @@ function FormularioIniciarSesion() {
     ];
 
     const  validarUsuario = async (correo, contraseña) => {
-        const existe = usuarios.some(usu => usu.email === correo && usu.contraseña === contraseña);
         let respuesta;
         //peticion a la api//
         try {
