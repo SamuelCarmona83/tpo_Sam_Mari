@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect,useState } from 'react';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import ItemNavProy from './ItemNavProy';
 import { agregarProyecto, getProyectos } from '../../Backend/BD';
@@ -7,7 +7,21 @@ import { Typography } from '@mui/material';
 
 function NavProy(props) {
     const actualizar = props.actualizar;
-    let proyectos = getProyectos();
+    const [proyectos, setProyectos] = useState([]);
+    console.log(proyectos);
+
+    useEffect( () => {
+        const llamadaProyectos = async () => {
+            try {
+                let data = await getProyectos();
+                setProyectos(data || []);
+                console.log(proyectos);
+            } catch (error) {
+                console.log("Error fetching data:", error);
+            }
+        }
+        llamadaProyectos();
+    }, [])
 
     const [cantidad, setCantidad] = React.useState(proyectos.length || 0);
     const [open, setOpen] = React.useState(false); // Estado para manejar la visibilidad del diálogo

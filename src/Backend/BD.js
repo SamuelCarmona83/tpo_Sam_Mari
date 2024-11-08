@@ -2,6 +2,8 @@ import ImagenMari from "../imagenes/mari.jpeg";
 import imagenSamu from "../imagenes/samu.jpeg";
 import imagenCorazon from "../imagenes/corazon.png";
 
+
+
 let proyectos = [{
     nombre: "Fiesta de cumpleaños",
     descripcion: "Todos los gastos para la fiesta del fin de semana",
@@ -81,7 +83,17 @@ let usuarios = [
     }
 ];
 //      Metodos de Proyecto     //
-export function getProyectos(){
+export async function getProyectos(){
+    try{
+        // fetching data from the backend
+        const resp = await fetch('http//:localhost:8080/api/usuario' + "/")
+        const data = await resp.json()
+        console.log(data);
+        //return data;
+        
+    }catch(error){
+        console.log("Error loading message from backend", error)
+    }
     return proyectos;
 }
 
@@ -203,3 +215,4 @@ export function getUsuaruiByID(ID){
         }
     }
 }
+
