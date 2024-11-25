@@ -12,20 +12,9 @@ function FormularioIniciarSesion() {
     const [correo, setCorreo] = useState("");
     const [contraseña, setContraseña] = useState(""); 
     const [error, setError] = useState("");
-    
-
-
-    const usuarios = [{
-        email: "mariangel@gmail.com",
-        contraseña: "admin",
-        nombre: "Mariangel"},
-        {email:"samuel@gmail.com",
-        contraseña: "admin",
-        nombre:"Samuel"
-        }
-    ];
 
     const  validarUsuario = async (correo, contraseña) => {
+
         let respuesta;
         //peticion a la api//
         try {
@@ -34,7 +23,7 @@ function FormularioIniciarSesion() {
             console.log("Error fetching data:", error);
         }
 
-        if (respuesta.ok) {
+        if (respuesta.status === 200) {
             const data = await respuesta.json(); //convertir en json
             let usuarioLogeado = data.usuario; //sacar del json los datos del usuario especificamente
             setUsuarioLogeado(usuarioLogeado.nombre);
