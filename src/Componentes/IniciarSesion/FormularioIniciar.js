@@ -5,6 +5,7 @@ import { Button, TextField } from '@mui/material';
 import { useNavigate ,useOutletContext} from 'react-router-dom';
 import { setUsuarioLogeado } from '../../Backend/BD';
 import { validarLogin } from '../../Controladores/usuarioControlador';
+import { Link } from 'react-router-dom';
 
 function FormularioIniciarSesion() {
     const navigate = useNavigate();
@@ -14,7 +15,6 @@ function FormularioIniciarSesion() {
     const [error, setError] = useState("");
 
     const  validarUsuario = async (correo, contraseña) => {
-
         let respuesta;
         //peticion a la api//
         try {
@@ -51,9 +51,7 @@ function FormularioIniciarSesion() {
 
     return (
         <article className='w-50 registro'>
-            <h3>
-                Iniciar sesión
-            </h3>
+            <h3>Iniciar sesión</h3>
             <div className='item_Registro'>
                 <TextField
                     required
@@ -78,8 +76,11 @@ function FormularioIniciarSesion() {
                     onChange={(e) => setContraseña(e.target.value)} 
                 />
             </div>
-            
-            <div className='mt-4'>
+
+            <div className='mt-4 text-center'>
+                <Link to="/recuperar-contraseña" className="link-recuperar">¿Olvidaste tu contraseña?</Link>
+            </div>
+            <div className="text-center">
                 <Button variant="contained" onClick={mensaje}>
                     Iniciar sesión
                 </Button>

@@ -7,6 +7,7 @@ import Inicio from './Pages/Inicio.js';
 import IniciarSesion from './Pages/Acceso.js';
 import Usuario from './Pages/Usuario.js';
 import Perfil from './Pages/PerfilUsuario.js';
+import RecuperarContraseña from './Pages/RecuperarContraseña.js';
 
 
 
@@ -20,6 +21,7 @@ function App() {
           <Route path="registrate" element={<IniciarSesion pag="registrate"/>} />
           <Route path=":usuario" element={<Usuario />} />
           <Route path="Perfil" element={<Perfil />}/>
+          <Route path="recuperar-contraseña" element={<RecuperarContraseña />} />
         </Route>
       </Routes>
     </Router>
