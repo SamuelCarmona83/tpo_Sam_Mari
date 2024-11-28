@@ -8,7 +8,6 @@ export async function validarLogin(email, clave) {
             },
             body: JSON.stringify({ email, clave }), // Convertimos los datos a JSON
         });
-
         return respuesta;
     } catch (error) {
         console.error('Error al iniciar sesión:', error);
