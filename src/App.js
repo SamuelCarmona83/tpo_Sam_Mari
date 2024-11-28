@@ -9,8 +9,6 @@ import Usuario from './Pages/Usuario.js';
 import Perfil from './Pages/PerfilUsuario.js';
 import RecuperarContraseña from './Pages/RecuperarContraseña.js';
 
-
-
 function App() {
   return (
     <Router>

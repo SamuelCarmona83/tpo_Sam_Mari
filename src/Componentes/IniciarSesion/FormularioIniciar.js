@@ -30,6 +30,9 @@ function FormularioIniciarSesion() {
             actualizarNavbar("/usuario");
             navigate("/"+ usuarioLogeado.nombre);
         } else {
+            if(respuesta.status === 401 || respuesta.status === 404 || respuesta.status === 500){
+                alert(respuesta.mensaje);
+            }
             alert("Verifique sus datos e intente de nuevo");
         }
     };
