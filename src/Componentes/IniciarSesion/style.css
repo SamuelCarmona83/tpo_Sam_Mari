@@ -4,9 +4,12 @@
     align-items: center;
     justify-content: center;
     background-color: #e1bcaa;
-    margin: 10%;
-    border-radius: 30px;
+    margin: auto; /* Centra el Box horizontalmente */
     padding: 20px;
+    border-radius: 30px;
+    width: fit-content; /* Ajusta el ancho al contenido interno */
+    max-width: 90%; /* Evita que crezca demasiado en pantallas pequeñas */
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2); /* Opcional: sombra */
 }
 
 .registro_Inicio {

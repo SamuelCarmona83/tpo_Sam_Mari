@@ -1,17 +1,16 @@
 import React, { useEffect,useState } from 'react';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import ItemNavProy from './ItemNavProy';
-import {getProyectos} from '../../Api/apiProyectos';
-import { agregarProyecto} from '../../Backend/BD';
+import {getProyectos, crearProyecto, eliminarProyectoApi} from '../../Api/apiProyectos';
 import { Button, TextField, Dialog, DialogActions, DialogContent, DialogTitle } from '@mui/material';
 import { Typography } from '@mui/material';
 
 function NavProy(props) {
-    const actualizar = props.actualizar;
+    const actualizarApp = props.actualizar;
     const [proyectos, setProyectos] = useState([]);
     const [cantidad, setCantidad] = React.useState(0);
-    const [open, setOpen] = React.useState(false); // Estado para manejar la visibilidad del diálogo
-    const [nombre, setNombreProyecto] = React.useState(''); // Estado para el nombre del proyecto
+    const [open, setOpen] = React.useState(false);
+    const [nombre, setNombreProyecto] = React.useState('');
 
     useEffect( async () => {
         const llamadaProyectos = async () => {
@@ -35,9 +34,20 @@ function NavProy(props) {
 
     
 
-    const eliminarProyecto = () => {
-        setCantidad(cantidad - 1);
+    const eliminarProyecto = async (proyectoID) => {
+        try {
+            await eliminarProyectoApi(proyectoID);
+            const nuevaListaProyectos = await getProyectos();
+            if (nuevaListaProyectos.status === 200) {
+                const data = await nuevaListaProyectos.json();
+                setProyectos(data);
+                setCantidad(data.length); 
+            }
+        } catch (error) {
+            console.log("Error al eliminar el proyecto:", error);
+        }
     };
+    
 
     const abrirFormulario = () => {
         setOpen(true);
@@ -47,12 +57,22 @@ function NavProy(props) {
         setOpen(false);
     };
 
-    const crearNuevoProyecto = () => {
-        agregarProyecto(nombre);
-        botonCerrar();
-        setNombreProyecto('');
-        setCantidad(cantidad + 1);
+    const crearNuevoProyecto = async () => {
+        try {
+            await crearProyecto(nombre);
+            const nuevaListaProyectos = await getProyectos();
+            if (nuevaListaProyectos.status === 200) {
+                const data = await nuevaListaProyectos.json();
+                setProyectos(data);
+                setCantidad(data.length); 
+            }
+            botonCerrar();
+            setNombreProyecto('');
+        } catch (error) {
+            console.log("Error al crear el proyecto:", error);
+        }
     };
+    
 
     return (
         <div id='listaDeProyectos'>
@@ -104,7 +124,7 @@ function NavProy(props) {
                         <ItemNavProy 
                             key={proyecto.ID} 
                             proyecto={proyecto}
-                            actualizar={actualizar}
+                            actualizarApp={actualizarApp}
                             eliminarProyecto={eliminarProyecto}
                         />
                     )

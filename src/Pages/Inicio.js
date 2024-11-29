@@ -30,7 +30,7 @@ function Inicio(){
             <Nosotros/>
             <div className='d-flex justify-content-center align-items-center'>
                 
-            
+            <FormularioRegistro></FormularioRegistro>
             </div>
             
             

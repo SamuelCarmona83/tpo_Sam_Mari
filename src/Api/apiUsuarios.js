@@ -24,6 +24,27 @@ export async function validarLogin(email, clave) {
     }
 }
 
+export async function registrarUsuario(email, clave, nombre){
+  const myHeaders = new Headers();
+  myHeaders.append("Content-Type", "application/json");
+
+  const raw = JSON.stringify({
+    "email": email,
+    "clave": clave,
+    "nombre": nombre
+  });
+
+  const requestOptions = {
+    method: "POST",
+    headers: myHeaders,
+    body: raw,
+    redirect: "follow"
+  };
+
+  const respuesta = await fetch("http://localhost:8080/api/usuarios/registrarse", requestOptions)
+  return respuesta;
+}
+
 export async function recuperarContraseña(email) {
     const linkApi = 'http://localhost:8080/api/usuarios/recuperarContra' // URL del backend
     try {

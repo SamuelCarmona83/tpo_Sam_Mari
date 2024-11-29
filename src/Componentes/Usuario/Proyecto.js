@@ -1,7 +1,10 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import {Button, DialogActions, DialogContent, TextField, DialogTitle, Dialog, ToggleButtonGroup, ToggleButton} from '@mui/material';
-import { getProyectobyID, getUsuarios, agregarUsuario, agregarParticipante} from '../../Backend/BD';
+import {getUsuarios, agregarUsuario, agregarParticipante} from '../../Backend/BD';
+import { getProyectobyID } from '../../Api/apiProyectos';
+import {gastosUsuarioPorProyecto} from '../../Api/apiGastos';
+import {deudasPagadasUsuarioPorProyecto} from '../../Api/apiDeudas';
 import ParticipantesList from './ParticipantesList';
 import InfoProyecto from './InformacionProyecto';
 import EditIcon from '@mui/icons-material/Edit';
@@ -11,15 +14,69 @@ import FeedIcon from '@mui/icons-material/Feed';
 import ReceiptLongIcon from '@mui/icons-material/ReceiptLong';
 
 function Proyecto({ proyectoID }) {
-    let proyecto = [];
-    if (proyectoID !== 'n') {
-        proyecto = getProyectobyID(proyectoID);
-    }
+    const [proyecto, setProyecto] = useState(null);
+    const [usuarios, setUsuarios] = useState([]);
+    const [cantidad, setCantidad] = useState(0);
+    const [open, setOpen] = useState(false);
+    const [nombre, setNombreUsuario] = useState('');
+    const [alignment, setAlignment] = useState('datos');
+    const [estadoFormulario, setEstado] = useState(false);
+    const [nombreProyecto, setNombre] = useState('');
     
-    const [usuarios, setUsuarios] = React.useState(getUsuarios());
-    const [cantidad, setCantidad] = React.useState(usuarios.length || 0);
-    const [open, setOpen] = React.useState(false);
-    const [nombre, setNombreUsuario] = React.useState('');
+    useEffect(() => {
+        const fetchData = async () => {
+            if (proyectoID !== 'n') {
+                try {
+                    const proyectoData = await getProyectobyID(proyectoID);
+                    setProyecto(proyectoData);
+                    setNombre(proyectoData.nombre); // Asumiendo que proyecto tiene un atributo 'nombre'
+                } catch (error) {
+                    console.error("Error al cargar el proyecto:", error);
+                }
+            }
+        };
+        fetchData();
+    }, [proyectoID]);
+
+    useEffect(() => {
+        const fetchUsuarios = async () => {
+            // Aquí puedes reemplazar `getUsuarios` por la llamada real para obtener los usuarios
+            const usuariosData = await getUsuarios();
+            setUsuarios(usuariosData);
+            setCantidad(usuariosData.length);
+        };
+        fetchUsuarios();
+    }, []);
+
+    const calcularAbonadoPorUsuario = async (usuarioID) => {
+        let abonado = 0;
+        let gastos = await gastosUsuarioPorProyecto(proyectoID, usuarioID);
+        let pagos = await deudasPagadasUsuarioPorProyecto(proyectoID, usuarioID);
+
+        gastos.forEach(gasto => {
+            if (gasto.usuarioID === usuarioID) {
+                const montoGasto = parseFloat(gasto.monto);
+                if (!isNaN(montoGasto)) {
+                    abonado += montoGasto;
+                }
+            }
+        });
+
+        pagos.forEach(pago => {
+            if (pago.usuarioID === usuarioID) {
+                const montoPago = parseFloat(pago.monto);
+                if (!isNaN(montoPago)) {
+                    abonado += montoPago;
+                }
+            }
+        });
+
+        return abonado;
+    };
+
+    const handleChange = (event, newAlignment) => {
+        setAlignment(newAlignment);
+    };
 
     const abrirFormulario = () => {
         setOpen(true);
@@ -39,8 +96,8 @@ function Proyecto({ proyectoID }) {
 
         agregarUsuario(nuevoUsuario);
         setUsuarios(prevUsuarios => [...prevUsuarios, nuevoUsuario]);
-        agregarParticipante(proyectoID, usuarios.length-1);
-        
+        agregarParticipante(proyectoID, usuarios.length - 1);
+
         botonCerrar();
         setNombreUsuario('');
         setCantidad(cantidad + 1);
@@ -49,40 +106,10 @@ function Proyecto({ proyectoID }) {
     const eliminarParticipante = () => {
         setCantidad(cantidad - 1);
     };
-    
-    //      Metodos para calcular datos     //
-    const calcularAbonadoPorUsuario = (usuarioID) =>  {//TODO Rompiendo aca
-        let abonado = 0;
-        let gastos = proyecto.gastos;
-        let pagos = proyecto.pagos;
 
-        for (let i=0; i<gastos.length; i++){
-            if (gastos[i].usuarioID === usuarioID) {
-                abonado += gastos[i].monto;
-            }
-        }
-
-        for (let i=0; i<pagos.length; i++) {
-            if (pagos[i].usuarioID === usuarioID) {
-                abonado += pagos[i].monto;
-            }
-        }
-
-        return abonado;
-    }
-
-    const [alignment, setAlignment] = React.useState('datos');
-
-    const handleChange = (event, newAlignment) => {
-        setAlignment(newAlignment);
-    };
-
-    //      Formulario para editar el nombre del proyecto   //
-    let ProySeleccionado = getProyectobyID(proyectoID);
+    let ProySeleccionado = proyecto;
     let nombreProyectoSeleccionado = ProySeleccionado ? ProySeleccionado.nombre : '';
-    let [nombreProyecto, setNombre] = React.useState(nombreProyectoSeleccionado);
-    let [estadoFormulario, setEstado] = React.useState(false);
-
+    
     const cerrarFormularioDelNombre = () => {
         setNombre(ProySeleccionado.nombre);
         setEstado(false);
@@ -92,18 +119,12 @@ function Proyecto({ proyectoID }) {
         setEstado(false);
     }
 
-    const desplegarFormulario = () => {
-        setEstado(true);
-    }
-
-    //      Generando el contenido del proyecto     //
-    //      Barra de nagegacion y contenido //
     let headerProyecto;
-    if (proyectoID !== 'n') {
+    if (proyectoID !== 'n' && proyecto) {
         headerProyecto = (
             <nav id='navProyecto'>
                 <div className='d-flex f-row justify-content-between align-items-center'>
-                    <h2>{nombreProyectoSeleccionado}</h2>
+                    <h2>{proyecto.nombre}</h2>
                     <Button 
                         variant='text'
                         sx={{
@@ -163,30 +184,26 @@ function Proyecto({ proyectoID }) {
     }
 
     let main;
-
-    if (proyectoID !== 'n') {
+    if (proyectoID !== 'n' && proyecto) {
         switch (alignment) {
             case 'datos':
                 main = <InfoProyecto proyectoID={proyectoID} calcularAbonado={calcularAbonadoPorUsuario} />;
                 break;
             case 'participantes':
-                main = <ParticipantesList proyectoID={proyectoID} abrir= {abrirFormulario} calcularAbonado={calcularAbonadoPorUsuario}/>;
-
+                main = <ParticipantesList proyectoID={proyectoID} abrir={abrirFormulario} calcularAbonado={calcularAbonadoPorUsuario} />;
                 break;
             case 'transacciones':
-                main = <Transacciones proyectoID={proyectoID} />
-                break
+                main = <Transacciones proyectoID={proyectoID} />;
+                break;
             default:
                 main = <InfoProyecto proyectoID={proyectoID} calcularAbonado={calcularAbonadoPorUsuario} />;
         }
     }
 
     return (
-        <article id='proyecto' className='proyecto box'>
+        <article id="proyecto" className="proyecto box">
             {headerProyecto}
-            <div id='mainProyecto'>
-                {main}
-            </div>
+            <div id="mainProyecto">{main}</div>
 
             <Dialog open={open} onClose={botonCerrar}>
                 <DialogTitle>Agregar Participante</DialogTitle>
@@ -202,13 +219,12 @@ function Proyecto({ proyectoID }) {
                         value={nombre}
                         onChange={(e) => setNombreUsuario(e.target.value)}
                     />
-
                 </DialogContent>
                 <DialogActions>
                     <Button onClick={botonCerrar} color="primary">
                         Cancelar
                     </Button>
-                    <Button onClick={() => crearNuevoUsuario(nombre)} color="primary">
+                    <Button onClick={crearNuevoUsuario} color="primary">
                         Agregar
                     </Button>
                 </DialogActions>
