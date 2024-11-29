@@ -3,8 +3,7 @@ import './style.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { Button, TextField } from '@mui/material';
 import { useNavigate ,useOutletContext} from 'react-router-dom';
-import { setUsuarioLogeado } from '../../Backend/BD';
-import { validarLogin } from '../../Controladores/usuarioControlador';
+import { validarLogin } from '../../Api/apiUsuarios';
 import { Link } from 'react-router-dom';
 
 function FormularioIniciarSesion() {
@@ -23,17 +22,15 @@ function FormularioIniciarSesion() {
             console.log("Error fetching data:", error);
         }
 
-        if (respuesta.status === 200) {
-            const data = await respuesta.json(); //convertir en json
-            let usuarioLogeado = data.usuario; //sacar del json los datos del usuario especificamente
-            setUsuarioLogeado(usuarioLogeado.nombre);
+        if (respuesta.mensaje && respuesta.mensaje === "Inicio de sesión exitoso") {
             actualizarNavbar("/usuario");
-            navigate("/"+ usuarioLogeado.nombre);
+            navigate("/"+ sessionStorage.getItem('usuarioNombre'));
         } else {
-            if(respuesta.status === 401 || respuesta.status === 404 || respuesta.status === 500){
+            if(respuesta.mensaje && respuesta.mensaje !== 'Inicio de sesión exitoso'){
                 alert(respuesta.mensaje);
+            }else{
+                alert("Verifique sus datos e intente de nuevo");
             }
-            alert("Verifique sus datos e intente de nuevo");
         }
     };
 

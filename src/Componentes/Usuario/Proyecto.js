@@ -5,7 +5,7 @@ import { getProyectobyID, getUsuarios, agregarUsuario, agregarParticipante} from
 import ParticipantesList from './ParticipantesList';
 import InfoProyecto from './InformacionProyecto';
 import EditIcon from '@mui/icons-material/Edit';
-import Transacciones from './transacciones';
+import Transacciones from '../Usuario/Transacciones';
 import GroupIcon from '@mui/icons-material/Group';
 import FeedIcon from '@mui/icons-material/Feed';
 import ReceiptLongIcon from '@mui/icons-material/ReceiptLong';
@@ -51,7 +51,7 @@ function Proyecto({ proyectoID }) {
     };
     
     //      Metodos para calcular datos     //
-    const calcularAbonadoPorUsuario = (usuarioID) =>  {
+    const calcularAbonadoPorUsuario = (usuarioID) =>  {//TODO Rompiendo aca
         let abonado = 0;
         let gastos = proyecto.gastos;
         let pagos = proyecto.pagos;

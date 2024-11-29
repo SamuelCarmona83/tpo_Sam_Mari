@@ -1,29 +1,39 @@
 import React, { useEffect,useState } from 'react';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import ItemNavProy from './ItemNavProy';
-import { agregarProyecto, getProyectos } from '../../Backend/BD';
+import {getProyectos} from '../../Api/apiProyectos';
+import { agregarProyecto} from '../../Backend/BD';
 import { Button, TextField, Dialog, DialogActions, DialogContent, DialogTitle } from '@mui/material';
 import { Typography } from '@mui/material';
 
 function NavProy(props) {
     const actualizar = props.actualizar;
     const [proyectos, setProyectos] = useState([]);
+    const [cantidad, setCantidad] = React.useState(0);
+    const [open, setOpen] = React.useState(false); // Estado para manejar la visibilidad del diálogo
+    const [nombre, setNombreProyecto] = React.useState(''); // Estado para el nombre del proyecto
 
-    useEffect( () => {
+    useEffect( async () => {
         const llamadaProyectos = async () => {
             try {
-                let data = await getProyectos();
-                setProyectos(data || []);
+                let respuesta = await getProyectos();
+                
+                if(respuesta.status === 200){
+                    const data = await respuesta.json(); // Asegúrate de esperar a que la promesa de `json()` se resuelva
+                    setProyectos(data); 
+                    setCantidad(data.length || 0);
+                }else{
+                    setProyectos([]);
+                }
+                
             } catch (error) {
                 console.log("Error fetching data:", error);
             }
         }
-        llamadaProyectos();
+        await llamadaProyectos();
     }, [])
 
-    const [cantidad, setCantidad] = React.useState(proyectos.length || 0);
-    const [open, setOpen] = React.useState(false); // Estado para manejar la visibilidad del diálogo
-    const [nombre, setNombreProyecto] = React.useState(''); // Estado para el nombre del proyecto
+    
 
     const eliminarProyecto = () => {
         setCantidad(cantidad - 1);

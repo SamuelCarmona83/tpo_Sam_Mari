@@ -4,7 +4,6 @@ import 'bootstrap-icons/font/bootstrap-icons.css';
 import PersonIcon from '@mui/icons-material/Person';
 import Button from '@mui/material/Button';
 import {useNavigate} from 'react-router-dom';
-import { getUsuarioLogeado } from '../../Backend/BD';
 
 
 function UsuarioNB ({actualizar, estado}) {
@@ -20,7 +19,7 @@ function UsuarioNB ({actualizar, estado}) {
     }
 
     const toProyectos = () => {
-        let nombreUsuario = getUsuarioLogeado();
+        let nombreUsuario = sessionStorage.getItem("usuarioID");
         navigate(`/${nombreUsuario}`);
     }
 

@@ -15,13 +15,19 @@ function ItemNavProj ({actualizar, proyecto, eliminarProyecto}){
         }
     }
 
+    const botonPresionado = () => {
+        const proyectoID = proyecto.ID;
+        console.log(proyecto.ID);
+        actualizar(proyecto.ID);
+    }
+
     return (
 
         <li className='itemNavProy d-flex f-row'>
                 <Button 
                     sx={{color:'white', width:'100%'}}
                     variant='text'
-                    onClick={() => {actualizar(proyecto.ID)}}
+                    onClick={botonPresionado}
                 >
                     <Typography variant='subtitle'>
                         {proyecto.nombre}
