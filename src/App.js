@@ -8,6 +8,7 @@ import IniciarSesion from './Pages/Acceso.js';
 import Usuario from './Pages/Usuario.js';
 import Perfil from './Pages/PerfilUsuario.js';
 import RecuperarContraseña from './Pages/RecuperarContraseña.js';
+import CambiarClave from './Pages/CambiarClave.js';
 
 function App() {
   return (
@@ -20,6 +21,7 @@ function App() {
           <Route path=":usuario" element={<Usuario />} />
           <Route path="Perfil" element={<Perfil />}/>
           <Route path="recuperar-contraseña" element={<RecuperarContraseña />} />
+          <Route path="cambiarClave/:id"  element={<CambiarClave />} />
         </Route>
       </Routes>
     </Router>

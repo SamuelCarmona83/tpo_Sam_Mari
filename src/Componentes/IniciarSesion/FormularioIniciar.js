@@ -4,7 +4,7 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import { Button, TextField } from '@mui/material';
 import { useNavigate ,useOutletContext} from 'react-router-dom';
 import { setUsuarioLogeado } from '../../Backend/BD';
-import { validarLogin } from '../../Controladores/usuarioControlador';
+import { validarLogin } from '../../Api/apiUsuarios';
 import { Link } from 'react-router-dom';
 
 function FormularioIniciarSesion() {
