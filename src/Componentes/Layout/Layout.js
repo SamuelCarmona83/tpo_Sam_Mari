@@ -1,42 +1,45 @@
-import React, { useState } from 'react';
-import {Outlet, Link, useLocation} from 'react-router-dom';
+import React, { useState, useEffect } from 'react';
+import { Outlet, Link, useLocation } from 'react-router-dom';
 import './style.css';
 import logo from '../../imagenes/CatLogoSF.png';
 import Navbar from './Navbar';
 import Footer from '../LogOff/Footer';
 
-
-function Layout (){
+function Layout() {
     let location = useLocation();
     let actual = location.pathname;
 
     const [estado, setEstado] = useState(actual);
 
+    useEffect(() => {
+        setEstado(actual);
+    }, [actual]);
+
     const actualizarNavbar = (path) => {
         setEstado(path);
     }
-    
+
     return (
         <div>
-            <header >
-                <nav className={estado === "/usuario" ? "logOfNavBar fondo":"logOfNavBar"}>
+            <header>
+                <nav className={estado === "/usuario" ? "logOfNavBar fondo" : "logOfNavBar"}>
                     <div className="divNav row_spaceBetween">
-                        <figure >
+                        <figure>
                             <Link to="/" onClick={() => actualizarNavbar("/")}>
-                                <img className='logoNav' src={logo} alt='Logo de la pagina, es un gato'/>
+                                <img className='logoNav' src={logo} alt='Logo de la pagina, es un gato' />
                             </Link>
                         </figure>
-                        <Navbar estado={estado} actualizarNavbar={actualizarNavbar}/>
+                        <Navbar estado={estado} actualizarNavbar={actualizarNavbar} />
                     </div>
                 </nav>
             </header>
             <main>
-                <Outlet context={actualizarNavbar}/>
+                <Outlet context={actualizarNavbar} />
                 <hr className="divider" />
                 <Footer />
             </main>
         </div>
     );
-    
 }
+
 export default Layout;
