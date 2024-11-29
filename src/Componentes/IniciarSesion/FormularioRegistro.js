@@ -1,66 +1,90 @@
-import React, {useState} from 'react';
-import './style.css';
-import 'bootstrap/dist/css/bootstrap.min.css';
-import { Button, TextField, Box, Typography } from '@mui/material';
-import {useLocation} from 'react-router-dom';
+import React, { useState } from 'react';
+import { TextField, Button, Typography, Box } from '@mui/material';
 
-function FormularioRegistro() {
-    let location = useLocation();
-    let path = location.pathname;
-    console.log(path)
+const Registro = () => {
+    const [nombre, setNombre] = useState('');
+    const [email, setEmail] = useState('');
+    const [password, setPassword] = useState('');
+    const [confirmPassword, setConfirmPassword] = useState('');
+
+    const validarCorreo = (correo) => {
+        const vali = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+        return vali.test(correo);
+    };
+
+    const manejarRegistro = (event) => {
+        event.preventDefault();
+        
+    };
+
     return (
         <Box
-            className={path === '/' ? 'registro registro_Inicio w-50' : 'registro w-50'}
+            sx={{
+                display: 'flex',
+                flexDirection: 'column',
+                alignItems: 'center',
+                gap: 2,
+                maxWidth: 400,
+                margin: '0 auto',
+                padding: 2,
+                border: '1px solid #ccc',
+                borderRadius: '8px',
+            }}
         >
-            <Typography variant="h4" gutterBottom align="center">
-                Regístrate
+            <Typography variant="h5" sx={{ marginBottom: 2 }}>
+                Registro
             </Typography>
-            <div className='item_Registro'>
-                <TextField
-                    required
-                    fullWidth
-                    variant="outlined"
-                    label="Correo Electrónico"
-                    margin="normal"
-                />
-            </div>
-            <div className='item_Registro'>
-                <TextField
-                    required
-                    fullWidth
-                    variant="outlined"
-                    label="Nombre"
-                    margin="normal"
-                />
-            </div>
-            <div className='item_Registro'>
-                <TextField
-                    fullWidth
-                    variant="outlined"
-                    label="Contraseña"
-                    type="password"
-                    autoComplete="current-password"
-                    margin="normal"
-                />
-            </div>
-            <div className='item_Registro'>
-                <TextField
-                    fullWidth
-                    variant="outlined"
-                    label="Repita Contraseña"
-                    type="password"
-                    autoComplete="current-password"
-                    margin="normal"
-                />
-            </div>
 
-            <div className='mt-4'>
-                <Button variant="contained" sx={{ backgroundColor: 'black', color: 'white' }} fullWidth>
-                    Regístrate
-                </Button>
-            </div>
+            {/* Campo Nombre */}
+            <TextField
+                label="Nombre"
+                variant="outlined"
+                fullWidth
+                value={nombre}
+                onChange={(e) => setNombre(e.target.value)}
+            />
+
+            {/* Campo Email */}
+            <TextField
+                label="Email"
+                type="email"
+                variant="outlined"
+                fullWidth
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
+            />
+
+            {/* Campo Contraseña */}
+            <TextField
+                label="Contraseña"
+                type="password"
+                variant="outlined"
+                fullWidth
+                value={password}
+                onChange={(e) => setPassword(e.target.value)}
+            />
+
+            {/* Campo Confirmar Contraseña */}
+            <TextField
+                label="Confirmar Contraseña"
+                type="password"
+                variant="outlined"
+                fullWidth
+                value={confirmPassword}
+                onChange={(e) => setConfirmPassword(e.target.value)}
+            />
+
+            {/* Botón Registrarse */}
+            <Button
+                variant="contained"
+                color="primary"
+                onClick={manejarRegistro}
+                sx={{ marginTop: 2 }}
+            >
+                Registrarse
+            </Button>
         </Box>
     );
-}
+};
 
-export default FormularioRegistro;
+export default Registro;
