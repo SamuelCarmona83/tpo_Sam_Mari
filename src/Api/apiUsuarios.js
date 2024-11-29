@@ -8,6 +8,13 @@ export async function validarLogin(email, clave) {
             },
             body: JSON.stringify({ email, clave }), // Convertimos los datos a JSON
         });
+        const dataJson = await respuesta.json();
+        if(respuesta.status === 200){
+            const token = await dataJson.token;
+            const usuarioID = await dataJson.usuario.id;
+            sessionStorage.setItem("token", token);
+            sessionStorage.setItem("usuarioID", usuarioID);
+        }
         return respuesta;
     } catch (error) {
         console.error('Error al iniciar sesión:', error);
