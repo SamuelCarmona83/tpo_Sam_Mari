@@ -4,21 +4,20 @@ import { Button, Typography } from '@mui/material';
 import DeleteIcon from '@mui/icons-material/Delete';
 import { sacarProyecto } from '../../Backend/BD';
 
-function ItemNavProj ({actualizar, proyecto, eliminarProyecto}){
+function ItemNavProj ({actualizarApp, proyecto, eliminarProyecto}){
 
     const botonBorrar = () => {
         const confirmDelete = window.confirm(`¿Quieres borrar el proyecto "${proyecto.nombre}"?`);
         if (confirmDelete) {
-            sacarProyecto(proyecto.ID);
-            actualizar('n');
-            eliminarProyecto();
+            sacarProyecto(proyecto.ID); //TODO aqui va una Api
+            actualizarApp('n');
+            eliminarProyecto(proyecto.ID);
         }
     }
 
     const botonPresionado = () => {
         const proyectoID = proyecto.ID;
-        console.log(proyecto.ID);
-        actualizar(proyecto.ID);
+        actualizarApp(proyecto.ID);
     }
 
     return (
