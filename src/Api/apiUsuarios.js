@@ -1,5 +1,5 @@
 export async function validarLogin(email, clave) {
-    const linkApi = 'http://localhost:8080/api/usuarios/login'
+    const linkApi = 'http://localhost:8080/api/usuarios/login';
     try {
         const respuesta = await fetch(linkApi, {
             method: 'POST',
@@ -8,7 +8,16 @@ export async function validarLogin(email, clave) {
             },
             body: JSON.stringify({ email, clave }), // Convertimos los datos a JSON
         });
-        return respuesta;
+
+        const dataJson = await respuesta.json();
+        if(respuesta.status === 200){
+            const token = await dataJson.token;
+            const usuarioID = await dataJson.usuario.id;
+            sessionStorage.setItem("token", token);
+            sessionStorage.setItem("usuarioID", usuarioID);
+            sessionStorage.setItem("usuarioNombre", dataJson.usuario.nombre)
+        }
+        return dataJson;
     } catch (error) {
         console.error('Error al iniciar sesión:', error);
         return null;

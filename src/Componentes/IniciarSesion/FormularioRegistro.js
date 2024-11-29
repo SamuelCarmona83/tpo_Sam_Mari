@@ -26,6 +26,15 @@ function FormularioRegistro() {
             </div>
             <div className='item_Registro'>
                 <TextField
+                    required
+                    fullWidth
+                    variant="outlined"
+                    label="Nombre"
+                    margin="normal"
+                />
+            </div>
+            <div className='item_Registro'>
+                <TextField
                     fullWidth
                     variant="outlined"
                     label="Contraseña"
