@@ -48,3 +48,18 @@ export async function eliminarProyectoApi(proyectoID) {
     const dataJson = await respuesta.json();
     alert(dataJson.mensaje);
 }
+
+export async function getProyectobyID(proyectoID){
+    const myHeaders = new Headers();
+    myHeaders.append("jwt", sessionStorage.getItem("token"));
+    const requestOptions = {
+    method: "GET",
+    headers: myHeaders,
+    redirect: "follow"
+    };
+    console.log(proyectoID);
+    const linkApi = "http://localhost:8080/api/proyectos/getProyecto/"+proyectoID;
+    const respuestaApi = await fetch(linkApi, requestOptions);
+    const dataJson = await respuestaApi.json();
+    return dataJson;
+}
