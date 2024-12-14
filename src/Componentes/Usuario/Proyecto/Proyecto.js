@@ -6,7 +6,7 @@ import { getProyectobyID } from '../../Api/apiProyectos';
 import {gastosUsuarioPorProyecto} from '../../Api/apiGastos';
 import {deudasPagadasUsuarioPorProyecto} from '../../Api/apiDeudas';
 import ParticipantesList from './ParticipantesList';
-import InfoProyecto from './InformacionProyecto';
+import InfoProyecto from './InformacionDelProyecto/InformacionProyecto';
 import EditIcon from '@mui/icons-material/Edit';
 import Transacciones from '../Usuario/Transacciones';
 import GroupIcon from '@mui/icons-material/Group';

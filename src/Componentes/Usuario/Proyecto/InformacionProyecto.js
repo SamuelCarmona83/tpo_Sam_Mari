@@ -11,8 +11,8 @@ import {
     DialogActions,
 } from '@mui/material';
 import EditIcon from '@mui/icons-material/Edit';
-import { getProyectobyID } from '../../Api/apiProyectos';
-import { gastosUsuarioPorProyecto } from '../../Api/apiGastos';
+import { getProyectobyID } from '../../../Api/apiProyectos';
+import { gastosUsuarioPorProyecto } from '../../../Api/apiGastos';
 
 export default function InfoProyecto({ proyectoID, calcularAbonado }) {
     const [proyecto, setProyecto] = useState(null);

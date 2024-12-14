@@ -1,8 +1,8 @@
 import { Typography, Divider, ToggleButtonGroup, ToggleButton, Button} from '@mui/material';
 import React from 'react';
-import ListaDeTransacciones from './Componentes_Transacciones/ListaDeTransacciones';
-import { agregarGasto, agregarPago, borrarGasto, borrarPago, getProyectobyID } from '../../Backend/BD';
-import FormularioTransaccion from './Componentes_Transacciones/FormularioTransaccion';
+import ListaDeTransacciones from './ListaDeTransacciones';
+import { agregarGasto, agregarPago, borrarGasto, borrarPago, getProyectobyID } from '../../../../Backend/BD';
+import FormularioTransaccion from './FormularioTransaccion';
 
 export default function Transacciones({proyectoID}){
     let proyecto = getProyectobyID(proyectoID);

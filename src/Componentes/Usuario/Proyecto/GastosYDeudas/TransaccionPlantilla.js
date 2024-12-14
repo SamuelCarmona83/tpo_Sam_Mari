@@ -1,7 +1,7 @@
 import { Typography , Button} from '@mui/material';
 import React from 'react';
 import DeleteIcon from '@mui/icons-material/Delete';
-import { getUsuaruiByID } from '../../../Backend/BD';
+import { getUsuaruiByID } from '../../../../Backend/BD';
 
 export default function TransaccionPlantilla ({transaccion, borrar}) {
     let usuario = getUsuaruiByID(transaccion.usuarioID);

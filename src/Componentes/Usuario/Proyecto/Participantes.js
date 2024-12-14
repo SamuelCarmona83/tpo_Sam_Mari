@@ -3,7 +3,7 @@ import Accordion from '@mui/material/Accordion';
 import {AccordionSummary, AccordionDetails, Typography, Button} from '@mui/material';
 import ArrowDownwardIcon from '@mui/icons-material/ArrowDownward';
 import DeleteIcon from '@mui/icons-material/Delete';
-import { getProyectobyID, getUsuaruiByID } from '../../Backend/BD';
+import { getProyectobyID, getUsuaruiByID } from '../../../Backend/BD';
 
 export default function Participantes(props) {
   const calcularAbonado = props.calcularAbonado;
