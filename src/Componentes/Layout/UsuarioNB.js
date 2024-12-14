@@ -6,12 +6,12 @@ import Button from '@mui/material/Button';
 import {useNavigate} from 'react-router-dom';
 
 
-function UsuarioNB ({actualizar, estado}) {
+function UsuarioNB () {
     const navigate = useNavigate();
 
     const cerrarSesion = () => {
-        actualizar('/');
         navigate('/');
+        sessionStorage.clear();
     }
 
     const toPerfil = () => {

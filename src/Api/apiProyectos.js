@@ -1,14 +1,16 @@
 export async function getProyectos() {
-    const linkApi = 'http://localhost:8080/api/proyectos/proyectosUsuario/' + sessionStorage.getItem("usuarioID");
+    const myHeaders = new Headers();
+    myHeaders.append("jwt", sessionStorage.getItem("token"));
 
-    const respuesta = await fetch(linkApi, {
-            method: 'GET',
-            headers: {
-                "jwt": sessionStorage.getItem("token"),
-            },
-    });
-    
-    return respuesta;
+    const requestOptions = {
+    method: "GET",
+    headers: myHeaders,
+    redirect: "follow"
+    };
+
+    const respuestaApi = await fetch("http://localhost:8080/api/proyectos/proyectosUsuario/" + sessionStorage.getItem("usuarioID"), requestOptions);
+    const dataJson = await respuestaApi.json();
+    return dataJson;
 }
 
 export async function crearProyecto(nombreProyecto) {
