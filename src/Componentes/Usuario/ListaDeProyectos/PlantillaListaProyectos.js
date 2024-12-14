@@ -2,7 +2,7 @@ import React from 'react';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { Button, Typography } from '@mui/material';
 import DeleteIcon from '@mui/icons-material/Delete';
-import { sacarProyecto } from '../../Backend/BD';
+import { sacarProyecto } from '../../../Backend/BD';
 
 function ItemNavProj ({actualizarApp, proyecto, eliminarProyecto}){
 

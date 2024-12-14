@@ -1,11 +1,11 @@
 import React, { useState, useEffect } from 'react';
 import 'bootstrap/dist/css/bootstrap.min.css';
-import ItemNavProy from '../PlantillaListaProyectos';
+import PlantillaListaProyecto from './PlantillaListaProyectos';
 import {crearProyecto, eliminarProyectoApi} from '../../../Api/apiProyectos';
 import { Button, TextField, Dialog, DialogActions, DialogContent, DialogTitle } from '@mui/material';
 import { Typography } from '@mui/material';
 
-function NavProy({actualizarApp, listaProyectos}) {
+function ListaDeProyectos({actualizarApp, listaProyectos, cambiarProyectoElegido}) {
     const [open, setOpen] = useState(false);
     const [nombre, setNombreProyecto] = useState('');
 
@@ -86,7 +86,7 @@ function NavProy({actualizarApp, listaProyectos}) {
             <ul className='container-fluid box'>
                 {listaProyectos.map((proyecto) => {
                     return (
-                        <ItemNavProy 
+                        <PlantillaListaProyecto 
                             key={proyecto.ID} 
                             proyecto={proyecto}
                             actualizarApp={actualizarApp}
@@ -99,4 +99,4 @@ function NavProy({actualizarApp, listaProyectos}) {
     );
 }
 
-export default NavProy;
+export default ListaDeProyectos;
