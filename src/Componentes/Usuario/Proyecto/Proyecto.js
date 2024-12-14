@@ -8,7 +8,7 @@ import {deudasPagadasUsuarioPorProyecto} from '../../Api/apiDeudas';
 import ParticipantesList from './ParticipantesList';
 import InfoProyecto from './InformacionDelProyecto/InformacionProyecto';
 import EditIcon from '@mui/icons-material/Edit';
-import Transacciones from '../Usuario/Transacciones';
+import Transacciones from './Transacciones';
 import GroupIcon from '@mui/icons-material/Group';
 import FeedIcon from '@mui/icons-material/Feed';
 import ReceiptLongIcon from '@mui/icons-material/ReceiptLong';
