@@ -1,27 +1,19 @@
 // ParticipantesList.js
 import React from 'react';
 import Participantes from './Participantes';
-import { getProyectobyID, getUsuarios } from '../../../Backend/BD';
 import imagen4 from '../../../imagenes/agregarUsuario.png';
 
 
 
-const ParticipantesList = ({proyectoID, abrir, calcularAbonado}) => {
-    let proyecto = getProyectobyID(proyectoID);
-    let participantes = getUsuarios();
-    const participantesDelProyecto = proyecto.participantes || [];
+const ParticipantesList = ({proyecto, abrir}) => {
+    let usuarios = proyecto.usuarios;
 
     return (
         <article>
-            {participantesDelProyecto.map(index => (
+            {usuarios.map(usuario => (
                 <Participantes 
-                    proyectoID = {proyectoID}
-                    imagen={participantes[index].imagen} 
-                    nombre={participantes[index].nombre} 
-                    ID={participantes[index].ID} 
-                    collap="#collapseOne" 
-                    monto={participantes[index].monto}
-                    calcularAbonado={calcularAbonado}
+                    proyecto = {proyecto}
+                    usuario = {usuario}
                 />
             ))}
             <button className="boton-agregar" onClick={abrir}>

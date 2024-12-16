@@ -3,28 +3,11 @@ import Accordion from '@mui/material/Accordion';
 import {AccordionSummary, AccordionDetails, Typography, Button} from '@mui/material';
 import ArrowDownwardIcon from '@mui/icons-material/ArrowDownward';
 import DeleteIcon from '@mui/icons-material/Delete';
-import { getProyectobyID, getUsuaruiByID } from '../../../Backend/BD';
+import { SumaDeGastosPorUsuario } from '../../../Servicios/GastosFunciones';
+import { totalAdeudadoPorUsuario, totalPorCobrarPorUsuario } from '../../../Servicios/DeudasFunciones';
 
-export default function Participantes(props) {
-  const calcularAbonado = props.calcularAbonado;
-  let usuario = getUsuaruiByID(props.ID);
-  let proyecto = getProyectobyID(props.proyectoID);
-  let gastos = proyecto.gastos;
-  let pagos = proyecto.pagos;
-  let abonado = calcularAbonado(props.ID);
-
-  let totalGastos = 0;
-  for (let i=0; i<gastos.length; i++) {
-    totalGastos += gastos[i].monto;
-  }
-
-  let parteAPagar = totalGastos;
-  if (proyecto.participantes.length > 0) {
-    parteAPagar = totalGastos / proyecto.participantes.length;
-  }
-
-  let balance = abonado - parteAPagar;
-
+export default function Participantes({proyecto, usuario}) {
+  let ingresosPendientes = totalPorCobrarPorUsuario(proyecto, usuario.ID);
 
   return (
     <div>
@@ -35,9 +18,9 @@ export default function Participantes(props) {
           id="panel1-header" className='itemsAccodion'
         >
           <div id="datosParticipante">
-            <img src={props.imagen} alt={props.nombre} className="participante-imagen"/>
+            <img src={usuario.imagen} alt={usuario.nombre} className="participante-imagen"/>
             <Typography id="nombre-participante" variant='h6'>
-              {props.nombre}
+              {usuario.nombre}
             </Typography>
           </div>
         </AccordionSummary>
@@ -46,37 +29,34 @@ export default function Participantes(props) {
             <ul className="detalle-totales" >
               <li>
                 <Typography variant='subtitle1'>
-                  Abonado
+                  Gastos Reportados
                 </Typography>
                 
-                <Typography variant='p'
-                  sx={{color:"green"}}
-                >
-                  {abonado.toFixed(2)}
+                <Typography variant='p'sx={{color:"green"}}>
+                  {SumaDeGastosPorUsuario(proyecto,usuario.ID)}
                 </Typography>
               </li>
               <li>
                 <Typography variant='subtitle1'>
-                  Monto a pagar
+                  Total Deudas
                 </Typography>
                 
                 <Typography variant='p'
                   sx={{color:"red"}}
                 >
-                  {parteAPagar.toFixed(2)}
+                  {totalAdeudadoPorUsuario(proyecto, usuario.ID)}
                 </Typography>
               </li>
               <li>
                 <Typography variant='subtitle1'>
-                  Balance
+                  Ingresos pendientes
                 </Typography>
-                
                 <Typography variant='p'
                   sx={{
-                    color: balance >= 0 ? 'green' : 'red'
+                    color: ingresosPendientes > 0 ? 'green' : 'black'
                   }}
                 >
-                  {balance.toFixed(2)}
+                  {ingresosPendientes}
                 </Typography>
               </li>
               <li>

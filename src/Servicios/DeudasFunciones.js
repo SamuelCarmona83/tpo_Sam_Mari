@@ -18,7 +18,9 @@ export function totalPorCobrarPorUsuario(proyecto, usuarioID) {
     let totalACobrar = 0;
     for(let deuda of proyecto.deudas){
         if(deuda.cobradorId === usuarioID){
-            totalACobrar += parseFloat(deuda.monto);
+            if(deuda.pagada === false){
+                totalACobrar += parseFloat(deuda.monto);
+            }
         }
     }
     return totalACobrar;

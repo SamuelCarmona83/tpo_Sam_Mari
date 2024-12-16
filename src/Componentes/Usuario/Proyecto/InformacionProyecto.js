@@ -17,10 +17,7 @@ import { totalAdeudadoPorUsuario, totalImpagoDelProyecto, totalPorCobrarPorUsuar
 export default function InfoProyecto({proyecto}) {
     const [nuevaDescripcion, setDescripcion] = useState('');
     const [estadoFormulario, setEstado] = useState(false);
-    console.log("InformacionProyecto/InfoProyecto> proyecto: ", + proyecto);
-
-    const usuarioID = sessionStorage.getItem('usuarioID');
-
+    const usuarioID = Number(sessionStorage.getItem('usuarioID'));
 
     const abrirFormulario = () => {
         setEstado(true);
@@ -144,7 +141,7 @@ export default function InfoProyecto({proyecto}) {
                         alignItems: 'center',
                     }}
                 >
-                    <Typography variant="h6">Deudas Personal</Typography>
+                    <Typography variant="h6">Total Deudas</Typography>
                     <Typography variant="body1" sx={{ color: 'red' }}>
                         {totalAdeudadoPorUsuario(proyecto, usuarioID)}
                     </Typography>

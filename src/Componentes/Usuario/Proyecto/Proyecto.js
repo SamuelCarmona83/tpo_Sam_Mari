@@ -135,9 +135,9 @@ function Proyecto({ proyectoElegido }) {
             case 'datos':
                 main = <InfoProyecto proyecto={proyecto}/>;
                 break;
-            //case 'participantes':
-                //main = <ParticipantesList proyecto={proyecto} abrir={abrirFormulario}/>;
-                //break;
+            case 'participantes':
+                main = <ParticipantesList proyecto={proyecto} abrir={abrirFormulario}/>;
+                break;
             //case 'transacciones':
                 //main = <Transacciones proyecto={proyecto} />;
                 //break;

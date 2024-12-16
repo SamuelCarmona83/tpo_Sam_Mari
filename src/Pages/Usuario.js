@@ -13,9 +13,7 @@ function Usuario (){
     const cargarLosProyectos = async () => {
         try {
             const listaAuxiliar = await getProyectos();
-            console.log("listaAuxiliar " + listaAuxiliar);
             setListaProyectos(listaAuxiliar);
-            
             cantidadDeProyectos = listaProyectos.length;
         } catch (error){
             console.log("### ERROR ###\n### en el useEffect, de la page Usuarios ###\n### Tratando de cargarLosProyectos\n");
