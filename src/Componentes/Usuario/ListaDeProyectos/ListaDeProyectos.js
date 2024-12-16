@@ -8,7 +8,7 @@ import { Typography } from '@mui/material';
 function ListaDeProyectos({actualizarApp, listaProyectos, cambiarProyectoElegido}) {
     const [open, setOpen] = useState(false);
     const [nombre, setNombreProyecto] = useState('');
-
+    
     const eliminarProyecto = async (proyectoID) => {
         try {
             await eliminarProyectoApi(proyectoID);
@@ -84,12 +84,14 @@ function ListaDeProyectos({actualizarApp, listaProyectos, cambiarProyectoElegido
             </Dialog>
 
             <ul className='container-fluid box'>
-                {listaProyectos.map((proyecto) => {
+                {
+                    listaProyectos.length === 0 ? (
+                    <p>Cargando proyectos...</p>
+                    ) : listaProyectos && listaProyectos.map((proyecto) => {
                     return (
                         <PlantillaListaProyecto 
                             key={proyecto.ID} 
                             proyecto={proyecto}
-                            actualizarApp={actualizarApp}
                             eliminarProyecto={eliminarProyecto}
                         />
                     )

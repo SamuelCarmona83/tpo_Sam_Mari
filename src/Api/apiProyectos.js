@@ -45,9 +45,9 @@ export async function eliminarProyectoApi(proyectoID) {
     headers: myHeaders,
     redirect: "follow"
     };
-    const linkApi = "http://localhost:8080/api/proyectos/eliminarProyecto/" + proyectoID;
-    const respuesta = await fetch(linkApi, requestOptions)
-    const dataJson = await respuesta.json();
+
+    const respuestaApi = await fetch("http://localhost:8080/api/proyectos/eliminarProyecto/" + proyectoID, requestOptions);
+    const dataJson = await respuestaApi.json();
     alert(dataJson.mensaje);
 }
 
@@ -59,7 +59,6 @@ export async function getProyectobyID(proyectoID){
     headers: myHeaders,
     redirect: "follow"
     };
-    console.log(proyectoID);
     const linkApi = "http://localhost:8080/api/proyectos/getProyecto/"+proyectoID;
     const respuestaApi = await fetch(linkApi, requestOptions);
     const dataJson = await respuestaApi.json();

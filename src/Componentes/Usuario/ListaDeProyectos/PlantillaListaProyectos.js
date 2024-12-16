@@ -2,22 +2,19 @@ import React from 'react';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { Button, Typography } from '@mui/material';
 import DeleteIcon from '@mui/icons-material/Delete';
-import { sacarProyecto } from '../../../Backend/BD';
 
-function ItemNavProj ({actualizarApp, proyecto, eliminarProyecto}){
+function ItemNavProj ({proyecto, eliminarProyecto}){
 
     const botonBorrar = () => {
         const confirmDelete = window.confirm(`¿Quieres borrar el proyecto "${proyecto.nombre}"?`);
         if (confirmDelete) {
-            sacarProyecto(proyecto.ID); //TODO aqui va una Api
-            actualizarApp('n');
             eliminarProyecto(proyecto.ID);
         }
     }
 
-    const botonPresionado = () => {
+    const botonPresionado = () => {//boton por implementar, este tiene que devolver el proyecto
         const proyectoID = proyecto.ID;
-        actualizarApp(proyecto.ID);
+        //actualizarApp(proyecto.ID);
     }
 
     return (
