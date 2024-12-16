@@ -1,79 +1,25 @@
 import React, { useState, useEffect } from 'react';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import {Button, DialogActions, DialogContent, TextField, DialogTitle, Dialog, ToggleButtonGroup, ToggleButton} from '@mui/material';
-import {getUsuarios, agregarUsuario, agregarParticipante} from '../../Backend/BD';
-import { getProyectobyID } from '../../Api/apiProyectos';
-import {gastosUsuarioPorProyecto} from '../../Api/apiGastos';
-import {deudasPagadasUsuarioPorProyecto} from '../../Api/apiDeudas';
 import ParticipantesList from './ParticipantesList';
-import InfoProyecto from './InformacionDelProyecto/InformacionProyecto';
+import InfoProyecto from './InformacionProyecto';
 import EditIcon from '@mui/icons-material/Edit';
-import Transacciones from './Transacciones';
+import Transacciones from './GastosYDeudas/Transacciones';
 import GroupIcon from '@mui/icons-material/Group';
 import FeedIcon from '@mui/icons-material/Feed';
 import ReceiptLongIcon from '@mui/icons-material/ReceiptLong';
 
-function Proyecto({ proyectoID }) {
-    const [proyecto, setProyecto] = useState(null);
-    const [usuarios, setUsuarios] = useState([]);
+function Proyecto({ proyectoElegido }) {
+    let proyecto = proyectoElegido;
+    const [usuarios, setUsuarios] = useState(proyecto !== null ? proyecto.usuarios : []);
     const [cantidad, setCantidad] = useState(0);
     const [open, setOpen] = useState(false);
     const [nombre, setNombreUsuario] = useState('');
     const [alignment, setAlignment] = useState('datos');
     const [estadoFormulario, setEstado] = useState(false);
     const [nombreProyecto, setNombre] = useState('');
+    let proyectoID = proyecto !== null ? proyecto.ID : null;
     
-    useEffect(() => {
-        const fetchData = async () => {
-            if (proyectoID !== 'n') {
-                try {
-                    const proyectoData = await getProyectobyID(proyectoID);
-                    setProyecto(proyectoData);
-                    setNombre(proyectoData.nombre); // Asumiendo que proyecto tiene un atributo 'nombre'
-                } catch (error) {
-                    console.error("Error al cargar el proyecto:", error);
-                }
-            }
-        };
-        fetchData();
-    }, [proyectoID]);
-
-    useEffect(() => {
-        const fetchUsuarios = async () => {
-            // Aquí puedes reemplazar `getUsuarios` por la llamada real para obtener los usuarios
-            const usuariosData = await getUsuarios();
-            setUsuarios(usuariosData);
-            setCantidad(usuariosData.length);
-        };
-        fetchUsuarios();
-    }, []);
-
-    const calcularAbonadoPorUsuario = async (usuarioID) => {
-        let abonado = 0;
-        let gastos = await gastosUsuarioPorProyecto(proyectoID, usuarioID);
-        let pagos = await deudasPagadasUsuarioPorProyecto(proyectoID, usuarioID);
-
-        gastos.forEach(gasto => {
-            if (gasto.usuarioID === usuarioID) {
-                const montoGasto = parseFloat(gasto.monto);
-                if (!isNaN(montoGasto)) {
-                    abonado += montoGasto;
-                }
-            }
-        });
-
-        pagos.forEach(pago => {
-            if (pago.usuarioID === usuarioID) {
-                const montoPago = parseFloat(pago.monto);
-                if (!isNaN(montoPago)) {
-                    abonado += montoPago;
-                }
-            }
-        });
-
-        return abonado;
-    };
-
     const handleChange = (event, newAlignment) => {
         setAlignment(newAlignment);
     };
@@ -86,7 +32,7 @@ function Proyecto({ proyectoID }) {
         setOpen(false);
     };
 
-    const crearNuevoUsuario = () => {
+    const crearNuevoUsuario = () => { //todo por implementar api aca
         const nuevoUsuario = {
             ID: cantidad,
             nombre: nombre,
@@ -94,9 +40,9 @@ function Proyecto({ proyectoID }) {
             monto: '300'
         };
 
-        agregarUsuario(nuevoUsuario);
+        //agregarUsuario(nuevoUsuario);
         setUsuarios(prevUsuarios => [...prevUsuarios, nuevoUsuario]);
-        agregarParticipante(proyectoID, usuarios.length - 1);
+        //agregarParticipante(proyectoID, usuarios.length - 1);
 
         botonCerrar();
         setNombreUsuario('');
@@ -104,7 +50,7 @@ function Proyecto({ proyectoID }) {
     };
 
     const eliminarParticipante = () => {
-        setCantidad(cantidad - 1);
+        setCantidad(cantidad - 1); 
     };
 
     let ProySeleccionado = proyecto;
@@ -120,7 +66,7 @@ function Proyecto({ proyectoID }) {
     }
 
     let headerProyecto;
-    if (proyectoID !== 'n' && proyecto) {
+    if (proyectoID && proyecto) {
         headerProyecto = (
             <nav id='navProyecto'>
                 <div className='d-flex f-row justify-content-between align-items-center'>
@@ -184,19 +130,19 @@ function Proyecto({ proyectoID }) {
     }
 
     let main;
-    if (proyectoID !== 'n' && proyecto) {
+    if (proyectoID && proyecto) {
         switch (alignment) {
             case 'datos':
-                main = <InfoProyecto proyectoID={proyectoID} calcularAbonado={calcularAbonadoPorUsuario} />;
+                main = <InfoProyecto proyecto={proyecto}/>;
                 break;
-            case 'participantes':
-                main = <ParticipantesList proyectoID={proyectoID} abrir={abrirFormulario} calcularAbonado={calcularAbonadoPorUsuario} />;
-                break;
-            case 'transacciones':
-                main = <Transacciones proyectoID={proyectoID} />;
-                break;
+            //case 'participantes':
+                //main = <ParticipantesList proyecto={proyecto} abrir={abrirFormulario}/>;
+                //break;
+            //case 'transacciones':
+                //main = <Transacciones proyecto={proyecto} />;
+                //break;
             default:
-                main = <InfoProyecto proyectoID={proyectoID} calcularAbonado={calcularAbonadoPorUsuario} />;
+                main = <InfoProyecto proyecto={proyecto}/>;
         }
     }
 

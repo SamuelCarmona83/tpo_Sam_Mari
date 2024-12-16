@@ -11,59 +11,16 @@ import {
     DialogActions,
 } from '@mui/material';
 import EditIcon from '@mui/icons-material/Edit';
-import { getProyectobyID } from '../../../Api/apiProyectos';
-import { gastosUsuarioPorProyecto } from '../../../Api/apiGastos';
+import { gastosTotalesDelProyecto, SumaDeGastosPorUsuario } from '../../../Servicios/GastosFunciones';
+import { totalAdeudadoPorUsuario, totalImpagoDelProyecto, totalPorCobrarPorUsuario } from '../../../Servicios/DeudasFunciones';
 
-export default function InfoProyecto({ proyectoID, calcularAbonado }) {
-    const [proyecto, setProyecto] = useState(null);
-    const [gastos, setGastos] = useState([]);
-    const [totalGastos, setTotalGastos] = useState(0);
-    const [abonadoPorUsuario, setAbonadoPorUsuario] = useState(0);
+export default function InfoProyecto({proyecto}) {
     const [nuevaDescripcion, setDescripcion] = useState('');
     const [estadoFormulario, setEstado] = useState(false);
+    console.log("InformacionProyecto/InfoProyecto> proyecto: ", + proyecto);
 
     const usuarioID = sessionStorage.getItem('usuarioID');
 
-    useEffect(() => {
-        const fetchData = async () => {
-            try {
-                const proyectoData = await getProyectobyID(proyectoID);
-                setProyecto(proyectoData);
-                setDescripcion(proyectoData.descripcion); // Inicializa la descripción del formulario
-            } catch (error) {
-                console.error('Error al obtener el proyecto:', error);
-            }
-        };
-
-        const fetchGastos = async () => {
-            try {
-                const gastosData = await gastosUsuarioPorProyecto(proyectoID, usuarioID);
-                setGastos(gastosData);
-
-                let total = 0;
-                for (const gasto of gastosData) {
-                    const montoGasto = parseFloat(gasto.monto);
-                    total += montoGasto;
-                }
-                setTotalGastos(total);
-            } catch (error) {
-                console.error('Error al obtener los gastos:', error);
-            }
-        };
-
-        const fetchAbonado = async () => {
-            try {
-                const abonado = await calcularAbonado(usuarioID);
-                setAbonadoPorUsuario(abonado);
-            } catch (error) {
-                console.error('Error al calcular el abonado:', error);
-            }
-        };
-
-        fetchData();
-        fetchGastos();
-        fetchAbonado();
-    }, [proyectoID, usuarioID, calcularAbonado]);
 
     const abrirFormulario = () => {
         setEstado(true);
@@ -118,13 +75,14 @@ export default function InfoProyecto({ proyectoID, calcularAbonado }) {
                         gutterBottom
                         sx={{ marginTop: '10px', color: 'red' }}
                     >
-                        {totalGastos.toFixed(2)}
+                        totalDeGastos
                     </Typography>
                 </div>
             </div>
             <Divider />
+
             <Typography variant="h5" sx={{ margin: '15px' }}>
-                Balance Personal
+                Resumen: 
             </Typography>
             <Box sx={{ display: 'flex', marginBottom: '15px' }}>
                 <Box
@@ -136,13 +94,77 @@ export default function InfoProyecto({ proyectoID, calcularAbonado }) {
                         alignItems: 'center',
                     }}
                 >
-                    <Typography variant="h6">Abonado</Typography>
+                    <Typography variant="h6">Gastos Totales</Typography>
                     <Typography variant="body1" sx={{ color: 'green' }}>
-                        {abonadoPorUsuario.toFixed(2)}
+                        {gastosTotalesDelProyecto(proyecto)}
+                    </Typography>
+                </Box>
+                <Box
+                    sx={{
+                        flex: 1,
+                        display: 'flex',
+                        flexDirection: 'column',
+                        justifyContent: 'center',
+                        alignItems: 'center',
+                    }}
+                >
+                    <Typography variant="h6">Deudas Impagas Totales</Typography>
+                    <Typography variant="body1" sx={{ color: 'red' }}>
+                        {totalImpagoDelProyecto(proyecto)}
                     </Typography>
                 </Box>
             </Box>
+
             <Divider />
+            
+            <Typography variant="h5" sx={{ margin: '15px' }}>
+                Balance Personal:
+            </Typography>
+            <Box sx={{ display: 'flex', marginBottom: '15px' }}>
+                <Box
+                    sx={{
+                        flex: 1,
+                        display: 'flex',
+                        flexDirection: 'column',
+                        justifyContent: 'center',
+                        alignItems: 'center',
+                    }}
+                >
+                    <Typography variant="h6">Gastos Reportados</Typography>
+                    <Typography variant="body1" sx={{ color: 'green' }}>
+                        {SumaDeGastosPorUsuario(proyecto, usuarioID)}
+                    </Typography>
+                </Box>
+                <Box
+                    sx={{
+                        flex: 1,
+                        display: 'flex',
+                        flexDirection: 'column',
+                        justifyContent: 'center',
+                        alignItems: 'center',
+                    }}
+                >
+                    <Typography variant="h6">Deudas Personal</Typography>
+                    <Typography variant="body1" sx={{ color: 'red' }}>
+                        {totalAdeudadoPorUsuario(proyecto, usuarioID)}
+                    </Typography>
+                </Box>
+                <Box
+                    sx={{
+                        flex: 1,
+                        display: 'flex',
+                        flexDirection: 'column',
+                        justifyContent: 'center',
+                        alignItems: 'center',
+                    }}
+                >
+                    <Typography variant="h6">Ingresos pendientes</Typography>
+                    <Typography variant="body1" sx={{ color: 'red' }}>
+                        {totalPorCobrarPorUsuario(proyecto, usuarioID)}
+                    </Typography>
+                </Box>
+            </Box>
+            
 
             <Dialog open={estadoFormulario} onClose={botonCancelar}>
                 <DialogTitle>Editar Descripción del Proyecto</DialogTitle>

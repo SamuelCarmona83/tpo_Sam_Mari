@@ -93,6 +93,7 @@ function ListaDeProyectos({actualizarApp, listaProyectos, cambiarProyectoElegido
                             key={proyecto.ID} 
                             proyecto={proyecto}
                             eliminarProyecto={eliminarProyecto}
+                            cambiarProyectoElegido={cambiarProyectoElegido}
                         />
                     )
                 })}

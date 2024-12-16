@@ -3,11 +3,12 @@ import "../Componentes/Usuario/style.css";
 import ListaDeProyectos from '../Componentes/Usuario/ListaDeProyectos/ListaDeProyectos';
 import {getProyectos} from '../Api/apiProyectos';
 import { getProyectobyID } from '../Servicios/ProyectosFunciones';
+import Proyecto from '../Componentes/Usuario/Proyecto/Proyecto';
 
 function Usuario (){
     const [listaProyectos, setListaProyectos] = useState([]);
+    const [proyectoElegido, setProyecto] = useState(null);
     let cantidadDeProyectos = listaProyectos.length;
-    let proyectoElegido = null;
 
     const cargarLosProyectos = async () => {
         try {
@@ -29,8 +30,8 @@ function Usuario (){
         await cargarLosProyectos();
     }
 
-    const cambiarProyectoElegido = (proyectoID) => {
-        proyectoElegido = getProyectobyID(listaProyectos, proyectoID);
+    const cambiarProyectoElegido = (proyectoNuevo) => {
+        setProyecto(proyectoNuevo);
     }
 
     return (
@@ -40,13 +41,11 @@ function Usuario (){
                 listaProyectos = {listaProyectos}
                 cambiarProyectoElegido = {cambiarProyectoElegido}
             />
-            
+            <Proyecto 
+                proyectoElegido = {proyectoElegido}    
+            />
         </article>
     );
-    /** <Proyecto 
-            proyectoElegido = {proyectoElegido}    
-        />
-    */
 }
 
 export default Usuario;

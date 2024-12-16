@@ -3,7 +3,7 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import { Button, Typography } from '@mui/material';
 import DeleteIcon from '@mui/icons-material/Delete';
 
-function ItemNavProj ({proyecto, eliminarProyecto}){
+function ItemNavProj ({proyecto, eliminarProyecto, cambiarProyectoElegido}){
 
     const botonBorrar = () => {
         const confirmDelete = window.confirm(`¿Quieres borrar el proyecto "${proyecto.nombre}"?`);
@@ -12,9 +12,8 @@ function ItemNavProj ({proyecto, eliminarProyecto}){
         }
     }
 
-    const botonPresionado = () => {//boton por implementar, este tiene que devolver el proyecto
-        const proyectoID = proyecto.ID;
-        //actualizarApp(proyecto.ID);
+    const botonPresionado = () => {
+        cambiarProyectoElegido(proyecto);
     }
 
     return (

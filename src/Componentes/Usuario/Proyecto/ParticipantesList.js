@@ -2,7 +2,7 @@
 import React from 'react';
 import Participantes from './Participantes';
 import { getProyectobyID, getUsuarios } from '../../../Backend/BD';
-import imagen4 from '../../imagenes/agregarUsuario.png';
+import imagen4 from '../../../imagenes/agregarUsuario.png';
 
 
 
