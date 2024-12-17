@@ -38,3 +38,29 @@ export function totalImpagoDelProyecto(proyecto) {
     }
     return total;
 }
+
+export function totalDeudasPagadas(proyecto) {
+    if(proyecto.deudas.length === 0 ){
+        return 0;
+    }
+    let total = 0;
+    for(let deuda of proyecto.deudas){
+        if(deuda.pagada === true){
+            total += parseFloat(deuda.monto)
+        }
+    }
+    return total;
+}
+
+export function listaDeudasPagadas(deudas){
+    if(deudas.length === 0){
+        return [];
+    }
+    let deudasPagas = [];
+    for(let deuda of deudas){
+        if (deuda.pagada === true){
+            deudasPagas.push(deuda);
+        }
+    }
+    return deudasPagas;
+}

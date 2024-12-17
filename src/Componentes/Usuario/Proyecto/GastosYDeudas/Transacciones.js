@@ -1,12 +1,11 @@
 import { Typography, Divider, ToggleButtonGroup, ToggleButton, Button} from '@mui/material';
 import React from 'react';
 import ListaDeTransacciones from './ListaDeTransacciones';
-import { agregarGasto, agregarPago, borrarGasto, borrarPago, getProyectobyID } from '../../../../Backend/BD';
 import FormularioTransaccion from './FormularioTransaccion';
+import { gastosTotalesDelProyecto } from '../../../../Servicios/GastosFunciones';
+import { listaDeudasPagadas, totalDeudasPagadas, totalImpagoDelProyecto } from '../../../../Servicios/DeudasFunciones';
 
-export default function Transacciones({proyectoID}){
-    let proyecto = getProyectobyID(proyectoID);
-
+export default function Transacciones({proyecto}){
     //      Toda la logica para manejo del tipo de transaccion      //
     const [tipoTransaccion, setTipoTransaccion] = React.useState('Gastos');
     const cambiarTipo = (event, newTipo) => {
@@ -18,11 +17,14 @@ export default function Transacciones({proyectoID}){
 
     let listaAMostrar = [];
     let tipo = '';
+    let total = 0;
     if (tipoTransaccion === 'Gastos') {
-        listaAMostrar = proyecto.gastos || [];  
+        listaAMostrar = proyecto.gastos;
+        total = gastosTotalesDelProyecto(proyecto);
         tipo = 'gasto';
     } else {
-        listaAMostrar = proyecto.pagos || [];
+        listaAMostrar = listaDeudasPagadas(proyecto.deudas);
+        total = totalDeudasPagadas(proyecto);
         tipo = 'pago';
     }
 
@@ -36,34 +38,26 @@ export default function Transacciones({proyectoID}){
     }
     const crearTransaccion = (data) => {
         if(tipoTransaccion === 'Gastos'){
-            agregarGasto(data, proyectoID);
+            //agregarGasto(data, proyectoID);
         }else {
-            agregarPago(data, proyectoID);
+            //agregarPago(data, proyectoID);
         }
-        setCantidad(cantidad + 1);
+        //setCantidad(cantidad + 1);
     }
 
     const borrarTransaccion = (transaccionID) => {
         console.log(listaAMostrar);
         console.log(transaccionID);
         if(tipoTransaccion === 'Gastos'){
-            borrarGasto(transaccionID, proyectoID);
+            //borrarGasto(transaccionID, proyectoID);
         }else {
-            borrarPago(transaccionID, proyectoID);
+            //borrarPago(transaccionID, proyectoID);
         }
         setCantidad(cantidad - 1);
         console.log(listaAMostrar);
     }
 
     const [cantidad, setCantidad] = React.useState(listaAMostrar.length);
-
-    const sumarMontos = () => {
-        let total = 0;
-        for (let i = 0;  i < listaAMostrar.length; i++) {
-            total += listaAMostrar[i].monto;
-        }
-        return String(total);
-    }
 
     return (
         <article>
@@ -73,12 +67,12 @@ export default function Transacciones({proyectoID}){
                         color: tipoTransaccion ==='Gastos'? 'red' : 'green'
                     }}
                 >
-                    {tipoTransaccion}  ${sumarMontos()}
+                    {tipoTransaccion} ${total}
                 </Typography>
 
                 <ToggleButtonGroup
                     color="primary"
-                    value={tipoTransaccion}
+                    value={tipoTransaccion} 
                     exclusive
                     onChange={cambiarTipo}
                     aria-label="Plataforma"
@@ -93,7 +87,7 @@ export default function Transacciones({proyectoID}){
                 </Button>
             </nav>
             <Divider />
-            <ListaDeTransacciones listaAMostrar={listaAMostrar} borrar={borrarTransaccion} />
+            <ListaDeTransacciones proyecto={proyecto} listaAMostrar={listaAMostrar} borrar={borrarTransaccion} tipoTransaccion={tipoTransaccion}/>
             <FormularioTransaccion visibilidad={visibilidad} cerrar={cerrarFormulario} crearT={crearTransaccion}/>
         </article>
     );
