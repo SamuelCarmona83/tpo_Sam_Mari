@@ -28,6 +28,16 @@ function Usuario (){
         await cargarLosProyectos();
     }
 
+    const actualizarAppParaProyecto = async (proyectoID) => {
+        await cargarLosProyectos();
+        for(let proyecto of listaProyectos){
+            if(proyecto.ID === proyectoID){
+                setProyecto(proyecto);
+                return proyecto;
+            }
+        }
+    }
+
     const cambiarProyectoElegido = (proyectoNuevo) => {
         setProyecto(proyectoNuevo);
     }
@@ -41,6 +51,7 @@ function Usuario (){
             />
             <Proyecto 
                 proyectoElegido = {proyectoElegido}    
+                actualizarApp={actualizarAppParaProyecto}
             />
         </article>
     );

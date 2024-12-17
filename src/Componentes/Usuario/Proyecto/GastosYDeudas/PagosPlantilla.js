@@ -2,12 +2,12 @@ import { Typography , Button} from '@mui/material';
 import React from 'react';
 import DeleteIcon from '@mui/icons-material/Delete';
 import { nombreDelUsuarioPorID } from '../../../../Servicios/ProyectosFunciones';
-export default function GastoPlantilla ({Pago, borrar, proyecto}) {
+export default function GastoPlantilla ({pago, borrar, proyecto}) {
 
     const botonBorrar = () => {
-        const confirmDelete = window.confirm(`¿Quieres borrar "${Pago.descripcion}"?`);
+        const confirmDelete = window.confirm(`¿Quieres borrar "${pago.descripcion}"?`);
         if (confirmDelete) {
-            borrar(Pago.ID);
+            borrar(pago.ID);
         }
     }
     return (
@@ -21,28 +21,28 @@ export default function GastoPlantilla ({Pago, borrar, proyecto}) {
                 }}
             >
                 <figure>
-                    <img src={Pago.imagen} alt='ticket de compra'/>
+                    <img src={pago.imagen} alt='ticket de compra'/>
                 </figure>
             </Button>
             <Typography variant='subtitle1' 
                 sx={{flex: 1 }}
             >
-                Deudor: {nombreDelUsuarioPorID(proyecto, Pago.deudorId)}
+                Deudor: {nombreDelUsuarioPorID(proyecto, pago.deudorId)}
             </Typography>
             <Typography variant='subtitle1' 
                 sx={{flex: 1 }}
             >
-                Acreedor: {nombreDelUsuarioPorID(proyecto, Pago.cobradorId)}
+                Acreedor: {nombreDelUsuarioPorID(proyecto, pago.cobradorId)}
             </Typography>
             <Typography variant='subtitle2' 
                 sx={{flex: 1 }}
             >
-                {Pago.createdAt.slice(0, 10)}
+                {pago.createdAt.slice(0, 10)}
             </Typography>
             <Typography variant='h5' 
                 sx={{ flex: 1,}}
             >
-                {Pago.monto}
+                {pago.monto}
             </Typography>
             <Button 
                 variant='text'

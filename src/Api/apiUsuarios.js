@@ -46,21 +46,46 @@ export async function registrarUsuario(email, clave, nombre){
 }
 
 export async function recuperarContraseña(email) {
-    const linkApi = 'http://localhost:8080/api/usuarios/recuperarContra' // URL del backend
-    try {
-      const respuesta = await fetch(linkApi, {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({ email }), // Enviamos el correo en el cuerpo de la solicitud
-      });
-  
-      return respuesta;
-    } catch (error) {
-      console.error('Error al recuperar la contraseña:', error);
-      return null;
-    }
-  }
+  const linkApi = 'http://localhost:8080/api/usuarios/recuperarContra' // URL del backend
+  try {
+    const respuesta = await fetch(linkApi, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({ email }), // Enviamos el correo en el cuerpo de la solicitud
+    });
 
+    return respuesta;
+  } catch (error) {
+    console.error('Error al recuperar la contraseña:', error);
+    return null;
+  }
+}
+
+export async function buscarUsuario(nombreUsuarioBuscado) {
+  const myHeaders = new Headers();
+  myHeaders.append("jwt", sessionStorage.getItem("token"));
+  myHeaders.append("Content-Type", "application/json");
+
+  const raw = JSON.stringify({
+    "nombre": nombreUsuarioBuscado
+  });
+
+  const requestOptions = {
+    method: "POST",
+    headers: myHeaders,
+    body: raw,
+    redirect: "follow"
+  };
+
+  const respuestaApi = await fetch("http://localhost:8080/api/usuarios/buscarUsuario/", requestOptions);
+  if(respuestaApi.status === 200){
+    const dataJson = await respuestaApi.json();
+    return dataJson;
+  }else{
+    alert(respuestaApi.json.mensaje);
+    return [];
+  }
   
+}

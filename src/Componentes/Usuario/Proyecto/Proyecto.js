@@ -1,15 +1,16 @@
 import React, { useState, useEffect } from 'react';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import {Button, DialogActions, DialogContent, TextField, DialogTitle, Dialog, ToggleButtonGroup, ToggleButton} from '@mui/material';
-import ParticipantesList from './ParticipantesList';
+import ParticipantesList from './Participantes/ParticipantesList';
 import InfoProyecto from './InformacionProyecto';
 import EditIcon from '@mui/icons-material/Edit';
 import Transacciones from './GastosYDeudas/Transacciones';
 import GroupIcon from '@mui/icons-material/Group';
 import FeedIcon from '@mui/icons-material/Feed';
 import ReceiptLongIcon from '@mui/icons-material/ReceiptLong';
+import { getProyectobyID } from '../../../Api/apiProyectos';
 
-function Proyecto({ proyectoElegido }) {
+function Proyecto({ proyectoElegido , actualizarApp}) {
     let proyecto = proyectoElegido;
     const [usuarios, setUsuarios] = useState(proyecto !== null ? proyecto.usuarios : []);
     const [cantidad, setCantidad] = useState(0);
@@ -94,31 +95,6 @@ function Proyecto({ proyectoElegido }) {
                     <ToggleButton value="participantes" ><GroupIcon /></ToggleButton>
                     <ToggleButton value="transacciones"><ReceiptLongIcon /></ToggleButton>
                 </ToggleButtonGroup>
-
-                <Dialog open={estadoFormulario} onClose={cerrarFormularioDelNombre}>
-                    <DialogTitle>Agregar Participante</DialogTitle>
-                    <DialogContent>
-                        <TextField
-                            autoFocus
-                            margin="dense"
-                            id="Nombre del Proyecto"
-                            label="Nombre del Proyecto"
-                            type="text"
-                            fullWidth
-                            variant="outlined"
-                            value={nombreProyecto}
-                            onChange={(e) => setNombre(e.target.value)}
-                        />
-                    </DialogContent>
-                    <DialogActions>
-                        <Button onClick={cerrarFormularioDelNombre} color="primary">
-                            Cancelar
-                        </Button>
-                        <Button onClick={botonEditar} color="primary">
-                            Editar
-                        </Button>
-                    </DialogActions>
-                </Dialog>
             </nav>
         );
     } else {
@@ -136,7 +112,7 @@ function Proyecto({ proyectoElegido }) {
                 main = <InfoProyecto proyecto={proyecto}/>;
                 break;
             case 'participantes':
-                main = <ParticipantesList proyecto={proyecto} abrir={abrirFormulario}/>;
+                main = <ParticipantesList proyecto={proyecto} actualizarApp={actualizarApp}/>;
                 break;
             case 'transacciones':
                 main = <Transacciones proyecto={proyecto} />;

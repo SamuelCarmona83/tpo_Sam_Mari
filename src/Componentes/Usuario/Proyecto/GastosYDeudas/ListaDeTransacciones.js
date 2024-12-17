@@ -9,8 +9,8 @@ export default function ListaDeTransacciones ({listaAMostrar, borrar, tipoTransa
             <GastoPlantilla proyecto={proyecto} key={gasto.ID} gasto={gasto} borrar={borrar} />
         ))
     }else {
-        vista = listaAMostrar.map((gasto) => (
-            <PagosPlantilla proyecto={proyecto} key={gasto.ID} gasto={gasto} borrar={borrar} />
+        vista = listaAMostrar.map((pago) => (
+            <PagosPlantilla proyecto={proyecto} key={pago.ID} pago={pago} borrar={borrar} />
         ))
     }
 

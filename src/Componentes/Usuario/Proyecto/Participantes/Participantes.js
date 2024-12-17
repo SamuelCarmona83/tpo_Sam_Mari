@@ -3,8 +3,8 @@ import Accordion from '@mui/material/Accordion';
 import {AccordionSummary, AccordionDetails, Typography, Button} from '@mui/material';
 import ArrowDownwardIcon from '@mui/icons-material/ArrowDownward';
 import DeleteIcon from '@mui/icons-material/Delete';
-import { SumaDeGastosPorUsuario } from '../../../Servicios/GastosFunciones';
-import { totalAdeudadoPorUsuario, totalPorCobrarPorUsuario } from '../../../Servicios/DeudasFunciones';
+import { SumaDeGastosPorUsuario } from '../../../../Servicios/GastosFunciones';
+import { totalAdeudadoPorUsuario, totalPorCobrarPorUsuario } from '../../../../Servicios/DeudasFunciones';
 
 export default function Participantes({proyecto, usuario}) {
   let ingresosPendientes = totalPorCobrarPorUsuario(proyecto, usuario.ID);
