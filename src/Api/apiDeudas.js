@@ -60,14 +60,21 @@ export async function deudasImpagasUsuarioPorProyecto(proyectoID, usuarioID) {
     }
 }
 
-export async function pagarDeudaPorID (deudaID){
+export async function pagarDeudaPorID (deudaID, imagenUrl){
     const myHeaders = new Headers();
     myHeaders.append("jwt", sessionStorage.getItem("token"));
 
+    myHeaders.append("Content-Type", "application/json");
+
+    const raw = JSON.stringify({
+        "imagenUrl": imagenUrl
+    });
+
     const requestOptions = {
-    method: "PUT",
-    headers: myHeaders,
-    redirect: "follow"
+        method: "POST",
+        headers: myHeaders,
+        body: raw,
+        redirect: "follow"
     };
 
     let respuestaApi = await fetch("http://localhost:8080/api/deudas/pagarDeuda/" + deudaID, requestOptions);

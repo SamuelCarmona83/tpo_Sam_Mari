@@ -4,6 +4,7 @@ import PhotoCamera from '@mui/icons-material/PhotoCamera';
 import { listarParticipantesParaElFormularioGasto } from '../../../../Servicios/GastosFunciones';
 import SaveIcon from '@mui/icons-material/Save';
 import { crearGasto } from '../../../../Api/apiGastos';
+import subirImagenACloudinary from '../../../../Servicios/SubirImagen';
 
 export default function FormularioParaGasto ({proyecto, visibilidad, cerrar, actualizarApp}) {
 
@@ -99,31 +100,6 @@ export default function FormularioParaGasto ({proyecto, visibilidad, cerrar, act
         }
     }
 
-    const subirImagenACloudinary = async (imagen) => {
-        const cloudId = 'dkk2fe3os';
-
-        if (imagen) {
-            const formData = new FormData();
-                formData.append('file', imagen);
-                formData.append('upload_preset', 'rro35z0v');
-
-            try {
-                const response = await fetch(
-                    `https://api.cloudinary.com/v1_1/${cloudId}/image/upload`,
-                    {
-                        method: 'POST',
-                        body: formData,
-                    }
-                );
-
-                const data = await response.json();
-                return data.secure_url;
-            } catch (error) {
-                console.error('Error uploading file:', error);
-            }
-        }
-    };
-
     const cargarImagen = async (event) => {
         const file = event.target.files[0];
         if (file) {
@@ -143,7 +119,8 @@ export default function FormularioParaGasto ({proyecto, visibilidad, cerrar, act
         }
         let participantes = listaParticipantes.filter(participante => participante.ID !== usuarioID);
         try{
-            await crearGasto(monto, imagen ? imagen : '' ,descripcion,proyecto.ID,participantes);
+            let imagenUrl = await subirImagenACloudinary(imagen);
+            await crearGasto(monto, imagenUrl ? imagenUrl : '' ,descripcion,proyecto.ID,participantes);
         }catch (error) {
             console.log("###  ERROR en el try de botonGuardar en formularioParaGasto.js  ###");
         }

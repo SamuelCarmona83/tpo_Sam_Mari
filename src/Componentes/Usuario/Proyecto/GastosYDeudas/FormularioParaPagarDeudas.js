@@ -3,6 +3,7 @@ import { Dialog, DialogActions, DialogContent, DialogTitle, Button, TextField, M
 import PhotoCamera from '@mui/icons-material/PhotoCamera';
 import { deudasImpagasUsuarioPorProyecto, pagarDeudaPorID } from '../../../../Api/apiDeudas';
 import { nombreDelUsuarioPorID } from '../../../../Servicios/ProyectosFunciones';
+import subirImagenACloudinary from '../../../../Servicios/SubirImagen';
 
 export default function FormularioParaPagarDeudas ({proyecto, visibilidad, cerrar, actualizarApp}) {
     const [imagen, setImagen] = useState(null);
@@ -25,19 +26,14 @@ export default function FormularioParaPagarDeudas ({proyecto, visibilidad, cerra
     const cargarImagen = (event) => {
         const file = event.target.files[0];
         if (file) {
-            const reader = new FileReader();
-            reader.onloadend = () => {
-                setImagen(reader.result);
-            };
-            reader.readAsDataURL(file); // Lee la imagen como Data URL
-            console.log("CargarImagen/FormularoPagarDeudas.js/ imgane: ");
-            console.log(imagen);
+            setImagen(file);
         }
     };
 
     const botonPagar = async () => {
         try {
-            await pagarDeudaPorID(deudaElegida.ID);
+            const imagenUrl = subirImagenACloudinary(imagen);
+            await pagarDeudaPorID(deudaElegida.ID, imagenUrl);
         }catch(error){
             console.log("### ERROR en try/botonPagar/FormularioParaPagarDeudas.js ###   ");
         }
@@ -64,7 +60,14 @@ export default function FormularioParaPagarDeudas ({proyecto, visibilidad, cerra
                     </MenuItem>
                 ))}
             </TextField>
-                
+                {
+                    imagen &&
+                    <img
+                        src={URL.createObjectURL(imagen)}
+                        alt="imagen"
+                        style={{ width: '100%', height: 'auto' }}
+                    />
+                }
                 <Button variant="contained" component="label" fullWidth startIcon={<PhotoCamera />}
                     sx={{ marginTop: 2 }}
                 >
