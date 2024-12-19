@@ -1,7 +1,6 @@
 import { Typography, Divider, ToggleButtonGroup, ToggleButton, Button} from '@mui/material';
 import React from 'react';
 import ListaDeTransacciones from './ListaDeTransacciones';
-import FormularioTransaccion from './FormularioTransaccion';
 import { gastosTotalesDelProyecto } from '../../../../Servicios/GastosFunciones';
 import { listaDeudasPagadas, totalDeudasPagadas, totalImpagoDelProyecto } from '../../../../Servicios/DeudasFunciones';
 import FormularioParaGasto from './FormularioParaGasto';
