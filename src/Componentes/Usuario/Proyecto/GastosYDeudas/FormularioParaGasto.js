@@ -6,6 +6,7 @@ import SaveIcon from '@mui/icons-material/Save';
 import { crearGasto } from '../../../../Api/apiGastos';
 
 export default function FormularioParaGasto ({proyecto, visibilidad, cerrar, actualizarApp}) {
+
     const [descripcion, setDescripcion] = useState('');
     const [monto, setMonto] = useState('');
     const [fecha, setFecha] = useState('');
@@ -98,14 +99,35 @@ export default function FormularioParaGasto ({proyecto, visibilidad, cerrar, act
         }
     }
 
-    const cargarImagen = (event) => {
+    const subirImagenACloudinary = async (imagen) => {
+        const cloudId = 'dkk2fe3os';
+
+        if (imagen) {
+            const formData = new FormData();
+                formData.append('file', imagen);
+                formData.append('upload_preset', 'rro35z0v');
+
+            try {
+                const response = await fetch(
+                    `https://api.cloudinary.com/v1_1/${cloudId}/image/upload`,
+                    {
+                        method: 'POST',
+                        body: formData,
+                    }
+                );
+
+                const data = await response.json();
+                return data.secure_url;
+            } catch (error) {
+                console.error('Error uploading file:', error);
+            }
+        }
+    };
+
+    const cargarImagen = async (event) => {
         const file = event.target.files[0];
         if (file) {
-            const reader = new FileReader();
-            reader.onloadend = () => {
-                setImagen(reader.result);
-            };
-            reader.readAsDataURL(file); // Lee la imagen como Data URL
+            setImagen(file);
         }
     };
 
@@ -210,6 +232,14 @@ export default function FormularioParaGasto ({proyecto, visibilidad, cerrar, act
                     </TextField>
                 }
                 {visibilidadDeParticipantes && <ListaDeParticipantes />}
+                {
+                    imagen &&
+                    <img
+                        src={URL.createObjectURL(imagen)}
+                        alt="imagen"
+                        style={{ width: '100%', height: 'auto' }}
+                    />
+                }
                 <Button
                     variant="contained"
                     component="label"
