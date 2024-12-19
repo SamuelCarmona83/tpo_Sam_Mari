@@ -4,6 +4,7 @@ import ListaDeTransacciones from './ListaDeTransacciones';
 import { gastosTotalesDelProyecto } from '../../../../Servicios/GastosFunciones';
 import { listaDeudasPagadas, totalDeudasPagadas, totalImpagoDelProyecto } from '../../../../Servicios/DeudasFunciones';
 import FormularioParaGasto from './FormularioParaGasto';
+import FormularioParaPagarDeudas from './FormularioParaPagarDeudas';
 
 export default function Transacciones({proyecto, actualizarApp}){
     //      Toda la logica para manejo del tipo de transaccion      //
@@ -81,7 +82,7 @@ export default function Transacciones({proyecto, actualizarApp}){
             <Divider />
             <ListaDeTransacciones proyecto={proyecto} listaAMostrar={listaAMostrar} borrar={borrarTransaccion} tipoTransaccion={tipoTransaccion}/>
             {tipoTransaccion === 'Gastos' ?  <FormularioParaGasto visibilidad={visibilidad} cerrar={cerrarFormulario} proyecto={proyecto} actualizarApp={actualizarApp} usuarios={proyecto.usuarios}/> : 
-                                            <FormularioParaGasto visibilidad={visibilidad} cerrar={cerrarFormulario} proyecto={proyecto}/>
+                                            <FormularioParaPagarDeudas visibilidad={visibilidad} cerrar={cerrarFormulario} proyecto={proyecto} actualizarApp={actualizarApp} />
             }
         </article>
     );

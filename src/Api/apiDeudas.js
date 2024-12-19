@@ -52,6 +52,8 @@ export async function deudasImpagasUsuarioPorProyecto(proyectoID, usuarioID) {
                 deudasImpagas.push(deuda);
             }
         }
+        console.log("deudasImpagas apideudas.js/55");
+        console.log(deudasImpagas);
         return deudasImpagas;
     }else{
         alert("apiDeudas error di "+dataJson.mensaje);
