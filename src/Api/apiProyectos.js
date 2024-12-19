@@ -1,3 +1,5 @@
+import { Token } from "@mui/icons-material";
+
 export async function getProyectos() {
     const myHeaders = new Headers();
     myHeaders.append("jwt", sessionStorage.getItem("token"));
@@ -66,27 +68,47 @@ export async function getProyectobyID(proyectoID){
 }
 
 export async function agregarParticipante(usuarioID, proyectoID) {
-    const myHeaders = new Headers();
-    myHeaders.append("jwt", sessionStorage.getItem("token"));
-    myHeaders.append("Content-Type", "application/json");
+  const myHeaders = new Headers();
+  myHeaders.append("jwt", sessionStorage.getItem("token"));
+  myHeaders.append("Content-Type", "application/json");
   
-    const raw = JSON.stringify({
-      "usuarioId": usuarioID
-    });
+  const raw = JSON.stringify({
+    "usuarioId": usuarioID
+  });
   
-    const requestOptions = {
-      method: "POST",
-      headers: myHeaders,
-      body: raw,
-      redirect: "follow"
-    };
+  const requestOptions = {
+    method: "POST",
+    headers: myHeaders,
+    body: raw,
+    redirect: "follow"
+  };
   
-    const respuestaApi = await fetch("http://localhost:8080/api/proyectos/agregarParticipante/"+proyectoID, requestOptions);
-    const dataJson = await respuestaApi.json();
-    console.log(dataJson);
-    if(respuestaApi.status === 200){
-        return dataJson;
-      }else{
-        alert(respuestaApi.json.mensaje);
-      }
+  const respuestaApi = await fetch("http://localhost:8080/api/proyectos/agregarParticipante/"+proyectoID, requestOptions);
+  const dataJson = await respuestaApi.json();
+  console.log(dataJson);
+  if(respuestaApi.status === 200){
+    return dataJson;
+  }else{
+    alert(respuestaApi.json.mensaje);
+  }
+}
+
+export async function modificarNombreDelProyecto(proyectoID, nuevoNombre){
+  const myHeaders = new Headers();
+  myHeaders.append("jwt", sessionStorage.getItem("token"));
+  myHeaders.append("Content-Type", "application/json");
+
+  const raw = JSON.stringify({
+    "nombre": nuevoNombre
+  });
+
+  const requestOptions = {
+    method: "POST",
+    headers: myHeaders,
+    body: raw,
+    redirect: "follow"
+  };
+
+  const respuestaApi = await fetch("http://localhost:8080/api/proyectos/editarProyecto/" + proyectoID, requestOptions)
+  alert("mensaje: " + respuestaApi.json.mensaje);
 }

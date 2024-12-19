@@ -8,15 +8,13 @@ import Transacciones from './GastosYDeudas/Transacciones';
 import GroupIcon from '@mui/icons-material/Group';
 import FeedIcon from '@mui/icons-material/Feed';
 import ReceiptLongIcon from '@mui/icons-material/ReceiptLong';
-import { getProyectobyID } from '../../../Api/apiProyectos';
+import { modificarNombreDelProyecto } from '../../../Api/apiProyectos';
 
 function Proyecto({ proyectoElegido , actualizarApp}) {
     let proyecto = proyectoElegido;
-    
     const [cantidad, setCantidad] = useState(0);
     const [alignment, setAlignment] = useState('datos');
-    const [estadoFormulario, setEstado] = useState(false);
-    const [nombreProyecto, setNombre] = useState('');
+    const [vistaFormNombre, setVistaFromNombre] = useState(false);
     let proyectoID = proyecto !== null ? proyecto.ID : null;
     
     const handleChange = (event, newAlignment) => {
@@ -26,14 +24,6 @@ function Proyecto({ proyectoElegido , actualizarApp}) {
     const eliminarParticipante = () => {
         setCantidad(cantidad - 1); 
     };
-
-    let ProySeleccionado = proyecto;
-    let nombreProyectoSeleccionado = ProySeleccionado ? ProySeleccionado.nombre : '';
-    
-    const botonEditar = () =>  {
-        nombreProyectoSeleccionado = nombreProyecto;
-        setEstado(false);
-    }
 
     let headerProyecto;
     if (proyectoID && proyecto) {
@@ -47,7 +37,7 @@ function Proyecto({ proyectoElegido , actualizarApp}) {
                             height: "25px",
                             color: 'grey',
                         }}
-                        onClick={() => setEstado(true)}
+                        onClick={() => setVistaFromNombre(true)}
                     > 
                         <EditIcon />
                     </Button>
@@ -91,12 +81,49 @@ function Proyecto({ proyectoElegido , actualizarApp}) {
         }
     }
 
+    const FormularioEditarNombre = () => {
+        const [nombre, setNombre] = useState(proyecto.nombre);
+        const manejarEnvio = async (e) => {
+            e.preventDefault();
+            try{
+                await modificarNombreDelProyecto(proyecto.ID, nombre);
+            }catch(error){
+                console.log("### ERROR en el try de manejarEnvio/FormularioEditarNombre/Proyecto.js");
+            }
+            cerrarFormulario();
+            actualizarApp(proyecto.ID);
+        }
+        const cerrarFormulario = () => {
+            setVistaFromNombre(false);
+        }
+        return(
+            <form onSubmit={manejarEnvio}>
+                <div id='formularioAgregarParticipantes'>
+                    <div>
+                        <label htmlFor="nombre Proyecto">Editar Nombre: </label>
+                        <input
+                            type="text"
+                            id="nombre"
+                            value={nombre}
+                            onChange={(e) => setNombre(e.target.value)}
+                            placeholder="Edite el nombre aqui"
+                            required
+                        />
+                        <button type="submit">Editar</button>
+                        <button onClick={cerrarFormulario}>Cerrar</button>
+                    </div>
+                </div>
+            </form>
+        );
+    }
+
     return (
         <article id="proyecto" className="proyecto box">
             {headerProyecto}
             <div id="mainProyecto">
                 {main}
             </div>
+            {vistaFormNombre && <FormularioEditarNombre />}
         </article>
     );
 }

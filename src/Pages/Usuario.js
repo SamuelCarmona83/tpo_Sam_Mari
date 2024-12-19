@@ -32,14 +32,11 @@ function Usuario (){
     const actualizarAppParaProyecto = async (proyectoID) => {
         const listaAuxiliar = await getProyectos();
         setListaProyectos(listaAuxiliar);
-        console.log("entre a actualizarAppParaProyecto");
 
         const proyectoEncontrado = listaAuxiliar.find((proyecto) => proyecto.ID === proyectoID);
         if (proyectoEncontrado) {
             setProyecto(proyectoEncontrado);
         }
-        console.log('proyecto');
-        console.log(proyectoEncontrado);
     }
 
     const cambiarProyectoElegido = (proyectoNuevo) => {
