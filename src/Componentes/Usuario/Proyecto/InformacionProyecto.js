@@ -13,14 +13,16 @@ import {
 import EditIcon from '@mui/icons-material/Edit';
 import { gastosTotalesDelProyecto, SumaDeGastosPorUsuario } from '../../../Servicios/GastosFunciones';
 import { totalAdeudadoPorUsuario, totalImpagoDelProyecto, totalPorCobrarPorUsuario } from '../../../Servicios/DeudasFunciones';
+import { modificarDescripcionDelProyecto } from '../../../Api/apiProyectos';
 
-export default function InfoProyecto({proyecto}) {
+export default function InfoProyecto({proyecto, actualizarApp}) {
     const [nuevaDescripcion, setDescripcion] = useState('');
     const [estadoFormulario, setEstado] = useState(false);
     const usuarioID = Number(sessionStorage.getItem('usuarioID'));
 
     const abrirFormulario = () => {
         setEstado(true);
+        setDescripcion(proyecto.descripcion);
     };
 
     const botonCancelar = () => {
@@ -30,11 +32,14 @@ export default function InfoProyecto({proyecto}) {
         setEstado(false);
     };
 
-    const botonEditar = () => {
-        if (proyecto) {
-            proyecto.descripcion = nuevaDescripcion; // Aquí puedes realizar una llamada para actualizar la descripción
+    const botonEditar = async () => {
+        try{
+            await modificarDescripcionDelProyecto(proyecto.ID, nuevaDescripcion);
+        }catch(error){
+            console.log("### ERROR en el try de manejarEnvio/FormularioEditarNombre/Proyecto.js");
         }
-        setEstado(false);
+        botonCancelar();
+        actualizarApp(proyecto.ID);
     };
 
     if (!proyecto) {
@@ -62,19 +67,7 @@ export default function InfoProyecto({proyecto}) {
                 >
                     <EditIcon />
                 </Button>
-                <div className="gastoTotal">
-                    <Typography variant="h6" gutterBottom sx={{ marginTop: '10px' }}>
-                        Gasto Total
-                    </Typography>
-                    <Divider />
-                    <Typography
-                        variant="subtitle1"
-                        gutterBottom
-                        sx={{ marginTop: '10px', color: 'red' }}
-                    >
-                        totalDeGastos
-                    </Typography>
-                </div>
+                
             </div>
             <Divider />
 
@@ -93,7 +86,7 @@ export default function InfoProyecto({proyecto}) {
                 >
                     <Typography variant="h6">Gastos Totales</Typography>
                     <Typography variant="body1" sx={{ color: 'green' }}>
-                        {gastosTotalesDelProyecto(proyecto)}
+                        ${gastosTotalesDelProyecto(proyecto)}
                     </Typography>
                 </Box>
                 <Box
@@ -107,7 +100,7 @@ export default function InfoProyecto({proyecto}) {
                 >
                     <Typography variant="h6">Deudas Impagas Totales</Typography>
                     <Typography variant="body1" sx={{ color: 'red' }}>
-                        {totalImpagoDelProyecto(proyecto)}
+                        ${totalImpagoDelProyecto(proyecto)}
                     </Typography>
                 </Box>
             </Box>
@@ -129,7 +122,7 @@ export default function InfoProyecto({proyecto}) {
                 >
                     <Typography variant="h6">Gastos Reportados</Typography>
                     <Typography variant="body1" sx={{ color: 'green' }}>
-                        {SumaDeGastosPorUsuario(proyecto, usuarioID)}
+                        ${SumaDeGastosPorUsuario(proyecto, usuarioID)}
                     </Typography>
                 </Box>
                 <Box
@@ -143,7 +136,7 @@ export default function InfoProyecto({proyecto}) {
                 >
                     <Typography variant="h6">Total Deudas</Typography>
                     <Typography variant="body1" sx={{ color: 'red' }}>
-                        {totalAdeudadoPorUsuario(proyecto, usuarioID)}
+                        ${totalAdeudadoPorUsuario(proyecto, usuarioID)}
                     </Typography>
                 </Box>
                 <Box
@@ -157,7 +150,7 @@ export default function InfoProyecto({proyecto}) {
                 >
                     <Typography variant="h6">Ingresos pendientes</Typography>
                     <Typography variant="body1" sx={{ color: 'red' }}>
-                        {totalPorCobrarPorUsuario(proyecto, usuarioID)}
+                        ${totalPorCobrarPorUsuario(proyecto, usuarioID)}
                     </Typography>
                 </Box>
             </Box>

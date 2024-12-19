@@ -77,7 +77,7 @@ function Proyecto({ proyectoElegido , actualizarApp}) {
                 main = <Transacciones proyecto={proyecto} actualizarApp={actualizarApp}/>;
                 break;
             default:
-                main = <InfoProyecto proyecto={proyecto}/>;
+                main = <InfoProyecto proyecto={proyecto} actualizarApp={actualizarApp}/>;
         }
     }
 

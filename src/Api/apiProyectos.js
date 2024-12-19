@@ -110,5 +110,29 @@ export async function modificarNombreDelProyecto(proyectoID, nuevoNombre){
   };
 
   const respuestaApi = await fetch("http://localhost:8080/api/proyectos/editarProyecto/" + proyectoID, requestOptions)
-  alert("mensaje: " + respuestaApi.json.mensaje);
+  if (respuestaApi.status === 200) {
+    alert("Se modifico correctamente");
+  }
+}
+
+export async function modificarDescripcionDelProyecto(proyectoID, nuevaDescripcion){
+  const myHeaders = new Headers();
+  myHeaders.append("jwt", sessionStorage.getItem("token"));
+  myHeaders.append("Content-Type", "application/json");
+
+  const raw = JSON.stringify({
+    "descripcion": nuevaDescripcion
+  });
+
+  const requestOptions = {
+    method: "POST",
+    headers: myHeaders,
+    body: raw,
+    redirect: "follow"
+  };
+
+  const respuestaApi = await fetch("http://localhost:8080/api/proyectos/editarProyecto/" + proyectoID, requestOptions)
+  if (respuestaApi.status === 200) {
+    alert("Se modifico correctamente");
+  }
 }
