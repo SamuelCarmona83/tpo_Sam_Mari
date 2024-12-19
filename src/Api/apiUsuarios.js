@@ -84,7 +84,6 @@ export async function buscarUsuario(nombreUsuarioBuscado) {
     const dataJson = await respuestaApi.json();
     return dataJson;
   }else{
-    alert(respuestaApi.json.mensaje);
     return [];
   }
   

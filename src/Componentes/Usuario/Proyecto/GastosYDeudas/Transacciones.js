@@ -4,8 +4,9 @@ import ListaDeTransacciones from './ListaDeTransacciones';
 import FormularioTransaccion from './FormularioTransaccion';
 import { gastosTotalesDelProyecto } from '../../../../Servicios/GastosFunciones';
 import { listaDeudasPagadas, totalDeudasPagadas, totalImpagoDelProyecto } from '../../../../Servicios/DeudasFunciones';
+import FormularioParaGasto from './FormularioParaGasto';
 
-export default function Transacciones({proyecto}){
+export default function Transacciones({proyecto, actualizarApp}){
     //      Toda la logica para manejo del tipo de transaccion      //
     const [tipoTransaccion, setTipoTransaccion] = React.useState('Gastos');
     const cambiarTipo = (event, newTipo) => {
@@ -35,14 +36,6 @@ export default function Transacciones({proyecto}){
     }
     const cerrarFormulario = () => {
         setVisibilidad(false);
-    }
-    const crearTransaccion = (data) => {
-        if(tipoTransaccion === 'Gastos'){
-            //agregarGasto(data, proyectoID);
-        }else {
-            //agregarPago(data, proyectoID);
-        }
-        //setCantidad(cantidad + 1);
     }
 
     const borrarTransaccion = (transaccionID) => {
@@ -88,7 +81,9 @@ export default function Transacciones({proyecto}){
             </nav>
             <Divider />
             <ListaDeTransacciones proyecto={proyecto} listaAMostrar={listaAMostrar} borrar={borrarTransaccion} tipoTransaccion={tipoTransaccion}/>
-            <FormularioTransaccion visibilidad={visibilidad} cerrar={cerrarFormulario} crearT={crearTransaccion}/>
+            {tipoTransaccion === 'Gastos' ?  <FormularioParaGasto visibilidad={visibilidad} cerrar={cerrarFormulario} proyecto={proyecto} actualizarApp={actualizarApp} usuarios={proyecto.usuarios}/> : 
+                                            <FormularioParaGasto visibilidad={visibilidad} cerrar={cerrarFormulario} proyecto={proyecto}/>
+            }
         </article>
     );
 }

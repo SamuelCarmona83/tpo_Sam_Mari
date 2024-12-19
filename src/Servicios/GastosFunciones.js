@@ -1,3 +1,5 @@
+import { json } from "react-router-dom";
+
 export function SumaDeGastosPorUsuario(proyecto, usuarioID) {
     if(proyecto.gastos.length === 0 ){
         return 0;
@@ -20,4 +22,28 @@ export function gastosTotalesDelProyecto(proyecto) {
         totalDeGastos += parseFloat(gasto.monto);
     }
     return totalDeGastos;
+}
+
+export function listarParticipantesParaElFormularioGasto(proyecto, usuarioID) {
+    let usuarios = [];
+    if(proyecto.usuarios){
+        usuarios = proyecto.usuarios;
+    }
+    if (usuarios.length < 2){
+        return [];
+    }
+
+    const porcentaje = 1 / usuarios.length;
+
+    let usuariosAdaptados = [];
+    usuarios.map(usuario => {
+        const usuarioAdaptado = JSON.stringify({
+            "ID" : usuario.ID,
+            "nombre" : usuario.nombre,
+            "porcentaje" : porcentaje
+        });
+        usuariosAdaptados.push(usuarioAdaptado);
+    });
+
+    return usuariosAdaptados;
 }

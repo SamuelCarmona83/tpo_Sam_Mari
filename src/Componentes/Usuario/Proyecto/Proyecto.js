@@ -12,10 +12,8 @@ import { getProyectobyID } from '../../../Api/apiProyectos';
 
 function Proyecto({ proyectoElegido , actualizarApp}) {
     let proyecto = proyectoElegido;
-    const [usuarios, setUsuarios] = useState(proyecto !== null ? proyecto.usuarios : []);
+    
     const [cantidad, setCantidad] = useState(0);
-    const [open, setOpen] = useState(false);
-    const [nombre, setNombreUsuario] = useState('');
     const [alignment, setAlignment] = useState('datos');
     const [estadoFormulario, setEstado] = useState(false);
     const [nombreProyecto, setNombre] = useState('');
@@ -25,31 +23,6 @@ function Proyecto({ proyectoElegido , actualizarApp}) {
         setAlignment(newAlignment);
     };
 
-    const abrirFormulario = () => {
-        setOpen(true);
-    };
-
-    const botonCerrar = () => {
-        setOpen(false);
-    };
-
-    const crearNuevoUsuario = () => { //todo por implementar api aca
-        const nuevoUsuario = {
-            ID: cantidad,
-            nombre: nombre,
-            imagen: '../../imagenes/mari.jpeg',
-            monto: '300'
-        };
-
-        //agregarUsuario(nuevoUsuario);
-        setUsuarios(prevUsuarios => [...prevUsuarios, nuevoUsuario]);
-        //agregarParticipante(proyectoID, usuarios.length - 1);
-
-        botonCerrar();
-        setNombreUsuario('');
-        setCantidad(cantidad + 1);
-    };
-
     const eliminarParticipante = () => {
         setCantidad(cantidad - 1); 
     };
@@ -57,10 +30,6 @@ function Proyecto({ proyectoElegido , actualizarApp}) {
     let ProySeleccionado = proyecto;
     let nombreProyectoSeleccionado = ProySeleccionado ? ProySeleccionado.nombre : '';
     
-    const cerrarFormularioDelNombre = () => {
-        setNombre(ProySeleccionado.nombre);
-        setEstado(false);
-    }
     const botonEditar = () =>  {
         nombreProyectoSeleccionado = nombreProyecto;
         setEstado(false);
@@ -109,13 +78,13 @@ function Proyecto({ proyectoElegido , actualizarApp}) {
     if (proyectoID && proyecto) {
         switch (alignment) {
             case 'datos':
-                main = <InfoProyecto proyecto={proyecto}/>;
+                main = <InfoProyecto proyecto={proyecto} actualizarApp={actualizarApp}/>;
                 break;
             case 'participantes':
                 main = <ParticipantesList proyecto={proyecto} actualizarApp={actualizarApp}/>;
                 break;
             case 'transacciones':
-                main = <Transacciones proyecto={proyecto} />;
+                main = <Transacciones proyecto={proyecto} actualizarApp={actualizarApp}/>;
                 break;
             default:
                 main = <InfoProyecto proyecto={proyecto}/>;
@@ -125,32 +94,9 @@ function Proyecto({ proyectoElegido , actualizarApp}) {
     return (
         <article id="proyecto" className="proyecto box">
             {headerProyecto}
-            <div id="mainProyecto">{main}</div>
-
-            <Dialog open={open} onClose={botonCerrar}>
-                <DialogTitle>Agregar Participante</DialogTitle>
-                <DialogContent>
-                    <TextField
-                        autoFocus
-                        margin="dense"
-                        id="nombreParticipante"
-                        label="Nombre participante"
-                        type="text"
-                        fullWidth
-                        variant="outlined"
-                        value={nombre}
-                        onChange={(e) => setNombreUsuario(e.target.value)}
-                    />
-                </DialogContent>
-                <DialogActions>
-                    <Button onClick={botonCerrar} color="primary">
-                        Cancelar
-                    </Button>
-                    <Button onClick={crearNuevoUsuario} color="primary">
-                        Agregar
-                    </Button>
-                </DialogActions>
-            </Dialog>
+            <div id="mainProyecto">
+                {main}
+            </div>
         </article>
     );
 }

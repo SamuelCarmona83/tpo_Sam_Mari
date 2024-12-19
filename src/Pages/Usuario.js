@@ -2,7 +2,6 @@ import React, {useState, useEffect, useCallback} from 'react';
 import "../Componentes/Usuario/style.css";
 import ListaDeProyectos from '../Componentes/Usuario/ListaDeProyectos/ListaDeProyectos';
 import {getProyectos} from '../Api/apiProyectos';
-import { getProyectobyID } from '../Servicios/ProyectosFunciones';
 import Proyecto from '../Componentes/Usuario/Proyecto/Proyecto';
 
 function Usuario (){
@@ -13,8 +12,10 @@ function Usuario (){
     const cargarLosProyectos = async () => {
         try {
             const listaAuxiliar = await getProyectos();
-            setListaProyectos(listaAuxiliar);
-            cantidadDeProyectos = listaProyectos.length;
+            if (JSON.stringify(listaAuxiliar) !== JSON.stringify(listaProyectos)) {
+                setListaProyectos(listaAuxiliar);
+                cantidadDeProyectos = listaProyectos.length;
+            }
         } catch (error){
             console.log("### ERROR ###\n### en el useEffect, de la page Usuarios ###\n### Tratando de cargarLosProyectos\n");
         }
@@ -29,13 +30,16 @@ function Usuario (){
     }
 
     const actualizarAppParaProyecto = async (proyectoID) => {
-        await cargarLosProyectos();
-        for(let proyecto of listaProyectos){
-            if(proyecto.ID === proyectoID){
-                setProyecto(proyecto);
-                return proyecto;
-            }
+        const listaAuxiliar = await getProyectos();
+        setListaProyectos(listaAuxiliar);
+        console.log("entre a actualizarAppParaProyecto");
+
+        const proyectoEncontrado = listaAuxiliar.find((proyecto) => proyecto.ID === proyectoID);
+        if (proyectoEncontrado) {
+            setProyecto(proyectoEncontrado);
         }
+        console.log('proyecto');
+        console.log(proyectoEncontrado);
     }
 
     const cambiarProyectoElegido = (proyectoNuevo) => {

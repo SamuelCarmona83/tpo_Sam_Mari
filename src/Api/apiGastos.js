@@ -19,3 +19,31 @@ export async function gastosUsuarioPorProyecto(proyectoID, usuarioID){
     }
 
 }
+
+export async function crearGasto(monto, imagen, descripcion, proyectoID, participantes) {
+    let usuarioID = Number(sessionStorage.getItem("usuarioID"));
+    let participanteFiltrados = participantes.filter(participante => participante.ID !== usuarioID);
+    
+    const myHeaders = new Headers();
+    myHeaders.append("jwt", sessionStorage.getItem("token"));
+    myHeaders.append("Content-Type", "application/json");
+
+    const raw = JSON.stringify({
+        "monto": monto,
+        "imagen": imagen,
+        "descripcion": descripcion,
+        "usuarioID": usuarioID,
+        "proyectoID": proyectoID,
+        "participantes": participanteFiltrados
+    });
+
+    const requestOptions = {
+    method: "POST",
+    headers: myHeaders,
+    body: raw,
+    redirect: "follow"
+    };
+
+    let respuestApi = await fetch("http://localhost:8080/api/gastos/crearGasto", requestOptions)
+    let dataJson = respuestApi.json();
+}

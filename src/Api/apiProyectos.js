@@ -82,8 +82,9 @@ export async function agregarParticipante(usuarioID, proyectoID) {
     };
   
     const respuestaApi = await fetch("http://localhost:8080/api/proyectos/agregarParticipante/"+proyectoID, requestOptions);
+    const dataJson = await respuestaApi.json();
+    console.log(dataJson);
     if(respuestaApi.status === 200){
-        const dataJson = await respuestaApi.json();
         return dataJson;
       }else{
         alert(respuestaApi.json.mensaje);
