@@ -1,3 +1,5 @@
+import toast from "react-hot-toast";
+
 export async function validarLogin(email, clave) {
     const linkApi = process.env.REACT_APP_BACKEND_URL + '/api/usuarios/login';
     try {
@@ -16,6 +18,8 @@ export async function validarLogin(email, clave) {
             sessionStorage.setItem("token", token);
             sessionStorage.setItem("usuarioID", usuarioID);
             sessionStorage.setItem("usuarioNombre", dataJson.usuario.nombre)
+            
+            toast.success("Inicio de sesión exitoso");
         }
         return dataJson;
     } catch (error) {
