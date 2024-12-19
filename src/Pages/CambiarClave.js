@@ -22,7 +22,7 @@ function CambiarClave() {
 
     
     try {
-      const response = await fetch(`http://localhost:8080/api/usuarios/cambiarClave/${id}`, {
+      const response = await fetch(`${process.env.REACT_APP_BACKEND_URL}/api/usuarios/cambiarClave/${id}`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',

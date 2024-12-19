@@ -8,7 +8,7 @@ export async function deudasPagadasUsuarioPorProyecto(proyectoID, usuarioID) {
     redirect: "follow"
     };
 
-    const linkApi = "http://localhost:8080/api/deudas/deudasUsuarioPorProyecto/"+proyectoID+"/"+usuarioID;
+    const linkApi = process.env.REACT_APP_BACKEND_URL + "/api/deudas/deudasUsuarioPorProyecto/"+proyectoID+"/"+usuarioID;
     const resp = await fetch(linkApi, requestOptions);
     const dataJson = await resp.json();
     if (!Array.isArray(dataJson)) {
@@ -38,7 +38,7 @@ export async function deudasImpagasUsuarioPorProyecto(proyectoID, usuarioID) {
     redirect: "follow"
     };
 
-    const linkApi = "http://localhost:8080/api/deudas/deudasUsuarioPorProyecto/"+proyectoID+"/"+usuarioID;
+    const linkApi = process.env.REACT_APP_BACKEND_URL + "/api/deudas/deudasUsuarioPorProyecto/"+proyectoID+"/"+usuarioID;
     const resp = await fetch(linkApi, requestOptions);
     const dataJson = await resp.json();
     if (!Array.isArray(dataJson)) {
@@ -70,7 +70,7 @@ export async function pagarDeudaPorID (deudaID){
     redirect: "follow"
     };
 
-    let respuestaApi = await fetch("http://localhost:8080/api/deudas/pagarDeuda/" + deudaID, requestOptions);
+    let respuestaApi = await fetch(process.env.REACT_APP_BACKEND_URL +"/api/deudas/pagarDeuda/" + deudaID, requestOptions);
     if(respuestaApi.status === 200){
         alert("Su pago se ha registrado correctamente");
     }else{
