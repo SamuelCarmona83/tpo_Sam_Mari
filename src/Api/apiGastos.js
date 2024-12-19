@@ -8,7 +8,7 @@ export async function gastosUsuarioPorProyecto(proyectoID, usuarioID){
     redirect: "follow"
     };
     
-    const linkApi = "http://localhost:8080/api/gastos/obtenerGastosUsuario/"+proyectoID+"/"+usuarioID;
+    const linkApi = process.env.REACT_APP_BACKEND_URL + "/api/gastos/obtenerGastosUsuario/"+proyectoID+"/"+usuarioID;
     const resp = await fetch(linkApi, requestOptions);
     const dataJson = resp.json();
 
@@ -44,6 +44,6 @@ export async function crearGasto(monto, imagen, descripcion, proyectoID, partici
     redirect: "follow"
     };
 
-    let respuestApi = await fetch("http://localhost:8080/api/gastos/crearGasto", requestOptions)
+    let respuestApi = await fetch(process.env.REACT_APP_BACKEND_URL +"/api/gastos/crearGasto", requestOptions)
     let dataJson = respuestApi.json();
 }

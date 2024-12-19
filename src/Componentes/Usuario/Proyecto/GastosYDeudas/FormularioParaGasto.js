@@ -100,12 +100,12 @@ export default function FormularioParaGasto ({proyecto, visibilidad, cerrar, act
     }
 
     const subirImagenACloudinary = async (imagen) => {
-        const cloudId = 'dkk2fe3os';
-
+        const cloudId = process.env.REACT_APP_CLOUD_ID;
+        const uploadPreset = process.env.REACT_APP_CLOUDINARY_UPLOAD_PRESET;
         if (imagen) {
             const formData = new FormData();
                 formData.append('file', imagen);
-                formData.append('upload_preset', 'rro35z0v');
+                formData.append('upload_preset', uploadPreset);
 
             try {
                 const response = await fetch(
