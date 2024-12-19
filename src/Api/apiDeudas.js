@@ -59,3 +59,21 @@ export async function deudasImpagasUsuarioPorProyecto(proyectoID, usuarioID) {
         alert("apiDeudas error di "+dataJson.mensaje);
     }
 }
+
+export async function pagarDeudaPorID (deudaID){
+    const myHeaders = new Headers();
+    myHeaders.append("jwt", sessionStorage.getItem("token"));
+
+    const requestOptions = {
+    method: "PUT",
+    headers: myHeaders,
+    redirect: "follow"
+    };
+
+    let respuestaApi = await fetch("http://localhost:8080/api/deudas/pagarDeuda/" + deudaID, requestOptions);
+    if(respuestaApi.status === 200){
+        alert("Su pago se ha registrado correctamente");
+    }else{
+        alert("Ocurrio un error al registrar su pago");
+    }
+}

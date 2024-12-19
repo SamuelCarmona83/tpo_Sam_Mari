@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { Dialog, DialogActions, DialogContent, DialogTitle, Button, TextField, MenuItem} from '@mui/material';
 import PhotoCamera from '@mui/icons-material/PhotoCamera';
-import { deudasImpagasUsuarioPorProyecto } from '../../../../Api/apiDeudas';
+import { deudasImpagasUsuarioPorProyecto, pagarDeudaPorID } from '../../../../Api/apiDeudas';
 import { nombreDelUsuarioPorID } from '../../../../Servicios/ProyectosFunciones';
 
 export default function FormularioParaPagarDeudas ({proyecto, visibilidad, cerrar, actualizarApp}) {
@@ -17,8 +17,8 @@ export default function FormularioParaPagarDeudas ({proyecto, visibilidad, cerra
     console.log(listaDeudasImpagas);
     console.log("deudaElegida");
     console.log(deudaElegida);
-    const cerrarFormulario = () => {
 
+    const cerrarFormulario = () => {
         cerrar();
     }
 
@@ -30,11 +30,18 @@ export default function FormularioParaPagarDeudas ({proyecto, visibilidad, cerra
                 setImagen(reader.result);
             };
             reader.readAsDataURL(file); // Lee la imagen como Data URL
+            console.log("CargarImagen/FormularoPagarDeudas.js/ imgane: ");
+            console.log(imagen);
         }
     };
 
-    const botonPagar = () => {
-
+    const botonPagar = async () => {
+        try {
+            await pagarDeudaPorID(deudaElegida.ID);
+        }catch(error){
+            console.log("### ERROR en try/botonPagar/FormularioParaPagarDeudas.js ###   ");
+        }
+        actualizarApp(proyecto.ID);
         cerrar();
     }
 

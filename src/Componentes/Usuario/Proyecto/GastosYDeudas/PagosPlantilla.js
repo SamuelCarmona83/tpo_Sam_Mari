@@ -1,15 +1,8 @@
 import { Typography , Button} from '@mui/material';
 import React from 'react';
-import DeleteIcon from '@mui/icons-material/Delete';
 import { nombreDelUsuarioPorID } from '../../../../Servicios/ProyectosFunciones';
+    
 export default function GastoPlantilla ({pago, borrar, proyecto}) {
-
-    const botonBorrar = () => {
-        const confirmDelete = window.confirm(`¿Quieres borrar "${pago.descripcion}"?`);
-        if (confirmDelete) {
-            borrar(pago.ID);
-        }
-    }
     return (
         <li>
             <Button variant='text'
@@ -44,15 +37,6 @@ export default function GastoPlantilla ({pago, borrar, proyecto}) {
             >
                 {pago.monto}
             </Typography>
-            <Button 
-                variant='text'
-                sx={{
-                color: 'grey',
-                width:'42px'}}
-                onClick={botonBorrar}
-            >
-                <DeleteIcon />
-            </Button>
         </li>
     )
 }
