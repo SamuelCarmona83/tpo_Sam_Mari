@@ -65,6 +65,8 @@ export async function pagarDeudaPorID (deudaID, imagenUrl){
     myHeaders.append("jwt", sessionStorage.getItem("token"));
 
     myHeaders.append("Content-Type", "application/json");
+    console.log(imagenUrl);
+    console.log("imagenUrl");
 
     const raw = JSON.stringify({
         "imagenUrl": imagenUrl

@@ -12,12 +12,6 @@ export default function FormularioParaPagarDeudas ({proyecto, visibilidad, cerra
         return deuda.pagada === false && deuda.deudorId === usuarioID;
     });
     const [deudaElegida, setDeudaElegida] = useState(null);
-    console.log("proyecto.deudas");
-    console.log(proyecto.deudas);
-    console.log("listaDeudasImpagas");
-    console.log(listaDeudasImpagas);
-    console.log("deudaElegida");
-    console.log(deudaElegida);
 
     const cerrarFormulario = () => {
         cerrar();
@@ -32,7 +26,7 @@ export default function FormularioParaPagarDeudas ({proyecto, visibilidad, cerra
 
     const botonPagar = async () => {
         try {
-            const imagenUrl = subirImagenACloudinary(imagen);
+            const imagenUrl = await subirImagenACloudinary(imagen);
             await pagarDeudaPorID(deudaElegida.ID, imagenUrl);
         }catch(error){
             console.log("### ERROR en try/botonPagar/FormularioParaPagarDeudas.js ###   ");

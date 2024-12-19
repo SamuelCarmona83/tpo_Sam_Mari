@@ -1,5 +1,5 @@
 
-export default async function subirImagenACloudinary (imagen, imagenUrl){
+export default async function subirImagenACloudinary (imagen){
     const cloudId = 'dkk2fe3os';
 
         if (imagen) {
