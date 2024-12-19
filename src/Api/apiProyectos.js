@@ -5,12 +5,12 @@ export async function getProyectos() {
     myHeaders.append("jwt", sessionStorage.getItem("token"));
 
     const requestOptions = {
-    method: "GET",
-    headers: myHeaders,
-    redirect: "follow"
+      method: "GET",
+      headers: myHeaders,
+      redirect: "follow"
     };
 
-    const respuestaApi = await fetch("http://localhost:8080/api/proyectos/proyectosUsuario/" + sessionStorage.getItem("usuarioID"), requestOptions);
+    const respuestaApi = await fetch(process.env.REACT_APP_BACKEND_URL +"/api/proyectos/proyectosUsuario/" + sessionStorage.getItem("usuarioID"), requestOptions);
     const dataJson = await respuestaApi.json();
     return dataJson;
 }
@@ -33,7 +33,7 @@ export async function crearProyecto(nombreProyecto) {
     redirect: "follow"
     };
 
-    const respuestaApi = await fetch("http://localhost:8080/api/proyectos/crearProyecto", requestOptions);
+    const respuestaApi = await fetch(process.env.REACT_APP_BACKEND_URL + "/api/proyectos/crearProyecto", requestOptions);
     const dataJson = await respuestaApi.json();
     alert(dataJson.mensaje);
 }
@@ -48,7 +48,7 @@ export async function eliminarProyectoApi(proyectoID) {
     redirect: "follow"
     };
 
-    const respuestaApi = await fetch("http://localhost:8080/api/proyectos/eliminarProyecto/" + proyectoID, requestOptions);
+    const respuestaApi = await fetch(process.env.REACT_APP_BACKEND_URL + "/api/proyectos/eliminarProyecto/" + proyectoID, requestOptions);
     const dataJson = await respuestaApi.json();
     alert(dataJson.mensaje);
 }
@@ -61,7 +61,7 @@ export async function getProyectobyID(proyectoID){
     headers: myHeaders,
     redirect: "follow"
     };
-    const linkApi = "http://localhost:8080/api/proyectos/getProyecto/"+proyectoID;
+    const linkApi = process.env.REACT_APP_BACKEND_URL + "/api/proyectos/getProyecto/"+proyectoID;
     const respuestaApi = await fetch(linkApi, requestOptions);
     const dataJson = await respuestaApi.json();
     return dataJson;
@@ -83,7 +83,7 @@ export async function agregarParticipante(usuarioID, proyectoID) {
     redirect: "follow"
   };
   
-  const respuestaApi = await fetch("http://localhost:8080/api/proyectos/agregarParticipante/"+proyectoID, requestOptions);
+  const respuestaApi = await fetch(process.env.REACT_APP_BACKEND_URL + "/api/proyectos/agregarParticipante/"+proyectoID, requestOptions);
   const dataJson = await respuestaApi.json();
   console.log(dataJson);
   if(respuestaApi.status === 200){
@@ -109,7 +109,7 @@ export async function modificarNombreDelProyecto(proyectoID, nuevoNombre){
     redirect: "follow"
   };
 
-  const respuestaApi = await fetch("http://localhost:8080/api/proyectos/editarProyecto/" + proyectoID, requestOptions)
+  const respuestaApi = await fetch(process.env.REACT_APP_BACKEND_URL + "/api/proyectos/editarProyecto/" + proyectoID, requestOptions)
   if (respuestaApi.status === 200) {
     alert("Se modifico correctamente");
   }
@@ -131,7 +131,7 @@ export async function modificarDescripcionDelProyecto(proyectoID, nuevaDescripci
     redirect: "follow"
   };
 
-  const respuestaApi = await fetch("http://localhost:8080/api/proyectos/editarProyecto/" + proyectoID, requestOptions)
+  const respuestaApi = await fetch(process.env.REACT_APP_BACKEND_URL + "/api/proyectos/editarProyecto/" + proyectoID, requestOptions)
   if (respuestaApi.status === 200) {
     alert("Se modifico correctamente");
   }

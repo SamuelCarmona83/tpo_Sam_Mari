@@ -1,5 +1,5 @@
 export async function validarLogin(email, clave) {
-    const linkApi = 'http://localhost:8080/api/usuarios/login';
+    const linkApi = process.env.REACT_APP_BACKEND_URL + '/api/usuarios/login';
     try {
         const respuesta = await fetch(linkApi, {
             method: 'POST',
@@ -41,12 +41,12 @@ export async function registrarUsuario(email, clave, nombre){
     redirect: "follow"
   };
 
-  const respuesta = await fetch("http://localhost:8080/api/usuarios/registrarse", requestOptions)
+  const respuesta = await fetch(process.env.REACT_APP_BACKEND_URL + "/api/usuarios/registrarse", requestOptions)
   return respuesta;
 }
 
 export async function recuperarContraseña(email) {
-  const linkApi = 'http://localhost:8080/api/usuarios/recuperarContra' // URL del backend
+  const linkApi = process.env.REACT_APP_BACKEND_URL + '/api/usuarios/recuperarContra'; // URL del backend
   try {
     const respuesta = await fetch(linkApi, {
       method: 'POST',
@@ -79,7 +79,7 @@ export async function buscarUsuario(nombreUsuarioBuscado) {
     redirect: "follow"
   };
 
-  const respuestaApi = await fetch("http://localhost:8080/api/usuarios/buscarUsuario/", requestOptions);
+  const respuestaApi = await fetch(process.env.REACT_APP_BACKEND_URL + "/api/usuarios/buscarUsuario/", requestOptions);
   if(respuestaApi.status === 200){
     const dataJson = await respuestaApi.json();
     return dataJson;
